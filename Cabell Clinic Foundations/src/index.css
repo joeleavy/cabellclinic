@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* The Cabell Clinic Design System */
+    
+    /* Primary Colors */
+    --deep-navy: 213 72% 15%;
+    --soft-white: 0 0% 97%;
+    --warm-gray: 0 0% 88%;
+    --champagne-gold: 42 42% 58%;
+    --sage-green: 82 14% 62%;
+    
+    /* Semantic Tokens */
+    --background: 0 0% 97%;
+    --foreground: 213 72% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 72% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 72% 15%;
+
+    --primary: 213 72% 15%;
+    --primary-foreground: 0 0% 97%;
+
+    --secondary: 0 0% 88%;
+    --secondary-foreground: 213 72% 15%;
+
+    --muted: 0 0% 92%;
+    --muted-foreground: 213 20% 40%;
+
+    --accent: 42 42% 58%;
+    --accent-foreground: 213 72% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 42 42% 58%;
+
+    --radius: 0.25rem;
+
+    /* Typography */
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    
+    /* Spacing rhythm */
+    --section-padding: clamp(4rem, 10vw, 8rem);
+    
+    /* Transitions */
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 213 72% 8%;
+    --foreground: 0 0% 97%;
+    --card: 213 72% 12%;
+    --card-foreground: 0 0% 97%;
+    --popover: 213 72% 12%;
+    --popover-foreground: 0 0% 97%;
+    --primary: 0 0% 97%;
+    --primary-foreground: 213 72% 15%;
+    --secondary: 213 30% 20%;
+    --secondary-foreground: 0 0% 97%;
+    --muted: 213 30% 20%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 42 42% 58%;
+    --accent-foreground: 0 0% 97%;
+    --border: 213 30% 20%;
+    --input: 213 30% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    @apply tracking-tight;
+  }
+
+  /* Custom selection */
+  ::selection {
+    @apply bg-accent/30 text-foreground;
+  }
+}
+
+@layer components {
+  /* Section spacing utility */
+  .section-padding {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+  }
+
+  /* Container with elegant max-width */
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-6 lg:px-8;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  /* Gold accent underline */
+  .accent-underline {
+    @apply relative inline-block;
+  }
+  
+  .accent-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px] bg-accent;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s var(--transition-smooth);
+  }
+
+  .accent-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Subtle text reveal animation */
+  .text-reveal {
+    @apply opacity-0 translate-y-4;
+    animation: textReveal 0.8s var(--transition-smooth) forwards;
+  }
+
+  @keyframes textReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Elegant divider */
+  .divider-gold {
+    @apply w-16 h-[2px] bg-accent;
+  }
+
+  /* Card hover elevation */
+  .card-elevated {
+    @apply transition-all duration-500;
+  }
+
+  .card-elevated:hover {
+    @apply shadow-lg -translate-y-1;
+  }
+}
+
+@layer utilities {
+  /* Text color utilities using design tokens */
+  .text-navy {
+    color: hsl(var(--deep-navy));
+  }
+
+  .text-gold {
+    color: hsl(var(--champagne-gold));
+  }
+
+  .text-sage {
+    color: hsl(var(--sage-green));
+  }
+
+  .bg-soft-white {
+    background-color: hsl(var(--soft-white));
+  }
+
+  .bg-warm-gray {
+    background-color: hsl(var(--warm-gray));
+  }
+
+  .bg-navy {
+    background-color: hsl(var(--deep-navy));
+  }
+
+  .border-gold {
+    border-color: hsl(var(--champagne-gold));
+  }
+}
