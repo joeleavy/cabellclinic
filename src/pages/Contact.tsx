@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Clock, Shield } from "lucide-react";
+import { MapPin, Clock, Shield, ArrowRight } from "lucide-react";
+import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
+import SelfAssessmentDialog from "@/components/SelfAssessmentDialog";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,7 +44,7 @@ const Contact = () => {
 
       if (res.ok && data.success === true) {
         toast({
-          title: "Thanks — we received your message.",
+          title: "Thanks, we received your message.",
         });
         setFormData({ name: "", email: "", phone: "", message: "" });
       } else {
@@ -71,32 +74,73 @@ const Contact = () => {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="pt-32 pb-20 bg-soft-white">
+      {/* Two Paths */}
+      <section className="pt-32 pb-16 bg-soft-white">
         <div className="container-wide">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-3xl"
-          >
-            <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
-              Contact
-            </span>
-            <h1 className="font-heading text-display-lg text-navy mb-8">
-              Begin the conversation
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              We welcome inquiries from those seeking a more thoughtful approach 
-              to their health. All communications are treated with discretion 
-              and respect for your privacy.
-            </p>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            {/* Path 1: Ready */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-navy text-soft-white p-8 md:p-10 flex flex-col"
+            >
+              <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-3 block">
+                If you're ready
+              </span>
+              <h3 className="font-heading text-2xl md:text-3xl mb-4">
+                Book a Discovery Call
+              </h3>
+              <p className="text-soft-white/75 leading-relaxed mb-8 flex-grow">
+                If you've read enough and feel ready to move forward, complete a short application and we'll be in touch within a few business days to schedule your fifteen-minute discovery call with Dr. Cabell.
+              </p>
+              <DiscoveryCallDialog>
+                <Button
+                  variant="clinic-gold-outline"
+                  size="xl"
+                  className="self-start"
+                >
+                  Book a Discovery Call
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </DiscoveryCallDialog>
+            </motion.div>
+
+            {/* Path 2: Curious */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white border border-warm-gray p-8 md:p-10 flex flex-col"
+            >
+              <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-3 block">
+                If you're still deciding
+              </span>
+              <h3 className="font-heading text-2xl md:text-3xl text-navy mb-4">
+                See if we're a fit
+              </h3>
+              <p className="text-muted-foreground leading-relaxed mb-8 flex-grow">
+                Read our honest self-assessment and answer a short questionnaire. About five minutes. No pressure, no obligation, just a clear picture for both of us before any conversation.
+              </p>
+              <SelfAssessmentDialog>
+                <Button
+                  variant="clinic-outline"
+                  size="xl"
+                  className="self-start"
+                >
+                  Take the Self-Assessment
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </SelfAssessmentDialog>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Contact Form & Info */}
-      <section className="section-padding bg-warm-gray/20">
+      <section className="pt-4 pb-20 md:pb-24 bg-warm-gray/20">
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Form */}
@@ -108,10 +152,10 @@ const Contact = () => {
             >
               <div className="bg-white p-10 md:p-12 shadow-sm">
                 <h2 className="font-heading text-display-sm text-navy mb-2">
-                  Request an Invitation
+                  Have a question?
                 </h2>
                 <p className="text-muted-foreground mb-8">
-                  Share a bit about yourself and what you're seeking.
+                  For general inquiries that don't need a full application. We'll get back to you within a few business days.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -149,7 +193,7 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <Label htmlFor="phone" className="text-sm font-medium text-navy">
-                      Phone (Optional)
+                      Phone
                     </Label>
                     <Input
                       id="phone"
@@ -157,6 +201,7 @@ const Contact = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
+                      required
                       className="border-warm-gray focus:border-gold focus:ring-gold/20 h-12"
                       placeholder="(555) 123-4567"
                     />
@@ -207,11 +252,10 @@ const Contact = () => {
                   <h3 className="font-heading text-xl text-navy">Location</h3>
                 </div>
                 <div className="pl-[52px]">
-                  <p className="text-muted-foreground leading-relaxed mb-2">
-                    Brentwood, Tennessee
-                  </p>
-                  <p className="text-sm text-muted-foreground/70">
-                    Precise address provided upon scheduling.
+                  <p className="text-muted-foreground leading-relaxed">
+                    105 Continental Place, Suite 160
+                    <br />
+                    Brentwood, TN 37027
                   </p>
                 </div>
               </div>
@@ -258,9 +302,9 @@ const Contact = () => {
                 <ul className="space-y-3">
                   {[
                     "A brief follow-up to understand your needs",
-                    "An introductory conversation with Dr. Cabell",
+                    "An introductory conversation with our team",
                     "Information about our approach and membership",
-                    "No pressure, no obligation—just clarity",
+                    "No pressure, no obligation, just clarity",
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-gold rounded-full mt-2.5 flex-shrink-0" />
@@ -277,7 +321,7 @@ const Contact = () => {
       </section>
 
       {/* Map placeholder / closing thought */}
-      <section className="section-padding bg-soft-white">
+      <section className="section-padding bg-warm-gray/20">
         <div className="container-narrow text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

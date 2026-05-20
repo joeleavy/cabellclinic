@@ -7,6 +7,9 @@ import Home from "./pages/Home";
 import Approach from "./pages/Approach";
 import About from "./pages/About";
 import Resources from "./pages/Resources";
+import ExpertsAtLarge from "./pages/ExpertsAtLarge";
+import FAQ from "./pages/FAQ";
+import Apply from "./pages/Apply";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
@@ -23,8 +26,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/approach" element={<Approach />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/dr-cabell" element={<About />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/experts" element={<ExpertsAtLarge />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/apply" element={<Apply />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

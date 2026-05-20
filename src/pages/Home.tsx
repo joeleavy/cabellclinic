@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, Sparkles, Sun, Waves, ChevronDown, Plus, Minus } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import PatientReviewsSection from "@/components/home/PatientReviewsSection";
@@ -58,7 +59,7 @@ const Home = () => {
           }} transition={{
             duration: 0.8,
             delay: 0.4
-          }} className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 font-body leading-relaxed">Helping patients restore vitality since 2008 by integrating Quantum & Circadian Health, longevity science, trauma-informed care, and performance optimization.</motion.p>
+          }} className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 font-body leading-relaxed">Preventive & Integrative Cardiology since 2008, integrating root-cause diagnostics, longevity science, trauma-informed care, and the environmental signals that shape your biology.</motion.p>
 
             <motion.div initial={{
             opacity: 0,
@@ -70,13 +71,13 @@ const Home = () => {
             duration: 0.8,
             delay: 0.5
           }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="clinic-primary" size="xl" asChild>
-                <Link to="/contact">
-                  Request an Invitation
+              <DiscoveryCallDialog>
+                <Button variant="clinic-primary" size="xl" className="w-full sm:w-64">
+                  Book a Discovery Call
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="clinic-outline" size="xl" asChild>
+                </Button>
+              </DiscoveryCallDialog>
+              <Button variant="clinic-outline" size="xl" asChild className="w-full sm:w-64">
                 <Link to="/approach">Explore Our Approach</Link>
               </Button>
             </motion.div>
@@ -106,7 +107,7 @@ const Home = () => {
       {/* Philosophy Contrast Section */}
       <section className="section-padding bg-soft-white">
         <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
+          <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-stretch">
             <motion.div initial={{
             opacity: 0,
             x: -30
@@ -117,18 +118,13 @@ const Home = () => {
             once: true
           }} transition={{
             duration: 0.7
-          }}>
+          }} className="bg-white p-10 md:p-12 shadow-lg h-full flex flex-col">
               <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-4 block">
                 The Challenge
               </span>
               <h2 className="font-heading text-display-sm text-navy mb-6">Modern medicine often treats symptoms, not the person</h2>
-              <p className="text-muted-foreground leading-relaxed mb-2">Most healthcare is designed to intervene once something has already gone wrong.</p>
-              <ul className="text-muted-foreground leading-relaxed mb-4 list-disc list-inside space-y-1 pl-2">
-                <li>Appointments are short and solutions are fragmented.</li>
-                <li>The focus is often limited to managing symptoms rather than understanding why the body lost resilience in the first place.</li>
-              </ul>
-              <p className="text-muted-foreground leading-relaxed">For many high-performing individuals, this leaves an unsettling gap:
-You're doing "everything right," yet energy, clarity, or confidence in your long-term health can feel elusive.</p>
+              <p className="text-muted-foreground leading-relaxed mb-4">Most healthcare is built to react, not prevent. Appointments are short, solutions are fragmented, and symptoms get managed while the deeper loss of resilience goes unaddressed.</p>
+              <p className="text-muted-foreground leading-relaxed">For high-performing patients, doing "everything right" often isn't enough, energy, clarity, and long-term confidence still feel out of reach.</p>
             </motion.div>
 
             <motion.div initial={{
@@ -142,18 +138,17 @@ You're doing "everything right," yet energy, clarity, or confidence in your long
           }} transition={{
             duration: 0.7,
             delay: 0.2
-          }} className="bg-white p-10 md:p-12 shadow-lg">
+          }} className="bg-white p-10 md:p-12 shadow-lg h-full flex flex-col">
               <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">A New Approach</span>
-              <h3 className="font-heading text-display-sm text-navy mb-6">A different way of approaching health </h3>
+              <h3 className="font-heading text-display-sm text-navy mb-6">Medicine designed around you</h3>
               <p className="text-muted-foreground leading-relaxed mb-4">Medicine grounded in time, precision, and relationship. Where your physician knows your story, not just your chart.</p>
-              <p className="text-muted-foreground leading-relaxed mb-6">Dr. Thomas Cabell, a board-certified cardiologist, for nearly two decades has practiced inside large healthcare systems—until his own health challenges forced him to ask deeper questions.</p>
-              <Button variant="clinic-outline" asChild>
+              <p className="text-muted-foreground leading-relaxed mb-6">We work in the space between detection and disease, using advanced diagnostics and root-cause thinking to build a strategy around your specific biology, not population averages.</p>
+              <Button variant="clinic-outline" asChild className="self-start mt-auto">
                 <Link to="/approach">
                   Learn What We Do
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <div className="divider-gold mt-8" />
             </motion.div>
           </div>
         </div>
@@ -194,21 +189,13 @@ You're doing "everything right," yet energy, clarity, or confidence in your long
               <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
                 Your Guide
               </span>
-              <h2 className="font-heading text-display text-navy mb-6">
+              <h2 className="font-heading text-display text-navy mb-2">
                 Dr. Thomas Cabell
               </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">For nearly two decades, I practiced conventional cardiology in some of the largest healthcare systems in the country. I loved my work, but I kept seeing the same thing: people getting treated, not truly healed.</p>
-              <p className="text-muted-foreground leading-relaxed mb-8">That search led me to the science of trauma, psychoneuroimmunology, and the emerging field of circadian and quantum biology. 
-
-
-
-
-I discovered how profoundly our environment, story, and nervous system shape every aspect of health  and how healing requires integration of all three.Years of unprocessed trauma showed up as anxiety, depression, and autoimmune disease. 
-
-
-
-
-The way I was doing things wasn't working, so I went looking for a different way</p>
+              <p className="text-sm uppercase tracking-widest text-gold font-semibold mb-6">
+                Founder · Preventive & Integrative Cardiologist
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-8">For eighteen years, I practiced conventional cardiology in some of the largest healthcare systems in the country. I loved my work, but I kept seeing the same thing: people getting treated, not truly healed. The journey to find a better answer became personal, and ultimately, the foundation of The Cabell Clinic.</p>
               
               <Collapsible className="mb-8">
                 <CollapsibleTrigger className="flex items-center gap-2 text-sm font-semibold text-navy hover:text-gold transition-colors group">
@@ -223,7 +210,7 @@ The way I was doing things wasn't working, so I went looking for a different way
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
-                      <span>Triple-board certified in Internal Medicine, Cardiovascular Disease, and Nuclear Cardiology, and practiced for 17 years within large healthcare systems.</span>
+                      <span>Triple-board certified in Internal Medicine, Cardiovascular Disease, and Nuclear Cardiology, with eighteen years of practice within large healthcare systems.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
@@ -231,7 +218,7 @@ The way I was doing things wasn't working, so I went looking for a different way
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
-                      <span>Advising multiple health-tech startups—including: Psycheceutical Biosciences, Thaddeus Medical Systems, Zealacare, Corrective Skin.</span>
+                      <span>Advising multiple health-tech startups, including: Psycheceutical Biosciences, Thaddeus Medical Systems, Zealacare, Corrective Skin.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
@@ -242,8 +229,8 @@ The way I was doing things wasn't working, so I went looking for a different way
               </Collapsible>
 
               <Button variant="clinic-outline" asChild>
-                <Link to="/about">
-                  Learn More About Dr. Cabell
+                <Link to="/dr-cabell">
+                  Meet Dr. Cabell
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -255,61 +242,96 @@ The way I was doing things wasn't working, so I went looking for a different way
       {/* Patient Reviews Section */}
       <PatientReviewsSection />
 
-      {/* Pillars / How We Think */}
+      {/* Story · Structure · Signals · Sovereignty Framework */}
       <section className="section-padding bg-navy">
         <div className="container-wide">
-          <SectionHeader 
-            eyebrow="Our Foundations" 
-            title="How We Approach Your Health" 
-            className="text-soft-white [&_h2]:text-soft-white mb-16" 
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <span className="inline-block text-xs uppercase tracking-widest text-gold font-semibold mb-4">
+              How We Work
+            </span>
+            <h2 className="font-heading text-soft-white whitespace-nowrap text-2xl md:text-3xl lg:text-4xl">
+              Story · Structure · Signals · Sovereignty
+            </h2>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-            {[{
-              icon: Heart,
-              title: "Cardiovascular Integrity",
-              description: "Your heart and vascular system tell a much deeper story than standard labs alone—one that reveals resilience, risk, and long-term vitality."
-            }, {
-              icon: Sparkles,
-              title: "Nervous System & Story",
-              description: "Stress, trauma, and lived experience shape how your body functions; understanding your story helps explain patterns your labs can't."
-            }, {
-              icon: Sun,
-              title: "Circadian & Mitochondrial Health",
-              description: "Energy, metabolism, and aging are governed by timing, light, and cellular signaling—often long before symptoms appear."
-            }, {
-              icon: Waves,
-              title: "Environment & Daily Signals",
-              description: "From air and water to movement and electromagnetic exposure, the signals you encounter every day quietly influence your biology."
-            }].map((pillar, index) => (
-              <motion.div 
-                key={pillar.title} 
-                initial={{ opacity: 0, y: 30 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ duration: 0.5, delay: index * 0.1 }} 
-                className="text-center p-6 lg:p-8"
+          {/* The Destination: Sovereignty */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl mx-auto text-center mb-16 px-8 py-10 border border-gold/30"
+          >
+            <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-3 block">
+              The Destination
+            </span>
+            <h3 className="font-heading text-4xl md:text-5xl text-soft-white italic mb-5">
+              Sovereignty
+            </h3>
+            <p className="text-soft-white/70 leading-relaxed">
+              The capacity to know your own biology well enough to trust it, and lead it. Not the absence of disease, but the presence of genuine biological resilience: understood, built, and owned by you.
+            </p>
+          </motion.div>
+
+          {/* Three Pillars: Story / Structure / Signals */}
+          <div className="grid md:grid-cols-3 gap-10 lg:gap-12 max-w-6xl mx-auto">
+            {[
+              {
+                label: "Story",
+                heading: "Every body carries a history.",
+                description:
+                  "The patterns of stress you've carried, the experiences that shaped you, and the way your nervous system orients daily, these are not soft variables at the margins of health. They are your health, upstream of the chemistry we find when we look.",
+              },
+              {
+                label: "Structure",
+                heading: "The body is not a collection of parts.",
+                description:
+                  "How you move, breathe, and are held in space translates physical organization into biological signal. The same is true of the light, water, and electromagnetic fields in the spaces you inhabit, inputs your biology is responding to around the clock.",
+              },
+              {
+                label: "Signals",
+                heading: "The body seeks signal coherence.",
+                description:
+                  "Your cardiovascular function, metabolic efficiency, hormonal patterns, and biological-age markers are generating actionable information at every moment. We read it earlier, in more detail, and with a longer view, long before signals become diagnoses.",
+              },
+            ].map((pillar, index) => (
+              <motion.div
+                key={pillar.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                className="border-t border-gold/40 pt-6"
               >
-                <div className="w-14 h-14 mx-auto mb-6 border border-gold/40 rounded-full flex items-center justify-center">
-                  <pillar.icon className="w-6 h-6 text-gold" strokeWidth={1.5} />
-                </div>
-                <h3 className="font-heading text-lg text-soft-white mb-4">
-                  {pillar.title}
-                </h3>
-                <p className="text-soft-white/60 text-sm leading-relaxed">
+                <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-3 block">
+                  {pillar.label}
+                </span>
+                <h4 className="font-heading text-xl text-soft-white mb-4 leading-snug">
+                  {pillar.heading}
+                </h4>
+                <p className="text-soft-white/70 text-sm leading-relaxed">
                   {pillar.description}
                 </p>
               </motion.div>
             ))}
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.5, delay: 0.5 }} 
-            className="text-center mt-12"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="text-center mt-16"
           >
+            <p className="text-soft-white/60 italic text-sm md:text-base mb-8">
+              "We work in Story, Structure, and Signals, so that you arrive at Sovereignty."
+            </p>
             <Button variant="clinic-gold-outline" size="lg" asChild>
               <Link to="/approach">
                 Explore the approach
@@ -395,22 +417,20 @@ The way I was doing things wasn't working, so I went looking for a different way
           duration: 0.7
         }}>
             <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
-              Begin the Conversation
+              Toward Sovereignty
             </span>
             <h2 className="font-heading text-display text-navy mb-6">
-              Is The Cabell Clinic right for you?
+              Sovereignty starts with a conversation
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-              We work with a limited number of clients each year to ensure 
-              the depth and attention our approach requires. If this resonates, 
-              we invite you to reach out.
+              We accept a limited number of new members each year so the depth of care we offer stays intact. If the path we've described resonates, the discovery call is the right place to begin.
             </p>
-            <Button variant="clinic-primary" size="xl" asChild>
-              <Link to="/contact">
-                Request an Invitation
+            <DiscoveryCallDialog>
+              <Button variant="clinic-primary" size="xl">
+                Book a Discovery Call
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+              </Button>
+            </DiscoveryCallDialog>
           </motion.div>
         </div>
       </section>
@@ -418,40 +438,22 @@ The way I was doing things wasn't working, so I went looking for a different way
       {/* FAQ Section */}
       <section className="section-padding bg-soft-white">
         <div className="container-narrow">
-          <SectionHeader
-            eyebrow="Common Questions"
-            title="Frequently Asked Questions"
-            className="mb-12"
-          />
-
-          <div className="space-y-4">
-            {[
-              {
-                question: "What do members receive?",
-                answer: "Members enjoy ongoing routine exams that, instead of reacting to disease, are focused on ongoing health optimization and supported by year-long extraordinary communication connection. This is an over 100-year old recipe in the US for effectively preserving and enhancing the health of important people: your health deserves this, too. Because I focus my time and energies on a small panel of patients determined to enhance their health by investing in services entirely outside plan coverages, my patients enjoy easy and convenient scheduling and quick communication connectivity. And because this style of healthcare is not controlled or limited by insurance/plan restrictions, the time and scope of our interactions are no longer restricted by plan terms. My focus is solely on how to optimize your health on an ongoing basis."
-              },
-              {
-                question: "Are you in-network and will you use my healthcare insurance plan (either private, or Medicare)?",
-                answer: "My practice is Medicare participatory and in-network with major plans, so your plan resources can be utilized if or when useful. That said, the vast majority of our interactions will not trigger plan terms/conditions/reimbursement. If a situation arises where I believe utilizing plan resources makes sense, I will do so and collect the co-payments/deductibles as required by plan terms and applicable laws. But that will be rare, as my intent is to provide a healthcare program very different from how insurance packages (and restricts) healthcare services."
-              },
-              {
-                question: "Can I utilize pre-tax or employer funding options for your membership fees? Is your program fundable in a manner similar to executive health programs?",
-                answer: "Many members use HSA (Health Savings Account) or FSA (Flexible Spending Account) funds to cover membership fees. Some employers also offer executive health benefits that can be applied toward personalized healthcare programs like ours. We recommend consulting with your benefits administrator or tax advisor to understand what options are available to you."
-              }
-            ].map((faq, index) => (
-              <Collapsible key={index} className="border border-warm-gray rounded-sm">
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-6 text-left hover:bg-warm-gray/20 transition-colors group">
-                  <span className="font-heading text-lg text-navy pr-4">{faq.question}</span>
-                  <div className="flex-shrink-0">
-                    <Plus className="h-5 w-5 text-gold group-data-[state=open]:hidden" />
-                    <Minus className="h-5 w-5 text-gold hidden group-data-[state=open]:block" />
-                  </div>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="px-6 pb-6">
-                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                </CollapsibleContent>
-              </Collapsible>
-            ))}
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
+              Knowledge Is Power
+            </span>
+            <h2 className="font-heading text-display text-navy mb-6">
+              Questions, answered honestly
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-10">
+              From how membership works to what your first year looks like, the FAQ covers the questions we hear most often, including the ones about whether this model is right for you.
+            </p>
+            <Button variant="clinic-primary" size="lg" asChild>
+              <Link to="/faq">
+                View the full FAQ
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

@@ -6,8 +6,11 @@ const Footer = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "The Approach", path: "/approach" },
-    { name: "About", path: "/about" },
+    { name: "Our Method", path: "/approach" },
+    { name: "Experts at Large", path: "/experts" },
+    { name: "Meet Dr. Cabell", path: "/dr-cabell" },
     { name: "Resources", path: "/resources" },
+    { name: "FAQ", path: "/faq" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -21,8 +24,7 @@ const Footer = () => {
               The Cabell Clinic
             </h3>
             <p className="text-soft-white/70 font-body text-sm leading-relaxed max-w-sm">
-              A physician-led practice dedicated to cardiovascular health, 
-              longevity, and human performance in Brentwood, Tennessee.
+              A membership-based Preventive & Integrative Cardiology practice in Brentwood, Tennessee.
             </p>
           </div>
 
@@ -50,7 +52,9 @@ const Footer = () => {
               Location
             </h4>
             <address className="not-italic text-sm text-soft-white/70 leading-relaxed">
-              Brentwood, Tennessee
+              105 Continental Place, Suite 160
+              <br />
+              Brentwood, TN 37027
               <br />
               <span className="text-soft-white/50 text-xs">
                 By appointment only

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
 
 const Approach = () => {
   return (
@@ -17,7 +18,7 @@ const Approach = () => {
             className="max-w-3xl">
             
             <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
-              My Approach
+              The Approach
             </span>
             <h1 className="font-heading text-display-lg text-navy mb-8">
               From Heart Health to Whole-Person Healing
@@ -26,68 +27,7 @@ const Approach = () => {
         </div>
       </section>
 
-      {/* Section 2: Why I Practice Medicine Differently */}
-      <section className="section-padding bg-warm-gray/20">
-        <div className="container-narrow">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="prose prose-lg max-w-none">
-            
-            <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              I've spent nearly 20 years as a cardiologist, trained at Vanderbilt and the University of Florida, and became board certified in Internal Medicine, Cardiovascular Disease, and Nuclear Cardiology.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              But my perspective didn't just come from textbooks or hospitals.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              It came from my own struggles with anxiety, depression, autoimmune disease, and the buried trauma that fueled them.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Conventional medicine offered me medications and protocols, but not real healing. That experience reshaped how I see health and how I practice medicine today.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Section 3: What I Learned */}
-      <section className="section-padding bg-soft-white">
-        <div className="container-narrow">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}>
-            
-            <h2 className="font-heading text-display text-navy mb-10">
-              What I Learned
-            </h2>
-            <div className="space-y-6">
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Healing isn't just about biology. It's about story.
-              </p>
-              <ul className="space-y-4">
-                {[
-                "Unaddressed trauma affects our nervous system, immune system, and even our genes.",
-                "Our environment—light, water, sleep, movement—shapes our biology every day.",
-                "True health is not just about adding more pills or supplements, but removing the barriers that prevent our bodies from thriving."].
-                map((item, index) =>
-                <li key={index} className="flex items-start gap-4">
-                    <div className="w-1.5 h-1.5 bg-gold rounded-full mt-3 flex-shrink-0" />
-                    <span className="text-lg text-muted-foreground leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                )}
-              </ul>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Section 4: How I Work With Patients */}
+      {/* Section: How I Work With Patients */}
       <section className="section-padding bg-warm-gray/20">
         <div className="container-narrow">
           <motion.div
@@ -121,20 +61,23 @@ const Approach = () => {
             </ul>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              From there, we may integrate advanced tools like:
+              From there, we layer in the advanced diagnostics that conventional cardiology rarely uses, including:
             </p>
-            
+
             <ul className="space-y-3">
               {[
-              "Heart rate variability testing",
-              "Genetic markers for nutrition & risk",
-              "Wearables & continuous monitors",
-              "Hormetic stressors (sunlight, cold sauna, fasting, exercise) nutraceuticals and peptides."].
-              map((item, index) =>
-              <li key={index} className="flex items-start gap-4">
+                { title: "AI-QCA Plaque Scans", description: "advanced coronary CTA analysis with quantitative and qualitative plaque assessment" },
+                { title: "CIMT (Carotid Intima-Media Thickness)", description: "longitudinal tracking of vascular change" },
+                { title: "Endothelial Function (GlycoCheck)", description: "microvascular health and vascular resilience" },
+                { title: "Max Pulse Wave Velocity", description: "arterial stiffness and central aortic pressure" },
+                { title: "CGM Evaluations + DEXA + Resting Metabolic Rate", description: "metabolic flexibility and body composition" },
+                { title: "GlycanAge & SNP Genetic Testing", description: "biological-age and personalization markers" },
+                { title: "HRV-guided recovery protocols", description: "resonant breathing and vagus nerve training" },
+              ].map((item, index) =>
+                <li key={index} className="flex items-start gap-4">
                   <div className="w-1.5 h-1.5 bg-navy rounded-full mt-3 flex-shrink-0" />
                   <span className="text-lg text-muted-foreground leading-relaxed">
-                    {item}
+                    <strong className="text-navy font-medium">{item.title}</strong> · {item.description}
                   </span>
                 </li>
               )}
@@ -342,7 +285,7 @@ const Approach = () => {
                 Medications still have a place, but they're not the first reflex.
               </p>
               <p className="text-muted-foreground leading-relaxed text-sm italic">
-                I use pharmaceuticals only when truly necessary—after we've addressed your foundations, story, and environment—so your body can do what it was designed to do: thrive.
+                I use pharmaceuticals only when truly necessary, after we've addressed your foundations, story, and environment, so your body can do what it was designed to do: thrive.
               </p>
             </motion.div>
           </div>
@@ -359,27 +302,27 @@ const Approach = () => {
             transition={{ duration: 0.7 }}>
             
             <h2 className="font-heading text-display text-soft-white mb-10">
-              Why This Matters For You
+              Why This Matters
             </h2>
             <div className="space-y-6 text-soft-white/80">
               <p className="text-lg leading-relaxed">
-                Modern medicine is unmatched in emergencies.
+                Conventional medicine is organized around a single question: <em className="text-soft-white">is something wrong?</em> When the answer is no, the conversation ends.
               </p>
               <p className="text-lg leading-relaxed">
-                But for chronic illness and long-term vitality, we can do better.
+                We are organized around a different question entirely: <em className="text-soft-white">what is this biology capable of, and what is standing in the way?</em>
               </p>
               <p className="text-lg leading-relaxed">
-                It manages symptoms instead of creating health.
+                That distinction, between waiting for the threshold of disease and working upstream of it, is the difference between management and Sovereignty.
               </p>
-              <p className="text-lg leading-relaxed mt-10">
-                I believe the future of medicine lies in:
+              <p className="text-lg leading-relaxed mt-10 text-soft-white">
+                The future of medicine lies in:
               </p>
               <ul className="space-y-4 mt-6">
                 {[
-                "restoring balance to circadian and quantum biology",
-                "addressing trauma and inherited patterns",
-                "integrating both science and story into how we heal"].
-                map((item, index) =>
+                "restoring coherence to circadian and environmental biology",
+                "addressing trauma, story, and inherited patterns",
+                "integrating both science and story into how we heal",
+                ].map((item, index) =>
                 <li key={index} className="flex items-start gap-4">
                     <div className="w-1.5 h-1.5 bg-gold rounded-full mt-3 flex-shrink-0" />
                     <span className="text-lg leading-relaxed">{item}</span>
@@ -388,6 +331,113 @@ const Approach = () => {
               </ul>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* What to Expect, 3-Year Arc */}
+      <section className="section-padding bg-soft-white">
+        <div className="container-wide">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl mb-16"
+          >
+            <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
+              What to Expect
+            </span>
+            <h2 className="font-heading text-display text-navy mb-6">
+              The first three years
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Understanding the arc before committing is what allows members to engage fully, rather than just taking the first step. Here is what the work looks like over time.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
+            {[
+              {
+                year: "Year One",
+                title: "Understand & Establish Foundation",
+                description:
+                  "We complete advanced cardiovascular imaging and a comprehensive biological baseline built around your specific biology, not population averages. In parallel, we address the structural and environmental factors most medicine never assesses: movement mechanics, nervous system regulation, circadian biology, oral-systemic health, and environmental toxin load. By the end of year one, the data exists. The trajectory has changed.",
+              },
+              {
+                year: "Year Two",
+                title: "Optimize Against Your Own Baseline",
+                description:
+                  "Year two is where the investment compounds. Every marker from year one becomes a benchmark, body composition, biological age, cardiovascular function, hormonal balance, and metabolic efficiency, all measured against where you started. We deepen what's working, refine what isn't, and unlock more advanced diagnostics as the full picture comes into focus.",
+              },
+              {
+                year: "Year Three",
+                title: "Individualize & Push the Frontier",
+                description:
+                  "With two years of your specific biology as the foundation, we introduce the most advanced modalities, regenerative protocols, targeted peptide therapies where appropriate, and a three-year coronary imaging comparison that is one of the most powerful longitudinal data sets in preventive medicine. This is care that cannot be replicated in a single visit, or a single year.",
+              },
+            ].map((step, index) => (
+              <motion.div
+                key={step.year}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                className="bg-warm-gray/20 p-8 border-t-2 border-gold"
+              >
+                <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-2 block">
+                  {step.year}
+                </span>
+                <h3 className="font-heading text-xl text-navy mb-4 leading-snug">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How Membership Works */}
+      <section className="section-padding bg-warm-gray/20">
+        <div className="container-wide">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
+                How Membership Works
+              </span>
+              <h2 className="font-heading text-display text-navy mb-6">
+                A relationship, not a transaction
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Your membership fee secures direct access to Dr. Cabell as a genuine clinical partner, not through a portal or a nurse line, but as a physician who knows your biology in depth. It also includes Alex Ford, your Health Integrator, who works with you and alongside Dr. Cabell between appointments to translate protocol into practice. The fee reflects the depth of engagement involved.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="bg-white p-8 md:p-10 border-l-2 border-gold"
+            >
+              <h3 className="font-heading text-2xl text-navy mb-4">
+                A buying cooperative, not a margin business
+              </h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Where we can, testing, therapeutics, and supplements are offered at or near the clinic's actual cost, with minimal markup. You'll still pay for certain diagnostics and treatments beyond the fee, but our financial interest is not in what you purchase.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                It is in your <strong className="text-navy">outcome</strong>. A physician whose income depends on patient consumption has a built-in conflict of interest. Ours is removed by design.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -404,17 +454,17 @@ const Approach = () => {
               The Invitation
             </span>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
-              This is the approach I take every day—whether I'm with patients, writing, or teaching.
+              This is the approach I take every day, whether I'm with patients, writing, or teaching.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mb-12 max-w-2xl mx-auto">
               If you're looking for more than symptom management, if you want a new way of thinking about health and vitality, I'd love to share what I'm learning.
             </p>
-            <Button variant="clinic-primary" size="xl" asChild>
-              <Link to="/contact">
-                Request an Invitation
+            <DiscoveryCallDialog>
+              <Button variant="clinic-primary" size="xl">
+                Book a Discovery Call
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+              </Button>
+            </DiscoveryCallDialog>
           </motion.div>
         </div>
       </section>
