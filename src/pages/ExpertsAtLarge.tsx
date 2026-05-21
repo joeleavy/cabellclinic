@@ -48,11 +48,6 @@ const experts: Expert[] = [
     ],
   },
   {
-    name: "Dr. Kelsey Dexter",
-    tagline: "Vitalism-based endocrinology · Metabolism & hormone optimization",
-    paragraphs: ["Bio coming soon."],
-  },
-  {
     name: "Dr. Jennifer Judge",
     tagline:
       "Oral-systemic dentistry · Salivary diagnostics & periodontal health",
