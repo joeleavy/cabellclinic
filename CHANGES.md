@@ -291,3 +291,15 @@ Changed *"An introductory conversation with Dr. Cabell"* to *"An introductory co
 
 ### Removed Dr. Kelsey Dexter from Experts at Large
 Removed the Dr. Kelsey Dexter card entirely from the /experts page until we have her actual headshot and bio. Was showing as a "Bio coming soon" + "Image coming soon" placeholder. The Experts at Large page now has 5 experts: Dr. Olivia Lesslar, Dr. Jennifer Judge, Dr. Katelyn Kalstein, Dr. Stephen Hussey, and Elizabeth York NP.
+
+### "Request an Invitation" restored as the primary CTA (popup rewritten)
+Reverted the CTA wording from "Book a Discovery Call" back to "Request an Invitation" and reworked the popup to match the existing Contact form layout exactly.
+
+- **All 11 CTA instances swapped** back to "Request an Invitation" (Header desktop + mobile, Home hero + final CTA, Approach final CTA, About final CTA, FAQ final CTA, Experts at Large final CTA, Contact page top-left card heading + button).
+- **Popup rewrite** (was Name/Email/Phone; now matches the Contact form's fuller layout):
+  - **Title:** Request an Invitation
+  - **Subtitle:** *"Share a bit about yourself and what you're seeking."*
+  - **Fields:** Full Name + Email (side-by-side) → Phone → "How can we help?" (required textarea)
+  - **Button:** Submit Inquiry
+- **Submission source tag:** `"Invitation request"` (was `"Discovery call request"`), so Kristy can distinguish these from the Contact form's "Cabell Clinic website" submissions and the Self-Assessment's "Membership application" submissions.
+- Phone is still required everywhere — preserving the earlier client direction not to make phone optional.
