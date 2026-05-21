@@ -90,7 +90,7 @@ const Contact = () => {
                 If you're ready
               </span>
               <h3 className="font-heading text-2xl md:text-3xl mb-4">
-                Book a Discovery Call
+                Request an Invitation
               </h3>
               <p className="text-soft-white/75 leading-relaxed mb-8 flex-grow">
                 If you've read enough and feel ready to move forward, complete a short application and we'll be in touch within a few business days to schedule your fifteen-minute discovery call with Dr. Cabell.
@@ -101,7 +101,7 @@ const Contact = () => {
                   size="xl"
                   className="self-start"
                 >
-                  Book a Discovery Call
+                  Request an Invitation
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </DiscoveryCallDialog>

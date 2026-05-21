@@ -281,7 +281,7 @@ const FAQ = () => {
             </p>
             <DiscoveryCallDialog>
               <Button variant="clinic-primary" size="xl">
-                Book a Discovery Call
+                Request an Invitation
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </DiscoveryCallDialog>

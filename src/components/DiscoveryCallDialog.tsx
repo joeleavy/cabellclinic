@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
@@ -20,6 +21,7 @@ const initialState = {
   name: "",
   email: "",
   phone: "",
+  message: "",
 };
 
 const DiscoveryCallDialog = ({ children }: Props) => {
@@ -38,12 +40,6 @@ const DiscoveryCallDialog = ({ children }: Props) => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const message = [
-        "=== Discovery Call Request ===",
-        "",
-        `Phone: ${form.phone || "(not provided)"}`,
-      ].join("\n");
-
       const res = await fetch(
         "https://mjcwnkilepatdwkzjnxh.supabase.co/functions/v1/send-contact-email",
         {
@@ -52,16 +48,16 @@ const DiscoveryCallDialog = ({ children }: Props) => {
           body: JSON.stringify({
             name: form.name,
             email: form.email,
-            message,
-            source: "Discovery call request",
+            message: `Phone: ${form.phone}\n\n${form.message}`,
+            source: "Invitation request",
           }),
         }
       );
       const data = await res.json();
       if (res.ok && data.success === true) {
         toast({
-          title: "Request received.",
-          description: "We'll be in touch within a few business days to schedule your call.",
+          title: "Thanks, we received your inquiry.",
+          description: "We'll be in touch within a few business days.",
         });
         setForm(initialState);
         setOpen(false);
@@ -84,54 +80,55 @@ const DiscoveryCallDialog = ({ children }: Props) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="font-heading text-2xl text-navy">
-            Book a Discovery Call
+          <DialogTitle className="font-heading text-2xl md:text-3xl text-navy">
+            Request an Invitation
           </DialogTitle>
           <DialogDescription className="text-muted-foreground leading-relaxed pt-1">
-            A fifteen-minute conversation with a member of our team. Share your details and we'll be in touch within a few business days to schedule.
+            Share a bit about yourself and what you're seeking.
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 pt-2">
-          <div className="space-y-2">
-            <Label htmlFor="dc-name" className="text-sm font-medium text-navy">
-              Full Name
-            </Label>
-            <Input
-              id="dc-name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              className="border-warm-gray focus:border-gold focus:ring-gold/20 h-11"
-              placeholder="Your name"
-            />
+        <form onSubmit={handleSubmit} className="space-y-5 pt-2">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="ri-name" className="text-sm font-medium text-navy">
+                Full Name
+              </Label>
+              <Input
+                id="ri-name"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="border-warm-gray focus:border-gold focus:ring-gold/20 h-11"
+                placeholder="Your name"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="ri-email" className="text-sm font-medium text-navy">
+                Email
+              </Label>
+              <Input
+                id="ri-email"
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="border-warm-gray focus:border-gold focus:ring-gold/20 h-11"
+                placeholder="your@email.com"
+              />
+            </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="dc-email" className="text-sm font-medium text-navy">
-              Email
-            </Label>
-            <Input
-              id="dc-email"
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              className="border-warm-gray focus:border-gold focus:ring-gold/20 h-11"
-              placeholder="your@email.com"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="dc-phone" className="text-sm font-medium text-navy">
+            <Label htmlFor="ri-phone" className="text-sm font-medium text-navy">
               Phone
             </Label>
             <Input
-              id="dc-phone"
+              id="ri-phone"
               name="phone"
               type="tel"
               value={form.phone}
@@ -142,6 +139,22 @@ const DiscoveryCallDialog = ({ children }: Props) => {
             />
           </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="ri-message" className="text-sm font-medium text-navy">
+              How can we help?
+            </Label>
+            <Textarea
+              id="ri-message"
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              rows={4}
+              required
+              className="border-warm-gray focus:border-gold focus:ring-gold/20 resize-none"
+              placeholder="Tell us about your health goals and what you're seeking in a physician..."
+            />
+          </div>
+
           <Button
             type="submit"
             variant="clinic-primary"
@@ -149,7 +162,7 @@ const DiscoveryCallDialog = ({ children }: Props) => {
             className="w-full"
             disabled={submitting}
           >
-            {submitting ? "Sending..." : "Request Discovery Call"}
+            {submitting ? "Sending..." : "Submit Inquiry"}
           </Button>
 
           <p className="text-xs text-muted-foreground/70 text-center pt-1">

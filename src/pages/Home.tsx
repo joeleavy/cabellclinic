@@ -73,7 +73,7 @@ const Home = () => {
           }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <DiscoveryCallDialog>
                 <Button variant="clinic-primary" size="xl" className="w-full sm:w-64">
-                  Book a Discovery Call
+                  Request an Invitation
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </DiscoveryCallDialog>
@@ -427,7 +427,7 @@ const Home = () => {
             </p>
             <DiscoveryCallDialog>
               <Button variant="clinic-primary" size="xl">
-                Book a Discovery Call
+                Request an Invitation
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </DiscoveryCallDialog>

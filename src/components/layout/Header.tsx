@@ -139,7 +139,7 @@ const Header = () => {
             transition={{ duration: 0.4, delay: 0.5 }}
           >
             <DiscoveryCallDialog>
-              <Button variant="clinic-primary" size="lg">Book a Discovery Call</Button>
+              <Button variant="clinic-primary" size="lg">Request an Invitation</Button>
             </DiscoveryCallDialog>
           </motion.div>
         </nav>
@@ -206,7 +206,7 @@ const Header = () => {
                 transition={{ duration: 0.3, delay: 0.5 }}
               >
                 <DiscoveryCallDialog>
-                  <Button variant="clinic-primary" size="xl">Book a Discovery Call</Button>
+                  <Button variant="clinic-primary" size="xl">Request an Invitation</Button>
                 </DiscoveryCallDialog>
               </motion.div>
             </nav>
