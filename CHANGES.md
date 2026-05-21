@@ -303,3 +303,18 @@ Reverted the CTA wording from "Book a Discovery Call" back to "Request an Invita
   - **Button:** Submit Inquiry
 - **Submission source tag:** `"Invitation request"` (was `"Discovery call request"`), so Kristy can distinguish these from the Contact form's "Cabell Clinic website" submissions and the Self-Assessment's "Membership application" submissions.
 - Phone is still required everywhere — preserving the earlier client direction not to make phone optional.
+
+### Favicon + meta cleanup
+Replaced the default Lovable.dev heart-shape favicon with a branded one, and cleaned up the Lovable references in `index.html`.
+
+- **New favicon:** Big Caslon serif "C" in champagne gold on deep navy. Brand colors pulled directly from the HSL custom properties in `src/index.css`.
+- **Generated assets** (in `public/`): multi-resolution `favicon.ico` (16/32/48), modern PNG variants (16×16, 32×32), Apple touch icon (180×180 for iOS home screen), and a 512×512 master.
+- **`index.html` cleanup:**
+  - Removed "Lovable Generated Project" description
+  - Removed `<meta name="author" content="Lovable" />`
+  - Removed `<meta name="twitter:site" content="@Lovable" />`
+  - Removed two `og:image` / `twitter:image` URLs that pointed to Lovable's Google Cloud storage
+  - Added proper favicon link tags (ico + PNG sizes + apple-touch-icon)
+  - Real meta description: *"A membership-based Preventive & Integrative Cardiology practice in Brentwood, Tennessee."*
+  - Open Graph + Twitter card titles and descriptions now use the real positioning
+- **Follow-up flagged:** social-share images (1200×630) were removed. Right now social shares show the title + description but no preview image. Need a designed social card eventually.
