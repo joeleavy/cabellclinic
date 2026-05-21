@@ -288,3 +288,6 @@ Several wording fixes based on client review:
 
 ### Contact page "What to expect" card
 Changed *"An introductory conversation with Dr. Cabell"* to *"An introductory conversation with our team"* — consistent with the Discovery Call modal's language (since the call may go through Alex/Kristy first rather than Dr. Cabell directly).
+
+### Removed Dr. Kelsey Dexter from Experts at Large
+Removed the Dr. Kelsey Dexter card entirely from the /experts page until we have her actual headshot and bio. Was showing as a "Bio coming soon" + "Image coming soon" placeholder. The Experts at Large page now has 5 experts: Dr. Olivia Lesslar, Dr. Jennifer Judge, Dr. Katelyn Kalstein, Dr. Stephen Hussey, and Elizabeth York NP.
