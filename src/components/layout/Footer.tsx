@@ -7,6 +7,7 @@ const Footer = () => {
     { name: "Home", path: "/" },
     { name: "The Approach", path: "/approach" },
     { name: "Our Method", path: "/approach" },
+    { name: "Our Team", path: "/team" },
     { name: "Experts at Large", path: "/experts" },
     { name: "Meet Dr. Cabell", path: "/dr-cabell" },
     { name: "Resources", path: "/resources" },
@@ -36,7 +37,7 @@ const Footer = () => {
             <nav className="flex flex-col gap-3">
               {navLinks.map((link) => (
                 <Link
-                  key={link.path}
+                  key={link.name}
                   to={link.path}
                   className="text-sm text-soft-white/70 hover:text-soft-white transition-colors duration-300"
                 >

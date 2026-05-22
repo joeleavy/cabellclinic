@@ -129,7 +129,7 @@ const categories: Category[] = [
         question:
           "How are tests, supplements, and therapeutics priced?",
         answer:
-          "Membership functions much like a buying cooperative. Where we can, testing, therapeutics, and supplements are offered at or near our actual cost, with minimal markup. Some diagnostics and treatments are billed beyond the membership fee, but our financial interest is in your outcomes, not in what you purchase. A practice whose income depends on patient consumption has a built-in conflict of interest. Ours is removed by design.",
+          "Where we can, testing, therapeutics, and supplements are offered very near the clinic's actual cost with minimal mark up. Some diagnostics and treatments are billed beyond the membership fee, but our financial interest is in your outcomes, not in what you purchase. A practice whose income depends on patient consumption has a built-in conflict of interest. Ours is removed by design.",
       },
       {
         question: "Who else is on my care team?",

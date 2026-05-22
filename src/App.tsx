@@ -8,6 +8,7 @@ import Approach from "./pages/Approach";
 import About from "./pages/About";
 import Resources from "./pages/Resources";
 import ExpertsAtLarge from "./pages/ExpertsAtLarge";
+import OurTeam from "./pages/OurTeam";
 import FAQ from "./pages/FAQ";
 import Apply from "./pages/Apply";
 import Contact from "./pages/Contact";
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/dr-cabell" element={<About />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/experts" element={<ExpertsAtLarge />} />
+          <Route path="/team" element={<OurTeam />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/contact" element={<Contact />} />

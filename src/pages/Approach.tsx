@@ -37,11 +37,11 @@ const Approach = () => {
             transition={{ duration: 0.7 }}>
             
             <h2 className="font-heading text-display text-navy mb-10">
-              How I Work With Patients
+              How We Work With Patients
             </h2>
-            
+
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              When I work with patients, I start with foundations:
+              When we work with patients, we start with foundations:
             </p>
             
             <ul className="space-y-3 mb-12">
@@ -97,7 +97,7 @@ const Approach = () => {
             className="text-center mb-16">
             
             <h2 className="font-heading text-display text-navy">
-              My Framework for Health: The Cabell Method
+              Our Framework for Health: The Cabell Method
             </h2>
           </motion.div>
 
@@ -285,7 +285,7 @@ const Approach = () => {
                 Medications still have a place, but they're not the first reflex.
               </p>
               <p className="text-muted-foreground leading-relaxed text-sm italic">
-                I use pharmaceuticals only when truly necessary, after we've addressed your foundations, story, and environment, so your body can do what it was designed to do: thrive.
+                We use pharmaceuticals only when truly necessary, after we've addressed your foundations, story, and environment, so your body can do what it was designed to do: thrive.
               </p>
             </motion.div>
           </div>
@@ -428,13 +428,13 @@ const Approach = () => {
               className="bg-white p-8 md:p-10 border-l-2 border-gold"
             >
               <h3 className="font-heading text-2xl text-navy mb-4">
-                A buying cooperative, not a margin business
+                Aligned economics, not a margin business
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Where we can, testing, therapeutics, and supplements are offered at or near the clinic's actual cost, with minimal markup. You'll still pay for certain diagnostics and treatments beyond the fee, but our financial interest is not in what you purchase.
+                Where we can, testing, therapeutics, and supplements are offered very near the clinic's actual cost with minimal mark up. You'll still pay for certain diagnostics and treatments beyond the fee, but our financial interest is not in what you purchase.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                It is in your <strong className="text-navy">outcome</strong>. A physician whose income depends on patient consumption has a built-in conflict of interest. Ours is removed by design.
+                It is in your <strong className="text-navy">outcome</strong>. A practice whose income depends on patient consumption has a built-in conflict of interest. Ours is removed by design.
               </p>
             </motion.div>
           </div>
@@ -454,10 +454,10 @@ const Approach = () => {
               The Invitation
             </span>
             <p className="text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
-              This is the approach I take every day, whether I'm with patients, writing, or teaching.
+              This is the approach we take every day, whether we're with patients, writing, or teaching.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mb-12 max-w-2xl mx-auto">
-              If you're looking for more than symptom management, if you want a new way of thinking about health and vitality, I'd love to share what I'm learning.
+              If you're looking for more than symptom management, if you want a new way of thinking about health and vitality, we'd love to share what we're learning.
             </p>
             <DiscoveryCallDialog>
               <Button variant="clinic-primary" size="xl">
