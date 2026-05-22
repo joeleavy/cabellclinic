@@ -129,7 +129,7 @@ const categories: Category[] = [
         question:
           "How are tests, supplements, and therapeutics priced?",
         answer:
-          "Where we can, testing, therapeutics, and supplements are offered very near the clinic's actual cost with minimal mark up. Some diagnostics and treatments are billed beyond the membership fee, but our financial interest is in your outcomes, not in what you purchase. A practice whose income depends on patient consumption has a built-in conflict of interest. Ours is removed by design.",
+          "Where we can, testing, therapeutics, and supplements are offered very near the clinic's actual cost with minimal mark up. Some diagnostics and treatments are billed beyond the membership fee, but our financial interest is in your outcome, not in what you buy. In most practices, more prescriptions and procedures mean more revenue, a conflict of interest built into the model. Ours is built without it.",
       },
       {
         question: "Who else is on my care team?",

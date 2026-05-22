@@ -431,10 +431,10 @@ const Approach = () => {
                 Aligned economics, not a margin business
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Where we can, testing, therapeutics, and supplements are offered very near the clinic's actual cost with minimal mark up. You'll still pay for certain diagnostics and treatments beyond the fee, but our financial interest is not in what you purchase.
+                Where we can, testing, therapeutics, and supplements are offered very near the clinic's actual cost with minimal mark up. You'll still pay for certain diagnostics and treatments beyond the fee, but our financial interest is in your <strong className="text-navy">outcome</strong>, not in what you buy.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                It is in your <strong className="text-navy">outcome</strong>. A practice whose income depends on patient consumption has a built-in conflict of interest. Ours is removed by design.
+                In most practices, more prescriptions and procedures mean more revenue, a conflict of interest built into the model. Ours is built without it.
               </p>
             </motion.div>
           </div>
