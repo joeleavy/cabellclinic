@@ -47,6 +47,20 @@ Replaced the six-paragraph bio with a tighter four-paragraph version supplied by
 ### Footer — duplicate React key warning fixed
 The footer nav `.map()` used `key={link.path}`, which produced a React duplicate-key console warning because two entries ("The Approach" and "Our Method") intentionally point to the same path (`/approach`). Switched the key to `link.name` (names are unique). No visual change; just clears the console noise.
 
+### "Aligned economics" body — rewritten on Approach + FAQ
+Rewrote the two paragraphs that close the "Aligned economics, not a margin business" section. Same point, less abstract phrasing, no em-dash.
+
+- **New copy:**
+  > Where we can, testing, therapeutics, and supplements are offered very near the clinic's actual cost with minimal mark up. You'll still pay for certain diagnostics and treatments beyond the fee, but our financial interest is in your **outcome**, not in what you buy.
+  >
+  > In most practices, more prescriptions and procedures mean more revenue, a conflict of interest built into the model. Ours is built without it.
+- **What changed and why:**
+  - "Not in what you purchase" → "not in what you buy" — simpler register, matches the rest of the page.
+  - "A practice whose income depends on patient consumption" → "In most practices, more prescriptions and procedures mean more revenue" — names the actual mechanism rather than the abstract category. "Patient consumption" read as clinical and commodifying.
+  - "Ours is removed by design" → "Ours is built without it" — the antecedent now clearly refers to the *model* (which is built), not the *conflict* (which was being awkwardly "removed").
+  - Bolded **outcome** moved into the first paragraph so the contrast lands immediately.
+- **Applied to both** the Approach page section card and the parallel FAQ answer ("How are tests, supplements, and therapeutics priced?"), to keep the two passages in sync.
+
 ---
 
 ## 2026-05-20
