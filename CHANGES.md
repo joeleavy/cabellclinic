@@ -4,6 +4,51 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-05-22
+
+### Approach page — team voice
+Shifted first-person ("I"/"my") to team voice ("we"/"our") across the page, reflecting the clinic's team approach.
+
+- **Section heading:** "How I Work With Patients" → **"How We Work With Patients"**
+- **Lead sentence in that section:** "When I work with patients, I start with foundations" → "When we work with patients, we start with foundations"
+- **Cabell Method section heading:** "My Framework for Health: The Cabell Method" → **"Our Framework for Health: The Cabell Method"**
+- **Selective Medicine card:** "I use pharmaceuticals only when truly necessary…" → "We use pharmaceuticals only when truly necessary…"
+- **Invitation section:** "This is the approach I take every day, whether I'm with patients…" → "the approach we take every day, whether we're with patients…" and "I'd love to share what I'm learning" → "we'd love to share what we're learning"
+
+### Approach + FAQ — "Aligned economics" rename (legal)
+Removed the "buying cooperative" framing, which the client flagged as legally problematic. Reframed as **"Aligned economics, not a margin business"** — defensible, conceptually precise, and avoids language that could trigger regulatory scrutiny.
+
+- **Approach page section title:** "A buying cooperative, not a margin business" → **"Aligned economics, not a margin business"**
+- **Approach page body (replacement copy):**
+  > Where we can, testing, therapeutics, and supplements are offered very near the clinic's actual cost with minimal mark up. You'll still pay for certain diagnostics and treatments beyond the fee, but our financial interest is not in what you purchase.
+  >
+  > It is in your **outcome**. A practice whose income depends on patient consumption has a built-in conflict of interest. Ours is removed by design.
+  - "at or near the clinic's actual cost, with minimal markup" → "very near the clinic's actual cost with minimal mark up"
+  - "A physician whose income depends…" → "A practice whose income depends…" (matches the new team voice)
+- **FAQ page** ("How are tests, supplements, and therapeutics priced?"): dropped the "Membership functions much like a buying cooperative" lead sentence; the rest of the answer (financial interest in outcomes, conflict of interest removed by design) is preserved with the same "very near the clinic's actual cost with minimal mark up" phrasing.
+
+### New page: Our Team
+Added a dedicated `/team` page for the clinic's core staff, separate from the existing Experts at Large network.
+
+- **Route:** `/team`
+- **Navigation:** added "Our Team" to the "The Approach" dropdown in the main nav (between "Our Method" and "Experts at Large") and to the footer nav.
+- **Structure:** mirrors Experts at Large.
+  - Hero: eyebrow "THE CORE TEAM", heading **"Our Team"**, intro paragraph ("Alongside Dr. Cabell, a small core team works directly with every member, translating protocol into practice and keeping the clinic running with the same care we bring to the medicine.")
+  - Profile slots: **Alex Ford** (Health Integrator) on top, **Kristy Wright** (Operations Manager) below — both with "Image coming soon" and "Bio coming soon" placeholders.
+  - Closing CTA: "A team approach to your care" → Request an Invitation
+- **Pending from client:** headshots and bios for both Alex and Kristy.
+
+### Experts at Large — Dr. Olivia Lesslar bio trimmed
+Replaced the six-paragraph bio with a tighter four-paragraph version supplied by the client.
+
+- **Kept:** the lead (psychoneuroimmunology + complex-condition medicine), the 2025 Australia/NZ speaking tour and *The Nine Ancient Survival Threats* framework, the Cingulum Health Director role, the BCFM directorship, and the Griffith + Geneva College of Longevity Science academic appointments.
+- **Removed:** the "medical Sherlock Holmes" descriptor and the analytical-precision paragraph, the long international affiliations list (Human Regenerator, L'evive Labs, Atlus, Sens.ai, ANI Biome, Avea, Oxford Healthspan, Naked Pharmacy), the Health Span XPrize / Women in Defence and Space Alliance section, and the closing "patient-centred, innovative models" paragraph.
+
+### Footer — duplicate React key warning fixed
+The footer nav `.map()` used `key={link.path}`, which produced a React duplicate-key console warning because two entries ("The Approach" and "Our Method") intentionally point to the same path (`/approach`). Switched the key to `link.name` (names are unique). No visual change; just clears the console noise.
+
+---
+
 ## 2026-05-20
 
 ### Address listings updated
