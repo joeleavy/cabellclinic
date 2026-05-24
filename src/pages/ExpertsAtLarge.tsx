@@ -38,10 +38,6 @@ const experts: Expert[] = [
     ],
     links: [
       { label: "drolivialesslar.com", href: "https://www.drolivialesslar.com" },
-      {
-        label: "TEDx · Take Control of Your Lifestyle-Driven Disease",
-        href: "https://www.youtube.com/results?search_query=Olivia+Lesslar+TEDx+Take+Control+of+Your+Lifestyle-Driven+Disease",
-      },
       { label: "Instagram", href: "https://www.instagram.com/drolivialesslar" },
     ],
   },
