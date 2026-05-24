@@ -47,6 +47,22 @@ Replaced the six-paragraph bio with a tighter four-paragraph version supplied by
 ### Footer — duplicate React key warning fixed
 The footer nav `.map()` used `key={link.path}`, which produced a React duplicate-key console warning because two entries ("The Approach" and "Our Method") intentionally point to the same path (`/approach`). Switched the key to `link.name` (names are unique). No visual change; just clears the console noise.
 
+### Our Team — Alex Ford bio + headshot
+Filled in Alex's content; Kristy still placeholdered.
+
+- **Headshot:** new file at `src/assets/team/alex-ford.jpg` (860x865), shown in the photo column.
+- **Tagline:** "Health Integrator" → **"Co-Founder · Health Integrator"** (matches the PDF the client sent).
+- **Hook (italic pull-quote under the tagline):** "Health doesn't change until life does."
+- **Bio body** rendered as three structured sections (each with a gold uppercase eyebrow + serif heading + paragraphs):
+  - **My Story — Ten years. One question.** Personal origin story, decade of cross-discipline health work, the integration insight, formal training.
+  - **What I Do Here — Integration, not just information.** Primary point of contact between visits; translates Dr. Cabell's findings into a livable protocol.
+  - **Philosophy — A system builder, not just a coach.** Plans fail when they aren't built around a real life; long-term sustainable health, not a 90-day reset.
+- **Training & Credentials** block at the bottom (separated by a thin border):
+  - Primal Health Coach (PHC) · Primal Health Coach Institute · Certified 2024
+  - Precision Medicine Training Program · Wild Health · 85-hour curriculum · 2023
+- **Code:** extended the `TeamMember` type in `OurTeam.tsx` with optional `hook`, `sections` (eyebrow + heading + paragraphs), and `credentials`. The render falls back to "Bio coming soon" when `sections` is empty, so Kristy's slot is unchanged.
+- **Pending:** Kristy Wright headshot + bio.
+
 ### "Aligned economics" body — rewritten on Approach + FAQ
 Rewrote the two paragraphs that close the "Aligned economics, not a margin business" section. Same point, less abstract phrasing, no em-dash.
 
