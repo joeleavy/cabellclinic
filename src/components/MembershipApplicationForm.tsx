@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
+import { CONTACT_EMAIL_FUNCTION_URL } from "@/integrations/supabase/client";
 
 type RadioQuestion = {
   id: string;
@@ -122,7 +123,7 @@ const MembershipApplicationForm = ({ onSuccess, compact = false }: Props) => {
     setSubmitting(true);
     try {
       const res = await fetch(
-        "https://mjcwnkilepatdwkzjnxh.supabase.co/functions/v1/send-contact-email",
+        CONTACT_EMAIL_FUNCTION_URL,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

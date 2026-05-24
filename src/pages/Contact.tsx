@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { CONTACT_EMAIL_FUNCTION_URL } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -27,7 +28,7 @@ const Contact = () => {
 
     try {
       const res = await fetch(
-        "https://mjcwnkilepatdwkzjnxh.supabase.co/functions/v1/send-contact-email",
+        CONTACT_EMAIL_FUNCTION_URL,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
