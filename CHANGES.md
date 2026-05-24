@@ -19,8 +19,8 @@ After the May 22 launch-prep work, the site went live on Cloudflare Pages.
   - Social share card (og:image) preview verified.
 - **Rollback safety net:** annotated git tag `pre-launch-snapshot` at commit `c9c8af0` marks the pre-launch state. Cloudflare Pages also retains every deploy in its history for one-click rollback.
 
-### Experts at Large — removed Olivia Lesslar TEDx placeholder link
-The TEDx link pointed to a YouTube search URL rather than a specific video. Removed for launch; will re-add when a real URL is available. Olivia's other two links (drolivialesslar.com, Instagram) are unchanged.
+### Experts at Large — Olivia Lesslar TEDx link
+Removed at launch because it pointed to a YouTube search URL rather than a specific video (commit `2d09b37`). Restored same-day with the real video URL `https://youtu.be/dMw5u5VCTxU` once the client supplied it (commit `f75cee8`). Label and position in the link row are unchanged.
 
 ---
 
