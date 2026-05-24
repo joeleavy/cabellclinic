@@ -4,6 +4,26 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-05-24
+
+### 🚀 Site launched at thomascabellmd.com
+After the May 22 launch-prep work, the site went live on Cloudflare Pages.
+
+- **Production URL:** https://thomascabellmd.com (apex). Also reachable at the Pages-native URL https://cabellclinic.pages.dev.
+- **Host:** Cloudflare Pages, project `cabellclinic`, deploying from `main` automatically on push.
+- **Build settings:** framework Vite, `npm run build`, output `dist`.
+- **Environment variables (Production scope):** `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set in the CF Pages dashboard (not committed; values mirror `.env.local`). The first deploy went out with these missing, which produced a blank page and a runtime error from the env-var guard in `client.ts` — adding the vars and retrying the deploy fixed it.
+- **Smoke test passed:**
+  - Homepage renders, all routes load (`/approach`, `/team`, `/faq`, `/dr-cabell`) — `public/_redirects` working.
+  - "Request an Invitation" submission delivered to info@ via the Supabase Edge Function.
+  - Social share card (og:image) preview verified.
+- **Rollback safety net:** annotated git tag `pre-launch-snapshot` at commit `c9c8af0` marks the pre-launch state. Cloudflare Pages also retains every deploy in its history for one-click rollback.
+
+### Experts at Large — removed Olivia Lesslar TEDx placeholder link
+The TEDx link pointed to a YouTube search URL rather than a specific video. Removed for launch; will re-add when a real URL is available. Olivia's other two links (drolivialesslar.com, Instagram) are unchanged.
+
+---
+
 ## 2026-05-22
 
 ### Approach page — team voice
