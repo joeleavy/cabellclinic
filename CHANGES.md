@@ -19,6 +19,9 @@ After the May 22 launch-prep work, the site went live on Cloudflare Pages.
   - Social share card (og:image) preview verified.
 - **Rollback safety net:** annotated git tag `pre-launch-snapshot` at commit `c9c8af0` marks the pre-launch state. Cloudflare Pages also retains every deploy in its history for one-click rollback.
 
+### Meet Dr. Cabell — removed duplicate "Your Team" cards
+The "A coordinated network, not a solo provider" section had three name+role cards (Dr. Cabell, Alex Ford, Kristy Wright) that duplicated content from the new `/team` page. Replaced them with a "Meet the team →" CTA that mirrors the existing "Meet the Experts at Large →" CTA in the broader-network callout right below it. Same conceptual framing (team-based approach), no duplicated bios. Side benefit: the awkwardness of listing Dr. Cabell alongside Alex and Kristy on Dr. Cabell's own page is gone.
+
 ### Experts at Large — Olivia Lesslar TEDx link
 Removed at launch because it pointed to a YouTube search URL rather than a specific video (commit `2d09b37`). Restored same-day with the real video URL `https://youtu.be/dMw5u5VCTxU` once the client supplied it (commit `f75cee8`). Label and position in the link row are unchanged.
 
