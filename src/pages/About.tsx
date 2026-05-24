@@ -235,43 +235,16 @@ const About = () => {
             <h2 className="font-heading text-display text-navy mb-6">
               A coordinated network, not a solo provider
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
               Membership is built around a small, dedicated core team, and access to a vetted network of specialists who share our philosophy. These aren't conventional referrals. They're partners chosen deliberately, integrated into your care plan, and coordinated on your behalf.
             </p>
+            <Button variant="clinic-outline" asChild>
+              <Link to="/team">
+                Meet the team
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {[
-              {
-                name: "Dr. Thomas Cabell, MD",
-                role: "Founder · Preventive & Integrative Cardiologist · Clinical Director",
-              },
-              {
-                name: "Alex Ford",
-                role: "Health Integrator · Your primary point of contact for coaching, protocol integration, and day-to-day guidance",
-              },
-              {
-                name: "Kristy Wright",
-                role: "Operations Manager & Assistant to Dr. Cabell · Scheduling, coordination, and member experience",
-              },
-            ].map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="border-t border-gold/40 pt-6"
-              >
-                <h3 className="font-heading text-xl text-navy mb-2">
-                  {member.name}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {member.role}
-                </p>
-              </motion.div>
-            ))}
-          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
