@@ -47,6 +47,18 @@ Replaced the six-paragraph bio with a tighter four-paragraph version supplied by
 ### Footer — duplicate React key warning fixed
 The footer nav `.map()` used `key={link.path}`, which produced a React duplicate-key console warning because two entries ("The Approach" and "Our Method") intentionally point to the same path (`/approach`). Switched the key to `link.name` (names are unique). No visual change; just clears the console noise.
 
+### Launch lockdown — SPA redirects, Supabase env vars, og:image
+Pre-deploy housekeeping before pointing `thomascabellmd.com` at the site via Cloudflare Pages.
+
+- **SPA routing.** New `public/_redirects` file with `/*    /index.html   200`. Required so deep links (`/approach`, `/team`, `/faq`) work after a hard page load on a static host. Without this, Cloudflare Pages returns a 404 on first hit.
+- **Supabase config moved to env vars.**
+  - Real values now live in `.env.local` (gitignored). `.env.example` is committed so the next person knows what's required: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
+  - `src/integrations/supabase/client.ts` reads from `import.meta.env`, throws a clear error if the vars are missing, and exports a single `CONTACT_EMAIL_FUNCTION_URL` constant.
+  - All four form components (`DiscoveryCallDialog`, `MembershipApplicationForm`, `Contact`, `Resources`) now import the constant instead of hardcoding the Edge Function URL.
+  - The Lovable "automatically generated, do not edit directly" comment has been removed; this file is now hand-maintained.
+  - The anon key is safe to expose in the browser bundle by design — moving it to an env var is hygiene, not security, but it means the Cloudflare Pages production env can hold different values from local dev if we ever need that.
+- **Social share card.** Generated `public/og-image.png` (1200×630): deep navy background, Big Caslon "The Cabell Clinic" in soft white, faded gold "C" monogram, gold accent line, Baskerville subtitle "Preventive & Integrative Cardiology · Brentwood, Tennessee". Added `og:url`, `og:image` (+ width/height/alt), and `twitter:image` meta tags in `index.html` pointing at `https://thomascabellmd.com/og-image.png`. Link previews in iMessage/Slack/Twitter/LinkedIn will now render the card instead of plain text.
+
 ### Our Team — Alex Ford bio + headshot
 Filled in Alex's content; Kristy still placeholdered.
 
