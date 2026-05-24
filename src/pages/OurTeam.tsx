@@ -4,23 +4,80 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
 
+import alexFordImg from "@/assets/team/alex-ford.jpg";
+
+type BioSection = {
+  eyebrow?: string;
+  heading?: string;
+  paragraphs: string[];
+};
+
+type Credential = {
+  title: string;
+  details: string;
+};
+
 type TeamMember = {
   name: string;
   tagline?: string;
+  hook?: string;
   image?: string;
-  paragraphs: string[];
+  sections: BioSection[];
+  credentials?: Credential[];
 };
 
 const team: TeamMember[] = [
   {
     name: "Alex Ford",
-    tagline: "Health Integrator",
-    paragraphs: [],
+    tagline: "Co-Founder · Health Integrator",
+    hook: "Health doesn't change until life does.",
+    image: alexFordImg,
+    sections: [
+      {
+        eyebrow: "My Story",
+        heading: "Ten years. One question.",
+        paragraphs: [
+          "I came to health the way a lot of people do by needing to fix my own. As a former college athlete, I assumed I understood my body. But when my health started breaking down, I realized how little I actually knew about what was driving it, and what it would take to genuinely turn it around.",
+          "That process changed everything. Once I found what worked for me, my first instinct was to help my family do the same. And then it kept spreading from there.",
+          "Over the past decade, I've worked across the full spectrum of health support: as a personal trainer, a health coach, and a health advocate for families navigating complex, fragmented care. The clients and contexts changed, but the core challenge was always the same.",
+          "Most people aren't lacking information. They have labs, physicians, specialists, wearables, and recommendations coming from every direction. What they're missing is someone who can take all of it, every data point, every opinion, every moving piece, and lay it against their actual life. Not a general protocol, but a plan built around this specific person, their specific circumstances, and the rhythm of life they're actually trying to live.",
+          "To do that work well alongside a physician, I knew I needed more than practical experience. I pursued formal training in health coaching and completed a precision medicine curriculum that gave me the clinical fluency to work meaningfully with diagnostic data, and sit at the table with Dr. Cabell as a true partner in your care.",
+          "At the end of the day, this work is about time. More of it, and better quality, with the people who matter most.",
+        ],
+      },
+      {
+        eyebrow: "What I Do Here",
+        heading: "Integration, not just information.",
+        paragraphs: [
+          "I'm your primary point of contact between clinical visits. My job is to take Dr. Cabell's findings and translate them into a protocol that fits your actual life, then stay close as you implement it, tracking what's working and adjusting as things change.",
+          "The goal isn't a perfect plan on paper. It's meaningful progress over years, and a relationship with your health that keeps getting stronger.",
+        ],
+      },
+      {
+        eyebrow: "Philosophy",
+        heading: "A system builder, not just a coach.",
+        paragraphs: [
+          "Most health plans fail not because the science is wrong, but because they were never built around a real life. The right foods, the right exercise, the right labs. None of it holds if it doesn't fit how you actually live, what you value, and what you're trying to protect.",
+          "My job is to build something that fits. To take everything we know about your body and hold it against everything I know about your life, and find the version of health that you can actually sustain. Not for ninety days. For the long run.",
+        ],
+      },
+    ],
+    credentials: [
+      {
+        title: "Primal Health Coach (PHC)",
+        details: "Primal Health Coach Institute · Certified 2024",
+      },
+      {
+        title: "Precision Medicine Training Program",
+        details:
+          "Wild Health · 85-hour curriculum in genomics, metabolic health, and personalized protocol design · 2023",
+      },
+    ],
   },
   {
     name: "Kristy Wright",
     tagline: "Operations Manager",
-    paragraphs: [],
+    sections: [],
   },
 ];
 
@@ -104,17 +161,59 @@ const OurTeam = () => {
                           {member.tagline}
                         </p>
                       )}
+                      {member.hook && (
+                        <p className="mt-5 font-heading text-xl md:text-2xl text-navy italic leading-snug">
+                          {member.hook}
+                        </p>
+                      )}
                     </header>
-                    {member.paragraphs.length > 0 ? (
-                      <div className="space-y-5">
-                        {member.paragraphs.map((p, i) => (
-                          <p
-                            key={i}
-                            className="text-muted-foreground leading-relaxed"
-                          >
-                            {p}
-                          </p>
+
+                    {member.sections.length > 0 ? (
+                      <div className="space-y-10">
+                        {member.sections.map((section, si) => (
+                          <div key={si}>
+                            {section.eyebrow && (
+                              <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-2 block">
+                                {section.eyebrow}
+                              </span>
+                            )}
+                            {section.heading && (
+                              <h3 className="font-heading text-xl md:text-2xl text-navy mb-4 leading-snug">
+                                {section.heading}
+                              </h3>
+                            )}
+                            <div className="space-y-5">
+                              {section.paragraphs.map((p, pi) => (
+                                <p
+                                  key={pi}
+                                  className="text-muted-foreground leading-relaxed"
+                                >
+                                  {p}
+                                </p>
+                              ))}
+                            </div>
+                          </div>
                         ))}
+
+                        {member.credentials && member.credentials.length > 0 && (
+                          <div className="pt-8 border-t border-warm-gray/60">
+                            <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-5 block">
+                              Training & Credentials
+                            </span>
+                            <ul className="space-y-4">
+                              {member.credentials.map((c, ci) => (
+                                <li key={ci}>
+                                  <p className="font-heading text-lg text-navy">
+                                    {c.title}
+                                  </p>
+                                  <p className="text-sm text-muted-foreground leading-relaxed">
+                                    {c.details}
+                                  </p>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <p className="text-sm uppercase tracking-widest text-muted-foreground/60 font-semibold">
