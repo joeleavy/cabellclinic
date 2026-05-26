@@ -19,6 +19,14 @@ After the May 22 launch-prep work, the site went live on Cloudflare Pages.
   - Social share card (og:image) preview verified.
 - **Rollback safety net:** annotated git tag `pre-launch-snapshot` at commit `c9c8af0` marks the pre-launch state. Cloudflare Pages also retains every deploy in its history for one-click rollback.
 
+### Social share preview — swapped to sunrise/silhouette photo
+The og:image was the navy/gold "The Cabell Clinic" text card I generated at launch. Replaced with a cropped version of `src/assets/vision-outdoor.jpg` (the camper-at-sunrise photo used elsewhere on the site) — matches the "vitality / open horizons" feel better than a text card.
+
+- Cropped from 1920×1281 (3:2) to 1200×630 (the standard og:image ratio of 1.905:1). Favored the bottom crop to remove the small "MAGELLAN" tent watermark. Re-encoded as progressive JPG at quality 85, final size ~100KB.
+- Renamed `public/og-image.png` → `public/og-image-v2.jpg` and updated the og:image and twitter:image meta tags in `index.html` to match. The filename change is intentional: iMessage, Slack, and LinkedIn cache link previews aggressively by image URL, sometimes for days. A new path forces those platforms to re-fetch the new image instead of serving the old card.
+- Deleted the unused `og-image.png`.
+- **To test the new preview without waiting on cache:** paste the URL into a brand-new conversation, or use [opengraph.xyz](https://www.opengraph.xyz/url/https%3A%2F%2Fthomascabellmd.com). Existing shared links may still show the old card until the cache expires.
+
 ### Meet Dr. Cabell — removed duplicate "Your Team" cards
 The "A coordinated network, not a solo provider" section had three name+role cards (Dr. Cabell, Alex Ford, Kristy Wright) that duplicated content from the new `/team` page. Replaced them with a "Meet the team →" CTA that mirrors the existing "Meet the Experts at Large →" CTA in the broader-network callout right below it. Same conceptual framing (team-based approach), no duplicated bios. Side benefit: the awkwardness of listing Dr. Cabell alongside Alex and Kristy on Dr. Cabell's own page is gone.
 
