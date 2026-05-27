@@ -4,6 +4,26 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-05-26
+
+### Our Team — Kristy Wright bio + headshot
+Filled in Kristy's content. The Our Team page is now fully populated for both core team members.
+
+- **Headshot:** new file at `src/assets/team/kristy-wright.jpg` (1079×810 JPEG). Source is 4:3 landscape; the team page renders her in the same 4:5 portrait frame as Alex (object-cover crops the sides), and her face is centered in the source so the crop sits cleanly.
+- **Tagline:** "Operations Manager" → **"Operations Manager · Medical Assistant"** (matches the role in the PDF).
+- **Hook (italic pull-quote under the tagline):** "The first face. The steady presence." *(The source PDF had font-encoding artifacts that wrote "The" as "!e" in this line — corrected.)*
+- **Preface paragraphs** (between the hook and the first section): two paragraphs framing the patient-experience side of her role before her personal story begins. ("Most people are a little nervous the first time…" / "Patients have told her for years…")
+- **Two bio sections** rendered with eyebrow + serif heading + paragraphs:
+  - **Her Story — A caregiver from the beginning.** Pediatric critical care at Vanderbilt Children's PICU, joining Dr. Cabell's practice in 2012, her own integrative-medicine recovery.
+  - **What She Does Here — The person who keeps everything running.** First point of contact, vitals/history/medications, follow-up coordination, the continuity she brings to long-standing patient relationships.
+- **Training & Credentials** block at the bottom:
+  - Certified Clinical Medical Assistant (CCMA) · with Dr. Cabell since 2012
+  - BLS Certified
+  - Pediatric Advanced Life Support (PEARS) · 9 years at Vanderbilt Children's Hospital PICU
+- **Type / render changes:** added an optional `preface?: string[]` field to the `TeamMember` type (Alex's data unaffected) and updated the render to display preface paragraphs in the standard body style between the hook and the first section.
+
+---
+
 ## 2026-05-24
 
 ### 🚀 Site launched at thomascabellmd.com
