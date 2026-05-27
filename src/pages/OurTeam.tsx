@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
 
 import alexFordImg from "@/assets/team/alex-ford.jpg";
+import kristyWrightImg from "@/assets/team/kristy-wright.jpg";
 
 type BioSection = {
   eyebrow?: string;
@@ -21,6 +22,8 @@ type TeamMember = {
   name: string;
   tagline?: string;
   hook?: string;
+  /** Optional intro paragraphs that sit between the hook and the first section. */
+  preface?: string[];
   image?: string;
   sections: BioSection[];
   credentials?: Credential[];
@@ -76,8 +79,46 @@ const team: TeamMember[] = [
   },
   {
     name: "Kristy Wright",
-    tagline: "Operations Manager",
-    sections: [],
+    tagline: "Operations Manager · Medical Assistant",
+    hook: "The first face. The steady presence.",
+    image: kristyWrightImg,
+    preface: [
+      "Most people are a little nervous the first time they come to a cardiologist. Kristy knows that. She was once on that side of it herself. Her goal from the moment you walk in is simple: make sure you never feel that way here.",
+      "Patients have told her for years that coming to this office feels less like a doctor's visit and more like seeing people who actually know them. That's not by accident. It's what Kristy builds, one visit at a time.",
+    ],
+    sections: [
+      {
+        eyebrow: "Her Story",
+        heading: "A caregiver from the beginning.",
+        paragraphs: [
+          "Kristy has been taking care of people her entire life. She started in pediatric critical care, spending nearly a decade at Vanderbilt Children's PICU, where she worked through emergency codes, supported families on the hardest days of their lives, and learned what it really means to be present for someone in a moment of fear.",
+          "She came to Dr. Cabell's practice in 2012, and in the years since, she has seen his approach to medicine transform the lives of hundreds of patients. She experienced that transformation herself. When her own health was at a low point, Dr. Cabell's integrative approach gave her a path forward that conventional medicine hadn't. She recovered in ways she hadn't thought possible.",
+          "That experience is why she shows up the way she does. She knows what it means to feel genuinely cared for, and she brings that into every interaction.",
+        ],
+      },
+      {
+        eyebrow: "What She Does Here",
+        heading: "The person who keeps everything running.",
+        paragraphs: [
+          "When you come in for a visit, Kristy is your first point of contact. She handles vitals, reviews your history, goes over your medications, and makes sure Dr. Cabell has everything he needs before he walks in the room. She's also the one who follows up after, answers your calls, coordinates your labs and referrals, and stays close on anything that needs attention between visits.",
+          "Some of Dr. Cabell's patients have been coming in for over a decade. Kristy knows them. She remembers what matters to them, what worries them, and what they need to hear. That continuity is something you can't manufacture, and it's one of the quiet reasons this practice feels different from the start.",
+        ],
+      },
+    ],
+    credentials: [
+      {
+        title: "Certified Clinical Medical Assistant (CCMA)",
+        details: "Current certification · with Dr. Cabell since 2012",
+      },
+      {
+        title: "BLS Certified",
+        details: "Current certification",
+      },
+      {
+        title: "Pediatric Advanced Life Support (PEARS)",
+        details: "Vanderbilt Children's Hospital PICU · 9 years clinical experience",
+      },
+    ],
   },
 ];
 
@@ -170,6 +211,18 @@ const OurTeam = () => {
 
                     {member.sections.length > 0 ? (
                       <div className="space-y-10">
+                        {member.preface && member.preface.length > 0 && (
+                          <div className="space-y-5">
+                            {member.preface.map((p, pi) => (
+                              <p
+                                key={pi}
+                                className="text-muted-foreground leading-relaxed"
+                              >
+                                {p}
+                              </p>
+                            ))}
+                          </div>
+                        )}
                         {member.sections.map((section, si) => (
                           <div key={si}>
                             {section.eyebrow && (
