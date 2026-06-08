@@ -39,6 +39,16 @@ const DiscoveryCallDialog = ({ children }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const phoneDigits = form.phone.replace(/\D/g, "");
+    if (phoneDigits.length !== 10) {
+      toast({
+        title: "Please enter a valid 10-digit phone number.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSubmitting(true);
     try {
       const res = await fetch(
