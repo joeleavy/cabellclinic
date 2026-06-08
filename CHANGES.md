@@ -4,6 +4,18 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-06-08
+
+### Request an Invitation form — phone number now validated
+The phone field was marked `required`, but `type="tel"` does no format checking, so a value like "no" passed straight through. Added a submit-time guard that strips all non-digits and requires exactly 10.
+
+- **Where:** `src/components/DiscoveryCallDialog.tsx` (the single shared component behind every "Request an Invitation" form — Home, About, Approach, Contact, FAQ, Our Team, Experts at Large, and the header button).
+- **Behavior:** on submit, `form.phone.replace(/\D/g, "")` must be exactly 10 digits. If not, a destructive toast ("Please enter a valid 10-digit phone number.") shows and submission is blocked before the network call.
+- **Formatting tolerated:** spaces, dashes, and parentheses are ignored, so `(555) 123-4567` and `5551234567` both pass; `no` and any <10 or >10 digit entry are rejected. (Note: a leading country-code "1" makes 11 digits and is currently rejected.)
+- **Verified** in the local dev server: "no" blocked with the error toast and dialog kept open; `(555) 123-4567` passed validation and proceeded to send.
+
+---
+
 ## 2026-05-26
 
 ### Our Team — Kristy Wright bio + headshot
