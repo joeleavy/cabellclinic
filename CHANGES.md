@@ -4,6 +4,17 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-06-29
+
+### Request an Invitation form — clearer post-submit confirmation
+The success toast previously said only "We'll be in touch within a few business days." Expanded it to set a concrete expectation and head off the most common support issue (the reply landing in spam).
+
+- **Where:** `src/components/DiscoveryCallDialog.tsx` (the shared component behind every "Request an Invitation" form).
+- **New copy:** title "Thanks, we received your inquiry."; description "You'll hear from us by email (info@thecabellclinic.com) within one business day. If you don't see it, please check your spam folder."
+- **Verified** in the local dev server: submitted the form (with `fetch` stubbed so no real inquiry was sent) and confirmed the toast renders the full copy within the viewport, the dialog closes, and the form resets.
+
+---
+
 ## 2026-06-08
 
 ### Request an Invitation form — phone number now validated
