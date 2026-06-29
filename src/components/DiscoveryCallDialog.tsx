@@ -68,7 +68,8 @@ const DiscoveryCallDialog = ({ children }: Props) => {
       if (res.ok && data.success === true) {
         toast({
           title: "Thanks, we received your inquiry.",
-          description: "We'll be in touch within a few business days.",
+          description:
+            "You'll hear from us by email (info@thecabellclinic.com) within one business day. If you don't see it, please check your spam folder.",
         });
         setForm(initialState);
         setOpen(false);
