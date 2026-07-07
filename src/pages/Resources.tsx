@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { useToast } from "@/hooks/use-toast";
-import { CONTACT_EMAIL_FUNCTION_URL } from "@/integrations/supabase/client";
+import { submitInquiry } from "@/lib/submitInquiry";
 
 const Resources = () => {
   const { toast } = useToast();
@@ -22,37 +22,24 @@ const Resources = () => {
   const handleSignupSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSignupSubmitting(true);
-    try {
-      const res = await fetch(
-        CONTACT_EMAIL_FUNCTION_URL,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: signupData.name,
-            email: signupData.email,
-            message: "Newsletter signup — please add me to the list and reach out with new resources.",
-            source: "Newsletter signup",
-          }),
-        }
-      );
-      const data = await res.json();
-      if (res.ok && data.success === true) {
-        toast({ title: "Thanks, you're on the list." });
-        setSignupData({ name: "", email: "" });
-      } else {
-        toast({
-          title: "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
-      }
-    } catch {
+    const result = await submitInquiry({
+      name: signupData.name,
+      email: signupData.email,
+      message: "Newsletter signup — please add me to the list and reach out with new resources.",
+      source: "Newsletter signup",
+    });
+    setSignupSubmitting(false);
+
+    if (result.ok) {
+      toast({ title: "Thanks, you're on the list." });
+      setSignupData({ name: "", email: "" });
+    } else {
       toast({
-        title: "Something went wrong. Please try again.",
+        title: "Something went wrong sending your signup.",
+        description:
+          "Please email us directly at info@thecabellclinic.com and we'll get right back to you.",
         variant: "destructive",
       });
-    } finally {
-      setSignupSubmitting(false);
     }
   };
 

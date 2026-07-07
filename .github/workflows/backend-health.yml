@@ -1,0 +1,47 @@
+# Pings the Supabase backend every 3 hours. This does two jobs:
+#
+# 1. Keep-alive: free-tier Supabase projects are auto-paused after ~7 days
+#    without API activity (this is what silently killed every form on the
+#    site in July 2026). Each REST ping counts as activity.
+# 2. Monitoring: if either check fails, the workflow fails and GitHub emails
+#    the repo owner — so we hear about an outage within hours even if no
+#    visitor reports it.
+#
+# The anon key below is NOT a secret: it is the public browser key that
+# already ships in the site's JS bundle. Do not put the service-role key here.
+
+name: Backend health check
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+env:
+  SUPABASE_URL: https://mjcwnkilepatdwkzjnxh.supabase.co
+  SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qY3dua2lsZXBhdGR3a3pqbnhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3OTUyMzgsImV4cCI6MjA4NzM3MTIzOH0.RP5gs-Kz1jK-vGwVKHlXyO39j87pdf2oMM7ztun0e-w
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping REST API (keep-alive + reachability)
+        run: |
+          curl --fail --silent --show-error --max-time 30 \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            "$SUPABASE_URL/rest/v1/" > /dev/null
+          echo "REST API reachable."
+
+      - name: Check contact-email edge function (CORS preflight)
+        run: |
+          status=$(curl --silent --output /dev/null --write-out "%{http_code}" --max-time 30 \
+            -X OPTIONS \
+            -H "Origin: https://thomascabellmd.com" \
+            -H "Access-Control-Request-Method: POST" \
+            -H "Access-Control-Request-Headers: content-type" \
+            "$SUPABASE_URL/functions/v1/send-contact-email")
+          echo "Edge function preflight returned HTTP $status"
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            echo "Edge function is NOT healthy — the site's forms are likely failing."
+            exit 1
+          fi

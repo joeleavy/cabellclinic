@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { CONTACT_EMAIL_FUNCTION_URL } from "@/integrations/supabase/client";
+import { submitInquiry } from "@/lib/submitInquiry";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -25,42 +25,26 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const result = await submitInquiry({
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+      source: "Cabell Clinic website",
+    });
+    setIsSubmitting(false);
 
-    try {
-      const res = await fetch(
-        CONTACT_EMAIL_FUNCTION_URL,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            message: formData.message,
-            source: "Cabell Clinic website",
-          }),
-        }
-      );
-
-      const data = await res.json();
-
-      if (res.ok && data.success === true) {
-        toast({
-          title: "Thanks, we received your message.",
-        });
-        setFormData({ name: "", email: "", phone: "", message: "" });
-      } else {
-        toast({
-          title: "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
-      }
-    } catch {
+    if (result.ok) {
       toast({
-        title: "Something went wrong. Please try again.",
+        title: "Thanks, we received your message.",
+      });
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } else {
+      toast({
+        title: "Something went wrong sending your message.",
+        description:
+          "Please email us directly at info@thecabellclinic.com and we'll get right back to you.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 

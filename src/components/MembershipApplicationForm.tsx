@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
-import { CONTACT_EMAIL_FUNCTION_URL } from "@/integrations/supabase/client";
+import { submitInquiry } from "@/lib/submitInquiry";
 
 type RadioQuestion = {
   id: string;
@@ -121,45 +121,32 @@ const MembershipApplicationForm = ({ onSuccess, compact = false }: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    try {
-      const res = await fetch(
-        CONTACT_EMAIL_FUNCTION_URL,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: form.name,
-            email: form.email,
-            message: formatMessage(),
-            source: "Membership application",
-          }),
-        }
-      );
-      const data = await res.json();
-      if (res.ok && data.success === true) {
-        setForm(initialState);
-        if (onSuccess) {
-          toast({
-            title: "Application received.",
-            description: "We'll be in touch within a few business days.",
-          });
-          onSuccess();
-        } else {
-          setSubmitted(true);
-        }
-      } else {
+    const result = await submitInquiry({
+      name: form.name,
+      email: form.email,
+      message: formatMessage(),
+      source: "Membership application",
+    });
+    setSubmitting(false);
+
+    if (result.ok) {
+      setForm(initialState);
+      if (onSuccess) {
         toast({
-          title: "Something went wrong. Please try again.",
-          variant: "destructive",
+          title: "Application received.",
+          description: "We'll be in touch within a few business days.",
         });
+        onSuccess();
+      } else {
+        setSubmitted(true);
       }
-    } catch {
+    } else {
       toast({
-        title: "Something went wrong. Please try again.",
+        title: "Something went wrong sending your application.",
+        description:
+          "Please email us directly at info@thecabellclinic.com and we'll get right back to you.",
         variant: "destructive",
       });
-    } finally {
-      setSubmitting(false);
     }
   };
 

@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { CONTACT_EMAIL_FUNCTION_URL } from "@/integrations/supabase/client";
+import { submitInquiry } from "@/lib/submitInquiry";
 
 type Props = {
   children: ReactNode;
@@ -50,42 +50,29 @@ const DiscoveryCallDialog = ({ children }: Props) => {
     }
 
     setSubmitting(true);
-    try {
-      const res = await fetch(
-        CONTACT_EMAIL_FUNCTION_URL,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: form.name,
-            email: form.email,
-            message: `Phone: ${form.phone}\n\n${form.message}`,
-            source: "Invitation request",
-          }),
-        }
-      );
-      const data = await res.json();
-      if (res.ok && data.success === true) {
-        toast({
-          title: "Thanks, we received your inquiry.",
-          description:
-            "You'll hear from us by email (info@thecabellclinic.com) within one business day. If you don't see it, please check your spam folder.",
-        });
-        setForm(initialState);
-        setOpen(false);
-      } else {
-        toast({
-          title: "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
-      }
-    } catch {
+    const result = await submitInquiry({
+      name: form.name,
+      email: form.email,
+      message: `Phone: ${form.phone}\n\n${form.message}`,
+      source: "Invitation request",
+    });
+    setSubmitting(false);
+
+    if (result.ok) {
       toast({
-        title: "Something went wrong. Please try again.",
+        title: "Thanks, we received your inquiry.",
+        description:
+          "You'll hear from us by email (info@thecabellclinic.com) within one business day. If you don't see it, please check your spam folder.",
+      });
+      setForm(initialState);
+      setOpen(false);
+    } else {
+      toast({
+        title: "Something went wrong sending your inquiry.",
+        description:
+          "Please email us directly at info@thecabellclinic.com and we'll get right back to you.",
         variant: "destructive",
       });
-    } finally {
-      setSubmitting(false);
     }
   };
 
