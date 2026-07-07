@@ -6,6 +6,9 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ## 2026-07-07 (later)
 
+### All outage alerts routed to tech@thecabellclinic.com
+Both alert channels now point at the clinic tech inbox instead of personal addresses: the health-check workflow emails tech@ directly on failure (added a `failure()` step using the FormSubmit relay), and the client-side fallback (which captures the lead when a live submission fails) now relays to tech@ as well. GitHub's own failure notification still goes to the repo owner's GitHub email as a bonus copy. One-time FormSubmit activation click required at tech@.
+
 ### Phone + email added to footer and Contact page
 Per client: publish the clinic's direct phone (call/text) and email so visitors can reach us without a form. Decision: include the email too — it was already public in the form toasts, and after the outage a form-independent contact channel on every page is a safety net.
 
