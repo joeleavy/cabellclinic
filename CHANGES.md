@@ -4,7 +4,25 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
-## 2026-07-07
+## 2026-07-07 (later)
+
+### Supabase removed — form backend migrated to a Cloudflare Worker (free)
+Rather than restore (and babysit or pay for) the paused Supabase project, the form backend now runs on Cloudflare, where the site already lives. Cloudflare Workers never auto-pause, and sending email to our own verified inboxes via Email Routing is free and unlimited on the free plan.
+
+- **New Worker:** `workers/contact-email/` — accepts the same POST contract the forms already used (`{name, email, message, source}` → `{success: true}`), validates input (required fields, length caps, email format), restricts CORS to the site's origins, and emails the inquiry to info@thecabellclinic.com via the `send_email` binding. From: `forms@thomascabellmd.com`, Reply-To: the visitor, Subject: `<source> — <name>`. Also exposes `GET /health` for monitoring.
+- **Frontend:** `submitInquiry` now posts to `VITE_CONTACT_ENDPOINT` (the Worker URL). If the var is missing, the site doesn't crash (the old Supabase env guard once blank-paged production) — submissions just go straight to the FormSubmit fallback relay, which still alerts us and captures the lead.
+- **Supabase fully removed:** `src/integrations/supabase/`, `supabase/config.toml`, and the `@supabase/supabase-js` dependency are gone. The forms were the only thing using it. The paused project can be left dead — but before deleting it outright, check whether the `send-contact-email` function's Resend/SMTP setup or any stored submissions in the database are worth exporting.
+- **Health check workflow** now pings the Worker's `/health` every 6 hours (reads the `CONTACT_ENDPOINT` GitHub repository variable; warns and skips if unset). No keep-alive purpose anymore — purely outage detection.
+- **npm scripts:** `worker:dev` (local dev at localhost:8787, simulates email sends) and `worker:deploy`.
+- **Verified locally end-to-end:** `wrangler dev` + the real Request an Invitation form in the browser — CORS preflight 204, POST 200 `{success:true}`, success toast rendered, and the simulated `.eml` showed correct From/Reply-To/To/Subject and the full message body including phone. Validation rejects (400) malformed payloads. All 8 unit tests, typecheck, lint (no new findings), and production build pass.
+
+**One-time deploy checklist (dashboard/CLI, in order):**
+1. `npx wrangler login` (previous token expired)
+2. Cloudflare dashboard → thomascabellmd.com zone → Email → Email Routing → enable it, and add + verify **info@thecabellclinic.com** (and joseph.leavy@gmail.com) as destination addresses
+3. `npm run worker:deploy` → note the workers.dev URL
+4. Set `VITE_CONTACT_ENDPOINT` to that URL in the Cloudflare Pages project env (Production) and in `.env.local`
+5. Set the `CONTACT_ENDPOINT` repository variable on GitHub (for the health check)
+6. Push to deploy the site
 
 ### OUTAGE: all site forms were silently failing — Supabase project offline
 Every form on the site (Request an Invitation, Contact, Self-Assessment/Apply, Newsletter signup) was failing with "Something went wrong. Please try again."
