@@ -6,6 +6,13 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ## 2026-07-07 (later)
 
+### Phone + email added to footer and Contact page
+Per client: publish the clinic's direct phone (call/text) and email so visitors can reach us without a form. Decision: include the email too — it was already public in the form toasts, and after the outage a form-independent contact channel on every page is a safety net.
+
+- **Footer (every page):** the "Location" column is now titled **"Contact"** — address, then "Call or text: (615) 237-8706" (tap-to-call `tel:` link), then info@thecabellclinic.com (`mailto:` link), then "By appointment only."
+- **Contact page:** new **"Reach Us Directly"** block (phone icon) between Location and Availability with the same call/text number and email, both as links.
+- Number formatted (615) 237-8706 to match the site's phone style; links dial/compose on mobile.
+
 ### Supabase removed — form backend migrated to a Cloudflare Worker (free)
 Rather than restore (and babysit or pay for) the paused Supabase project, the form backend now runs on Cloudflare, where the site already lives. Cloudflare Workers never auto-pause, and sending email to our own verified inboxes via Email Routing is free and unlimited on the free plan.
 
