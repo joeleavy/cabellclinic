@@ -1,11 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
-import { EmailMessage } from "cloudflare:email";
-// The browser build avoids Node-only imports (path/fs) that the default
-// entry pulls in via mime-types.
-import { createMimeMessage, Mailbox } from "mimetext/browser";
 
 interface Env {
-  CONTACT_EMAIL: SendEmail;
+  RESEND_API_KEY: string; // secret — set with: npx wrangler secret put RESEND_API_KEY -c workers/contact-email/wrangler.jsonc
   FROM_EMAIL: string;
   TO_EMAIL: string;
 }
@@ -111,26 +107,43 @@ export default {
       return json(400, { success: false, error: payload }, origin);
     }
 
-    const msg = createMimeMessage();
-    msg.setSender({ name: "Cabell Clinic Website", addr: env.FROM_EMAIL });
-    msg.setRecipient(env.TO_EMAIL);
-    msg.setHeader("Reply-To", new Mailbox(payload.email));
-    msg.setSubject(`${payload.source} — ${payload.name}`);
-    msg.addMessage({
-      contentType: "text/plain",
-      data: [
-        `Source: ${payload.source}`,
-        `Name: ${payload.name}`,
-        `Email: ${payload.email}`,
-        "",
-        payload.message,
-      ].join("\n"),
-    });
+    if (!env.RESEND_API_KEY) {
+      return json(
+        500,
+        { success: false, error: "RESEND_API_KEY secret is not configured" },
+        origin
+      );
+    }
 
     try {
-      await env.CONTACT_EMAIL.send(
-        new EmailMessage(env.FROM_EMAIL, env.TO_EMAIL, msg.asRaw())
-      );
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${env.RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: `Cabell Clinic Website <${env.FROM_EMAIL}>`,
+          to: [env.TO_EMAIL],
+          reply_to: payload.email,
+          subject: `${payload.source} — ${payload.name}`,
+          text: [
+            `Source: ${payload.source}`,
+            `Name: ${payload.name}`,
+            `Email: ${payload.email}`,
+            "",
+            payload.message,
+          ].join("\n"),
+        }),
+      });
+      if (!res.ok) {
+        const detail = await res.text().catch(() => "");
+        return json(
+          500,
+          { success: false, error: `Resend ${res.status}: ${detail}` },
+          origin
+        );
+      }
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       return json(500, { success: false, error: detail }, origin);
