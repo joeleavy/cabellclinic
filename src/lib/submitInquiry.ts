@@ -1,4 +1,9 @@
-import { CONTACT_EMAIL_FUNCTION_URL } from "@/integrations/supabase/client";
+// The Cloudflare Worker (workers/contact-email/) that emails inquiries to the
+// clinic inbox. Set VITE_CONTACT_ENDPOINT in .env.local and in the Cloudflare
+// Pages project's environment variables. If it's missing we don't crash the
+// site — submissions just go straight to the fallback relay below.
+export const CONTACT_ENDPOINT: string | undefined = import.meta.env
+  .VITE_CONTACT_ENDPOINT;
 
 export type InquiryPayload = {
   name: string;
@@ -27,33 +32,36 @@ const timeoutSignal = (ms: number): AbortSignal => {
 };
 
 /**
- * Submits a visitor inquiry to the Supabase edge function. If that fails for
- * any reason (project paused, function error, network), the same inquiry is
- * re-sent through the fallback relay so the lead is not lost and the team is
- * alerted to the backend failure. Only returns ok: false when BOTH channels
- * fail — callers should then point the visitor at the direct email address.
+ * Submits a visitor inquiry to the contact-email Worker. If that fails for
+ * any reason (worker error, network, endpoint not configured), the same
+ * inquiry is re-sent through the fallback relay so the lead is not lost and
+ * the team is alerted to the backend failure. Only returns ok: false when
+ * BOTH channels fail — callers should then point the visitor at the direct
+ * email address.
  */
 export async function submitInquiry(
   payload: InquiryPayload
 ): Promise<SubmitResult> {
-  let failureDetail: string;
+  let failureDetail = "VITE_CONTACT_ENDPOINT is not configured";
 
-  try {
-    const res = await fetch(CONTACT_EMAIL_FUNCTION_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      signal: timeoutSignal(REQUEST_TIMEOUT_MS),
-    });
-    const data = await res.json().catch(() => null);
-    if (res.ok && data?.success === true) {
-      return { ok: true, via: "primary" };
+  if (CONTACT_ENDPOINT) {
+    try {
+      const res = await fetch(CONTACT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        signal: timeoutSignal(REQUEST_TIMEOUT_MS),
+      });
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.success === true) {
+        return { ok: true, via: "primary" };
+      }
+      failureDetail = `HTTP ${res.status}${
+        data?.error ? ` — ${String(data.error)}` : ""
+      }`;
+    } catch (err) {
+      failureDetail = err instanceof Error ? err.message : String(err);
     }
-    failureDetail = `HTTP ${res.status}${
-      data?.error ? ` — ${String(data.error)}` : ""
-    }`;
-  } catch (err) {
-    failureDetail = err instanceof Error ? err.message : String(err);
   }
 
   try {

@@ -1,0 +1,35 @@
+// Contact-form email Worker for thomascabellmd.com.
+//
+// Sends form submissions to the clinic inbox via Cloudflare Email Routing's
+// send_email binding. Sending to verified destination addresses is free and
+// unlimited on the Workers Free plan, and Workers never auto-pause (unlike
+// the Supabase free tier this replaces).
+//
+// Requirements in the Cloudflare dashboard (one-time):
+//   1. Email Routing enabled on the thomascabellmd.com zone.
+//   2. TO_EMAIL below added and verified as an Email Routing destination
+//      address (Email > Email Routing > Destination addresses).
+//
+// Deploy:  npm run worker:deploy
+// Dev:     npm run worker:dev   (simulates email sends locally)
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cabell-contact-email",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "allowed_destination_addresses": [
+        "info@thecabellclinic.com",
+        "joseph.leavy@gmail.com"
+      ]
+    }
+  ],
+  "vars": {
+    // FROM must be on a domain with Email Routing enabled (the zone above).
+    "FROM_EMAIL": "forms@thomascabellmd.com",
+    "TO_EMAIL": "info@thecabellclinic.com"
+  }
+}

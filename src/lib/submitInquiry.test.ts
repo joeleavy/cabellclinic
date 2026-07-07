@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { submitInquiry, InquiryPayload } from "./submitInquiry";
-import { CONTACT_EMAIL_FUNCTION_URL } from "@/integrations/supabase/client";
+import { submitInquiry, InquiryPayload, CONTACT_ENDPOINT } from "./submitInquiry";
 
 const payload: InquiryPayload = {
   name: "Test Person",
@@ -27,7 +26,23 @@ describe("submitInquiry", () => {
 
     expect(result).toEqual({ ok: true, via: "primary" });
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(fetchMock.mock.calls[0][0]).toBe(CONTACT_EMAIL_FUNCTION_URL);
+    expect(fetchMock.mock.calls[0][0]).toBe(CONTACT_ENDPOINT);
+  });
+
+  it("goes straight to the fallback when the endpoint is not configured", async () => {
+    vi.resetModules();
+    vi.stubEnv("VITE_CONTACT_ENDPOINT", "");
+    const { submitInquiry: submitWithoutEndpoint } = await import(
+      "./submitInquiry"
+    );
+    fetchMock.mockResolvedValueOnce(jsonResponse(200, { success: "true" }));
+
+    const result = await submitWithoutEndpoint(payload);
+
+    expect(result).toEqual({ ok: true, via: "fallback" });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(String(fetchMock.mock.calls[0][0])).toContain("formsubmit.co");
+    vi.unstubAllEnvs();
   });
 
   it("falls back when the primary returns an error status", async () => {
