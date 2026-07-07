@@ -50,12 +50,26 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="text-xs uppercase tracking-widest text-gold mb-6 font-semibold">
-              Location
+              Contact
             </h4>
             <address className="not-italic text-sm text-soft-white/70 leading-relaxed">
               105 Continental Place, Suite 160
               <br />
               Brentwood, TN 37027
+              <br />
+              <a
+                href="tel:+16152378706"
+                className="hover:text-soft-white transition-colors duration-300"
+              >
+                Call or text: (615) 237-8706
+              </a>
+              <br />
+              <a
+                href="mailto:info@thecabellclinic.com"
+                className="hover:text-soft-white transition-colors duration-300"
+              >
+                info@thecabellclinic.com
+              </a>
               <br />
               <span className="text-soft-white/50 text-xs">
                 By appointment only

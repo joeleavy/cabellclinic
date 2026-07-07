@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Clock, Shield, ArrowRight } from "lucide-react";
+import { MapPin, Phone, Clock, Shield, ArrowRight } from "lucide-react";
 import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
 import SelfAssessmentDialog from "@/components/SelfAssessmentDialog";
 import Layout from "@/components/layout/Layout";
@@ -241,6 +241,35 @@ const Contact = () => {
                     105 Continental Place, Suite 160
                     <br />
                     Brentwood, TN 37027
+                  </p>
+                </div>
+              </div>
+
+              {/* Phone & Email */}
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 border border-gold/30 rounded-full flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-gold" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="font-heading text-xl text-navy">Reach Us Directly</h3>
+                </div>
+                <div className="pl-[52px]">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Call or text:{" "}
+                    <a
+                      href="tel:+16152378706"
+                      className="hover:text-navy transition-colors"
+                    >
+                      (615) 237-8706
+                    </a>
+                    <br />
+                    Email:{" "}
+                    <a
+                      href="mailto:info@thecabellclinic.com"
+                      className="hover:text-navy transition-colors"
+                    >
+                      info@thecabellclinic.com
+                    </a>
                   </p>
                 </div>
               </div>
