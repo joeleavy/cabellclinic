@@ -16,12 +16,12 @@ export type SubmitResult =
   | { ok: true; via: "primary" | "fallback" }
   | { ok: false };
 
-// Independent of Supabase on purpose: if the primary backend is down, this
+// Independent of the primary backend on purpose: if the Worker is down, this
 // FormSubmit relay still delivers the visitor's inquiry as an email, flagged
 // as an alert so we know the backend needs attention. The address must be
 // activated once with FormSubmit (they email a confirmation link) before
 // messages are delivered.
-const FALLBACK_RELAY_URL = "https://formsubmit.co/ajax/joseph.leavy@gmail.com";
+const FALLBACK_RELAY_URL = "https://formsubmit.co/ajax/tech@thecabellclinic.com";
 
 const REQUEST_TIMEOUT_MS = 15_000;
 
