@@ -4,6 +4,33 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-07-07
+
+### OUTAGE: all site forms were silently failing — Supabase project offline
+Every form on the site (Request an Invitation, Contact, Self-Assessment/Apply, Newsletter signup) was failing with "Something went wrong. Please try again."
+
+- **Root cause:** all four forms POST to a Supabase Edge Function. The Supabase project (`mjcwnkilepatdwkzjnxh`) is on the free tier, and free-tier projects are **auto-paused after ~7 days without API activity** — at which point the project's hostname is removed from DNS entirely (`ERR_NAME_NOT_RESOLVED`). Because the site only touches Supabase when someone submits a form, a quiet week was enough to trigger the pause. Once paused, every subsequent submission failed — and nothing told us.
+- **Immediate fix (manual):** restore the project in the Supabase dashboard (supabase.com/dashboard → project → Restore). Code changes below don't bring the backend back; they stop this from being silent or lossy next time.
+
+### New: fallback lead capture + failure alerting on every form
+All four forms now submit through a single shared helper, `src/lib/submitInquiry.ts`, instead of four copies of the same fetch code.
+
+- **Primary path unchanged:** POST to the Supabase Edge Function (now with a 15s timeout).
+- **If the primary fails for any reason**, the same inquiry is re-sent to an independent FormSubmit relay (`formsubmit.co/ajax/joseph.leavy@gmail.com`), which emails the lead with subject "[ALERT] Cabell Clinic form backend failed — lead captured (<source>)" plus the underlying error and page URL. The visitor sees the normal success message — their inquiry did reach us — and we get an immediate heads-up that the backend is down. **No lost leads, no silent outages.**
+- **One-time setup:** FormSubmit requires clicking the "Activate Form" link it emails to joseph.leavy@gmail.com. Until activated, fallback sends are not delivered (and the code correctly treats them as failures).
+- **If both channels fail**, the error toast now includes an escape hatch: "Please email us directly at info@thecabellclinic.com and we'll get right back to you."
+- **Tests:** `src/lib/submitInquiry.test.ts` covers primary success, fallback on HTTP error, fallback on network error, payload contents, unactivated-relay handling, and both-channels-down.
+- **Verified locally** against the real outage: dev-server submission showed the Supabase POST failing with `ERR_NAME_NOT_RESOLVED`, the fallback POST reaching formsubmit.co, and (pre-activation) the new error toast with the direct email address.
+
+### New: scheduled backend health check (`.github/workflows/backend-health.yml`)
+GitHub Actions cron every 3 hours that (1) pings the Supabase REST API — which counts as project activity, so the free-tier inactivity pause can't recur — and (2) sends a CORS preflight to the contact-email Edge Function. If either check fails, the workflow fails and GitHub emails the repo owner. This catches an outage within hours even if no visitor touches a form. (The anon key in the workflow is the public browser key that already ships in the JS bundle — not a secret.)
+
+### Prevention plan (beyond the code changes)
+- **Recommended:** upgrade the Supabase project to Pro (~$25/mo) — paid projects are never auto-paused. The health-check cron is the free mitigation, but Supabase doesn't guarantee pings prevent pausing forever.
+- **Flagged risk:** the `send-contact-email` Edge Function source is NOT in this repo. If the project were ever deleted (paused free projects are deletable after 90 days), the form backend couldn't be rebuilt from source control. Copy the function source out of the Supabase dashboard into `supabase/functions/send-contact-email/` and commit it.
+
+---
+
 ## 2026-06-29
 
 ### Request an Invitation form — clearer post-submit confirmation
