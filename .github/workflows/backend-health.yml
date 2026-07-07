@@ -33,14 +33,20 @@ jobs:
           echo "Contact-email worker is healthy."
 
       # GitHub also emails the repo owner's GitHub address on failure; this
-      # step additionally alerts the clinic tech inbox directly, via the same
-      # independent FormSubmit relay the site uses as its fallback channel.
-      # (One-time: tech@thecabellclinic.com must click FormSubmit's
-      # activation link before these deliver.)
+      # step additionally alerts the clinic tech inbox directly via the
+      # Resend API. (FormSubmit was tried first but its bot protection
+      # blocks requests from GitHub's runners.) Requires the
+      # RESEND_HEALTH_KEY repository secret — a Resend API key.
       - name: Email tech@thecabellclinic.com on failure
         if: failure()
+        env:
+          RESEND_KEY: ${{ secrets.RESEND_HEALTH_KEY }}
         run: |
-          curl -sS --max-time 30 -X POST "https://formsubmit.co/ajax/tech@thecabellclinic.com" \
-            -H "Content-Type: application/json" -H "Accept: application/json" \
-            -H "Origin: https://thomascabellmd.com" -H "Referer: https://thomascabellmd.com/" \
-            -d '{"_subject":"[ALERT] Cabell Clinic form backend is DOWN","name":"Backend health check","message":"The scheduled health check failed: the contact form backend (Cloudflare Worker) is unreachable. Site visitors submitting forms are being routed to the backup channel, so leads are still captured — but the primary backend needs attention. Details: https://github.com/joeleavy/cabellclinic/actions"}'
+          if [ -z "$RESEND_KEY" ]; then
+            echo "::warning::RESEND_HEALTH_KEY secret is not set — cannot email the failure alert."
+            exit 0
+          fi
+          curl -sS --max-time 30 -X POST "https://api.resend.com/emails" \
+            -H "Authorization: Bearer $RESEND_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"from":"Cabell Clinic Monitor <forms@thomascabellmd.com>","to":["tech@thecabellclinic.com"],"subject":"[ALERT] Cabell Clinic form backend is DOWN","text":"The scheduled health check failed: the contact form backend (Cloudflare Worker) is unreachable.\n\nSite visitors submitting forms are being routed to the backup channel, so leads are still captured — but the primary backend needs attention.\n\nDetails: https://github.com/joeleavy/cabellclinic/actions"}'
