@@ -6,6 +6,13 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ## 2026-07-07 (later)
 
+### New unlisted page: /nuropod (Nuropod intro videos)
+Per client: a link-only page Dr. Cabell can send to members about the Nuropod earpiece. Embeds three YouTube videos ("What is Nuropod", "How To Wear the Nuropod Earpiece", "How To Use Nuropod") using the Resources page's video-card style, plus a call/text/email line at the bottom.
+
+- **Unlisted:** not linked from any nav or footer; the page injects `<meta name="robots" content="noindex, nofollow">` so search engines skip it. Reachable at any capitalization (/nuropod, /Nuropod — routes match case-insensitively).
+- **Privacy-enhanced embeds:** uses youtube-nocookie.com.
+- **Note:** "unlisted" means obscure, not secret — anyone who has the link can view and share it.
+
 ### All outage alerts routed to tech@thecabellclinic.com
 Both alert channels now point at the clinic tech inbox instead of personal addresses: the health-check workflow emails tech@ directly on failure (added a `failure()` step using the FormSubmit relay), and the client-side fallback (which captures the lead when a live submission fails) now relays to tech@ as well. GitHub's own failure notification still goes to the repo owner's GitHub email as a bonus copy. One-time FormSubmit activation click required at tech@.
 
