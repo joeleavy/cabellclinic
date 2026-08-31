@@ -143,8 +143,13 @@ const Partners = () => {
                       className={`w-auto max-w-[220px] ${partner.logoClass ?? "max-h-10"}`}
                     />
                   ) : (
-                    <span className="font-heading text-2xl text-navy">
-                      {partner.name}
+                    // No logo exists for this practice — reproduce how their
+                    // own site typesets their name (Lora 400, ink navy).
+                    <span
+                      className="text-[26px]"
+                      style={{ fontFamily: "'Lora', serif", color: "#001F33" }}
+                    >
+                      Paul Gilliam DDS
                     </span>
                   )}
                 </div>
