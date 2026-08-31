@@ -16,6 +16,7 @@ type Partner = {
   name: string;
   category: string;
   description: string;
+  url: string;
   logo?: string;
   logoClass?: string;
 };
@@ -23,6 +24,7 @@ type Partner = {
 const partners: Partner[] = [
   {
     name: "Meo Health",
+    url: "https://www.meohealth.com",
     category: "Nervous System Training",
     description:
       "HRV-guided training that strengthens the autonomic nervous system.",
@@ -30,6 +32,7 @@ const partners: Partner[] = [
   },
   {
     name: "Caristo Diagnostics",
+    url: "https://www.caristo.com",
     category: "Cardiac Imaging",
     description:
       "AI-powered analysis of cardiac CT that reveals coronary inflammation conventional reads can miss.",
@@ -37,6 +40,7 @@ const partners: Partner[] = [
   },
   {
     name: "Vibrant Wellness",
+    url: "https://vibrant-wellness.com",
     category: "Functional Lab Testing",
     description:
       "Advanced functional laboratory testing, from micronutrient status to gut health.",
@@ -44,6 +48,7 @@ const partners: Partner[] = [
   },
   {
     name: "Quest Diagnostics",
+    url: "https://www.questdiagnostics.com",
     category: "Clinical Laboratories",
     description: "Nationwide clinical laboratory testing.",
     logo: questLogo,
@@ -51,6 +56,7 @@ const partners: Partner[] = [
   },
   {
     name: "Styku",
+    url: "https://www.styku.com",
     category: "Body Composition",
     description:
       "Precision 3D body scanning to measure and track body composition over time.",
@@ -59,6 +65,7 @@ const partners: Partner[] = [
   },
   {
     name: "Kenetik Pro",
+    url: "https://kenetikpro.com",
     category: "Metabolic Support",
     description:
       "Medical-grade bioidentical ketones, available through the practitioner channel.",
@@ -67,6 +74,7 @@ const partners: Partner[] = [
   },
   {
     name: "Paul Gilliam Dentistry",
+    url: "https://paulgilliamdentistry.com",
     category: "Dental Health",
     description:
       "Our local partner for oral health and its deep connection to cardiovascular wellness.",
@@ -116,13 +124,16 @@ const Partners = () => {
         <div className="container-wide">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {partners.map((partner, index) => (
-              <motion.div
+              <motion.a
                 key={partner.name}
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="bg-white shadow-sm p-8 flex flex-col"
+                className="bg-white shadow-sm p-8 flex flex-col hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="h-16 flex items-center mb-6">
                   {partner.logo ? (
@@ -148,7 +159,7 @@ const Partners = () => {
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {partner.description}
                 </p>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
 
