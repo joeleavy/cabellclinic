@@ -72,14 +72,6 @@ const partners: Partner[] = [
   },
 ];
 
-const OptionLabel = ({ children }: { children: string }) => (
-  <div className="container-wide pt-16 pb-10">
-    <span className="inline-block bg-navy text-soft-white text-xs uppercase tracking-widest font-semibold px-4 py-2">
-      {children}
-    </span>
-  </div>
-);
-
 const Partners = () => {
   useEffect(() => {
     const previousTitle = document.title;
@@ -106,7 +98,7 @@ const Partners = () => {
             className="max-w-3xl"
           >
             <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
-              Working Draft — Two Design Options
+              Our Network
             </span>
             <h1 className="font-heading text-display-lg text-navy mb-8">
               Our Partners
@@ -121,9 +113,8 @@ const Partners = () => {
         </div>
       </section>
 
-      {/* ============ OPTION A: logo cards ============ */}
-      <section className="bg-warm-gray/20 pb-20">
-        <OptionLabel>Design Option A — Logo Cards</OptionLabel>
+      {/* Partner logo cards */}
+      <section className="bg-warm-gray/20 py-20">
         <div className="container-wide">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {partners.map((partner, index) => (
@@ -162,37 +153,8 @@ const Partners = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ============ OPTION B: typographic list ============ */}
-      <section className="bg-soft-white pb-24">
-        <OptionLabel>Design Option B — Typographic</OptionLabel>
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-x-16 gap-y-12 max-w-5xl">
-            {partners.map((partner, index) => (
-              <motion.div
-                key={partner.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="border-t border-warm-gray pt-8"
-              >
-                <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-3 block">
-                  {partner.category}
-                </span>
-                <h3 className="font-heading text-2xl md:text-3xl text-navy mb-3">
-                  {partner.name}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {partner.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <p className="text-xs text-muted-foreground/60 mt-20 max-w-2xl">
+          <p className="text-xs text-muted-foreground/60 mt-16 max-w-2xl">
             Internal draft: partner descriptions are placeholders pending Dr.
             Cabell's review. This page is unlisted and not indexed by search
             engines.
