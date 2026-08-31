@@ -123,16 +123,12 @@ const Partners = () => {
       <section className="bg-warm-gray/20 py-20">
         <div className="container-wide">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {partners.map((partner, index) => (
-              <motion.a
+            {partners.map((partner) => (
+              <a
                 key={partner.name}
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
                 className="bg-white shadow-sm p-8 flex flex-col hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="h-16 flex items-center mb-6">
@@ -159,7 +155,7 @@ const Partners = () => {
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {partner.description}
                 </p>
-              </motion.a>
+              </a>
             ))}
           </div>
 
