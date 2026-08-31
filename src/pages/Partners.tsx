@@ -47,7 +47,7 @@ const partners: Partner[] = [
     category: "Clinical Laboratories",
     description: "Nationwide clinical laboratory testing.",
     logo: questLogo,
-    logoClass: "max-h-16",
+    logoClass: "max-h-12",
   },
   {
     name: "Styku",
@@ -55,6 +55,7 @@ const partners: Partner[] = [
     description:
       "Precision 3D body scanning to measure and track body composition over time.",
     logo: stykuLogo,
+    logoClass: "max-h-12",
   },
   {
     name: "Kenetik Pro",
