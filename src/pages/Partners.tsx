@@ -7,6 +7,7 @@ import caristoLogo from "@/assets/partners/caristo.svg";
 import questLogo from "@/assets/partners/quest-diagnostics.png";
 import stykuLogo from "@/assets/partners/styku.png";
 import kenetikLogo from "@/assets/partners/kenetik-pro.svg";
+import coolSpringsLogo from "@/assets/partners/cool-springs-modern-dentistry.png";
 
 // Unlisted draft page — reachable only by direct link, for internal review.
 // Shows two design options for an "Our Partners" page. Not in any nav; the
@@ -17,7 +18,7 @@ type Partner = {
   category: string;
   description: string;
   url: string;
-  logo?: string;
+  logo: string;
   logoClass?: string;
 };
 
@@ -73,11 +74,12 @@ const partners: Partner[] = [
     logoClass: "max-h-6",
   },
   {
-    name: "Paul Gilliam Dentistry",
-    url: "https://paulgilliamdentistry.com",
+    name: "Cool Springs Modern Dentistry",
+    url: "https://www.coolspringsmoderndentistry.com",
     category: "Dental Health",
     description:
       "Our local partner for oral health and its deep connection to cardiovascular wellness.",
+    logo: coolSpringsLogo,
   },
 ];
 
@@ -132,22 +134,11 @@ const Partners = () => {
                 className="bg-white shadow-sm p-8 flex flex-col hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="h-16 flex items-center mb-6">
-                  {partner.logo ? (
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className={`w-auto max-w-[220px] ${partner.logoClass ?? "max-h-10"}`}
-                    />
-                  ) : (
-                    // No logo exists for this practice — reproduce how their
-                    // own site typesets their name (Lora 400, ink navy).
-                    <span
-                      className="text-[26px]"
-                      style={{ fontFamily: "'Lora', serif", color: "#001F33" }}
-                    >
-                      Paul Gilliam DDS
-                    </span>
-                  )}
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className={`w-auto max-w-[220px] ${partner.logoClass ?? "max-h-10"}`}
+                  />
                 </div>
                 <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-2">
                   {partner.category}
