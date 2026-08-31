@@ -129,10 +129,10 @@ const Partners = () => {
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                transition={{ duration: 0.4, delay: index * 0.04 }}
                 className="bg-white shadow-sm p-8 flex flex-col hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="h-16 flex items-center mb-6">
