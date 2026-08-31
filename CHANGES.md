@@ -16,6 +16,7 @@ Per client: an "Our Partners" concept page for Dr. Cabell to review before anyth
 - **Once a direction is chosen:** promote to a real page (likely under The Approach dropdown in the header), remove the draft labels/the losing option, and drop the noindex.
 - **Direction chosen (same day):** client picked Option A (logo cards). The page now shows only that design — draft labels and the typographic option removed, hero eyebrow now "Our Network". Still unlisted/noindexed pending Dr. Cabell's copy review; after his sign-off, add to The Approach dropdown + footer nav and drop the noindex.
 - **Follow-up (same day):** the Paul Gilliam card now reproduces how their own site typesets their name — Lora 400 in ink navy `#001F33` (Lora added to the Google Fonts import for this wordmark only). Meo Health still shows the current official wordmark; the older lowercase mark the client prefers needs the image file dropped into the repo to swap.
+- **Corrections (same day, later):** the Meo card now uses the client-provided lowercase wordmark (trimmed of padding). The dental partner was actually **Cool Springs Modern Dentistry** (not Paul Gilliam) — their official logo is in and linked, and the Lora import was removed. All cards link to partner sites in a new tab; padded Quest/Styku logo files were trimmed and icon-style logos sized up; the "Our Network" eyebrow was dropped; and the cards' entrance animation was removed entirely after it read as jumping/flashing on mobile (confirmed via client screen recording).
 
 ## 2026-07-07 (later)
 
