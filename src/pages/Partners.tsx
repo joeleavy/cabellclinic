@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
-import meoLogo from "@/assets/partners/meo-health.webp";
+import meoLogo from "@/assets/partners/meo-health.png";
 import vibrantLogo from "@/assets/partners/vibrant-wellness.png";
 import caristoLogo from "@/assets/partners/caristo.svg";
 import questLogo from "@/assets/partners/quest-diagnostics.png";
