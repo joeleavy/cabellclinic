@@ -13,6 +13,7 @@ import FAQ from "./pages/FAQ";
 import Apply from "./pages/Apply";
 import Contact from "./pages/Contact";
 import Nuropod from "./pages/Nuropod";
+import Partners from "./pages/Partners";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           {/* Unlisted — shared by direct link only; not in any nav */}
           <Route path="/nuropod" element={<Nuropod />} />
+          <Route path="/partners" element={<Partners />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
