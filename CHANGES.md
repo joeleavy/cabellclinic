@@ -4,6 +4,17 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-08-31
+
+### New unlisted draft page: /partners (two design options for review)
+Per client: an "Our Partners" concept page for Dr. Cabell to review before anything goes public. Unlisted like /nuropod (no nav links, robots noindex; direct link only).
+
+- **Shows the same 7 partners in two treatments** stacked on one page: **Option A** — white logo cards with category eyebrow + one-line description; **Option B** — typographic editorial list (no logos), Playfair names with gold category labels.
+- **Partners:** Meo Health, Caristo Diagnostics, Vibrant Wellness, Quest Diagnostics, Styku, Kenetik Pro, Paul Gilliam Dentistry.
+- **Logos** pulled from each partner's official site into `src/assets/partners/`. Paul Gilliam Dentistry has no logo anywhere (their own site is typeset text), so their card is typeset in Playfair. Note: Meo Health's current site logo ("Meo Health", light blue) differs from the older lowercase mark the client sent — swap the file if Doc prefers the old one.
+- **Draft copy flagged in-page:** partner descriptions are placeholders pending Dr. Cabell's review (especially the medical claims for Caristo/Meo/Kenetik).
+- **Once a direction is chosen:** promote to a real page (likely under The Approach dropdown in the header), remove the draft labels/the losing option, and drop the noindex.
+
 ## 2026-07-07 (later)
 
 ### New unlisted page: /nuropod (Nuropod intro videos)
