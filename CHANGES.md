@@ -14,6 +14,7 @@ Per client: an "Our Partners" concept page for Dr. Cabell to review before anyth
 - **Logos** pulled from each partner's official site into `src/assets/partners/`. Paul Gilliam Dentistry has no logo anywhere (their own site is typeset text), so their card is typeset in Playfair. Note: Meo Health's current site logo ("Meo Health", light blue) differs from the older lowercase mark the client sent — swap the file if Doc prefers the old one.
 - **Draft copy flagged in-page:** partner descriptions are placeholders pending Dr. Cabell's review (especially the medical claims for Caristo/Meo/Kenetik).
 - **Once a direction is chosen:** promote to a real page (likely under The Approach dropdown in the header), remove the draft labels/the losing option, and drop the noindex.
+- **Follow-up (same day):** the Paul Gilliam card now reproduces how their own site typesets their name — Lora 400 in ink navy `#001F33` (Lora added to the Google Fonts import for this wordmark only). Meo Health still shows the current official wordmark; the older lowercase mark the client prefers needs the image file dropped into the repo to swap.
 
 ## 2026-07-07 (later)
 
