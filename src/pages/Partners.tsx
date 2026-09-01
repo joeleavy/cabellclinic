@@ -8,6 +8,7 @@ import questLogo from "@/assets/partners/quest-diagnostics.png";
 import stykuLogo from "@/assets/partners/styku.png";
 import kenetikLogo from "@/assets/partners/kenetik-pro.svg";
 import coolSpringsLogo from "@/assets/partners/cool-springs-modern-dentistry.png";
+import myosLogo from "@/assets/partners/myos-md.png";
 
 // Our Partners — the practices, labs, and technologies the clinic works
 // with. Linked from The Approach dropdown and the footer.
@@ -71,6 +72,14 @@ const partners: Partner[] = [
       "Medical-grade bioidentical ketones, available through the practitioner channel.",
     logo: kenetikLogo,
     logoClass: "max-h-6",
+  },
+  {
+    name: "MYOS MD",
+    url: "https://myosmd.com",
+    category: "Muscle Health",
+    description:
+      "Clinically studied nutrition that helps counter the muscle loss that comes with aging.",
+    logo: myosLogo,
   },
   {
     name: "Cool Springs Modern Dentistry",
