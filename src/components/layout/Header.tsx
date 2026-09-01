@@ -17,6 +17,7 @@ const navLinks: NavLink[] = [
       { name: "Our Method", path: "/approach" },
       { name: "Our Team", path: "/team" },
       { name: "Experts at Large", path: "/experts" },
+      { name: "Our Partners", path: "/partners" },
     ],
   },
   { name: "Meet Dr. Cabell", path: "/dr-cabell" },

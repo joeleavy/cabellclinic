@@ -36,9 +36,9 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/partners" element={<Partners />} />
           {/* Unlisted — shared by direct link only; not in any nav */}
           <Route path="/nuropod" element={<Nuropod />} />
-          <Route path="/partners" element={<Partners />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

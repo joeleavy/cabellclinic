@@ -9,9 +9,8 @@ import stykuLogo from "@/assets/partners/styku.png";
 import kenetikLogo from "@/assets/partners/kenetik-pro.svg";
 import coolSpringsLogo from "@/assets/partners/cool-springs-modern-dentistry.png";
 
-// Unlisted draft page — reachable only by direct link, for internal review.
-// Shows two design options for an "Our Partners" page. Not in any nav; the
-// meta tag below asks search engines not to index it.
+// Our Partners — the practices, labs, and technologies the clinic works
+// with. Linked from The Approach dropdown and the footer.
 
 type Partner = {
   name: string;
@@ -86,14 +85,9 @@ const partners: Partner[] = [
 const Partners = () => {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Our Partners (Draft) | The Cabell Clinic";
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex, nofollow";
-    document.head.appendChild(meta);
+    document.title = "Our Partners | The Cabell Clinic";
     return () => {
       document.title = previousTitle;
-      document.head.removeChild(meta);
     };
   }, []);
 
@@ -108,6 +102,9 @@ const Partners = () => {
             transition={{ duration: 0.7 }}
             className="max-w-3xl"
           >
+            <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
+              Our Network
+            </span>
             <h1 className="font-heading text-display-lg text-navy mb-8">
               Our Partners
             </h1>
@@ -150,11 +147,6 @@ const Partners = () => {
             ))}
           </div>
 
-          <p className="text-xs text-muted-foreground/60 mt-16 max-w-2xl">
-            Internal draft: partner descriptions are placeholders pending Dr.
-            Cabell's review. This page is unlisted and not indexed by search
-            engines.
-          </p>
         </div>
       </section>
     </Layout>
