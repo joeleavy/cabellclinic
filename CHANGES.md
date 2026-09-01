@@ -4,6 +4,17 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-08-31 (later)
+
+### /partners is now public: "Our Partners"
+Dr. Cabell approved the descriptions and the card order (Caristo, Vibrant, Meo across the top). The page is no longer a draft:
+
+- Draft note and robots noindex removed; page title is now "Our Partners | The Cabell Clinic".
+- The gold "Our Network" eyebrow restored above the title for consistency with the other pages under The Approach. (Note: the Experts at Large hero uses the same eyebrow text — flagged to client, fine for now.)
+- **Navigation:** added as the 4th item in the header's The Approach dropdown and to the footer nav, both labeled "Our Partners".
+
+---
+
 ## 2026-08-31
 
 ### New unlisted draft page: /partners (two design options for review)
