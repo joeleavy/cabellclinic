@@ -109,7 +109,7 @@ const ExpertsAtLarge = () => {
             className="max-w-3xl"
           >
             <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
-              Our Network
+              Trusted Colleagues
             </span>
             <h1 className="font-heading text-display-lg text-navy mb-8">
               Experts at Large
