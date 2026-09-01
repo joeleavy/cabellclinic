@@ -24,14 +24,6 @@ type Partner = {
 
 const partners: Partner[] = [
   {
-    name: "Meo Health",
-    url: "https://www.meohealth.com",
-    category: "Nervous System Training",
-    description:
-      "HRV-guided training that strengthens the autonomic nervous system.",
-    logo: meoLogo,
-  },
-  {
     name: "Caristo Diagnostics",
     url: "https://www.caristo.com",
     category: "Cardiac Imaging",
@@ -46,6 +38,14 @@ const partners: Partner[] = [
     description:
       "Advanced functional laboratory testing, from micronutrient status to gut health.",
     logo: vibrantLogo,
+  },
+  {
+    name: "Meo Health",
+    url: "https://www.meohealth.com",
+    category: "Nervous System Training",
+    description:
+      "HRV-guided training that strengthens the autonomic nervous system.",
+    logo: meoLogo,
   },
   {
     name: "Quest Diagnostics",
