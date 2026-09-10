@@ -4,6 +4,13 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-09-10
+
+### Newsletter signup removed from Resources (no newsletter exists yet)
+Per client: the "Stay Informed / Receive new insights directly" signup form at the bottom of /resources was collecting names and emails for a newsletter that doesn't exist yet. Removed the whole section plus its submit handler and now-unused imports; the page ends on the "Coming Soon" resources section instead. Swept the rest of the site for similar stay-up-to-date asks — there were none (this was the only one). Restore from git history when the newsletter launches.
+
+---
+
 ## 2026-08-31 (later)
 
 ### /partners is now public: "Our Partners"
