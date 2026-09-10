@@ -1,48 +1,13 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, FileText, BookOpen, Lightbulb, Play } from "lucide-react";
+import { FileText, BookOpen, Lightbulb, Play } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { useToast } from "@/hooks/use-toast";
-import { submitInquiry } from "@/lib/submitInquiry";
+
+// The newsletter signup section that used to live at the bottom of this page
+// was removed 2026-09-10 — there is no newsletter yet. Restore it from git
+// history once one actually exists.
 
 const Resources = () => {
-  const { toast } = useToast();
-  const [signupSubmitting, setSignupSubmitting] = useState(false);
-  const [signupData, setSignupData] = useState({ name: "", email: "" });
-
-  const handleSignupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSignupData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSignupSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSignupSubmitting(true);
-    const result = await submitInquiry({
-      name: signupData.name,
-      email: signupData.email,
-      message: "Newsletter signup — please add me to the list and reach out with new resources.",
-      source: "Newsletter signup",
-    });
-    setSignupSubmitting(false);
-
-    if (result.ok) {
-      toast({ title: "Thanks, you're on the list." });
-      setSignupData({ name: "", email: "" });
-    } else {
-      toast({
-        title: "Something went wrong sending your signup.",
-        description:
-          "Please email us directly at info@thecabellclinic.com and we'll get right back to you.",
-        variant: "destructive",
-      });
-    }
-  };
-
   const videos = [
     {
       id: "XnG-uUqgms4",
@@ -222,76 +187,6 @@ const Resources = () => {
         </div>
       </section>
 
-      {/* Newsletter / Stay Updated */}
-      <section className="section-padding bg-soft-white">
-        <div className="container-narrow text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
-              Stay Informed
-            </span>
-            <h2 className="font-heading text-display text-navy mb-6">
-              Receive new insights directly
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-              Share your name and email and we'll reach out from time to time with new resources, talks, and clinic updates. Low frequency. No noise.
-            </p>
-
-            <form
-              onSubmit={handleSignupSubmit}
-              className="max-w-xl mx-auto bg-white p-8 md:p-10 shadow-sm text-left"
-            >
-              <div className="grid sm:grid-cols-2 gap-4 mb-5">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-name" className="text-sm font-medium text-navy">
-                    Full Name
-                  </Label>
-                  <Input
-                    id="signup-name"
-                    name="name"
-                    value={signupData.name}
-                    onChange={handleSignupChange}
-                    required
-                    className="border-warm-gray focus:border-gold focus:ring-gold/20 h-12"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-sm font-medium text-navy">
-                    Email
-                  </Label>
-                  <Input
-                    id="signup-email"
-                    name="email"
-                    type="email"
-                    value={signupData.email}
-                    onChange={handleSignupChange}
-                    required
-                    className="border-warm-gray focus:border-gold focus:ring-gold/20 h-12"
-                    placeholder="your@email.com"
-                  />
-                </div>
-              </div>
-              <Button
-                type="submit"
-                variant="clinic-primary"
-                size="xl"
-                className="w-full"
-                disabled={signupSubmitting}
-              >
-                {signupSubmitting ? "Signing up..." : "Sign Up"}
-              </Button>
-              <p className="text-xs text-muted-foreground/70 mt-4 text-center">
-                We'll never share your information. Unsubscribe anytime.
-              </p>
-            </form>
-          </motion.div>
-        </div>
-      </section>
     </Layout>
   );
 };
