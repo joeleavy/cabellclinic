@@ -4,8 +4,11 @@ import Layout from "@/components/layout/Layout";
 import SectionHeader from "@/components/ui/SectionHeader";
 
 // The newsletter signup section that used to live at the bottom of this page
-// was removed 2026-09-10 — there is no newsletter yet. Restore it from git
-// history once one actually exists.
+// was removed 2026-09-10 — there is no newsletter yet. The submission piping
+// (submitInquiry -> contact-email Worker) is untouched and still serves the
+// other forms. To turn the signup back on, restore this file's form section,
+// handler, and imports from commit 701de54:
+//   git show 701de54:src/pages/Resources.tsx
 
 const Resources = () => {
   const videos = [
