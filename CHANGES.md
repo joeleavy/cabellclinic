@@ -4,6 +4,13 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-09-21
+
+### Fax number added to footer and Contact page
+Per client: fax (615) 616-7443 now appears in the footer's Contact column and the Contact page's "Reach Us Directly" block, on its own line between the phone and email. Kept the two numbers adjacent (phone, then fax — labeled) per medical-site convention rather than separating them with the email; fax is plain text, not a tap-to-call link.
+
+---
+
 ## 2026-09-10
 
 ### Newsletter signup removed from Resources (no newsletter exists yet)
