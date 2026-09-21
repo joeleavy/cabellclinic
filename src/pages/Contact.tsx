@@ -263,6 +263,8 @@ const Contact = () => {
                       (615) 237-8706
                     </a>
                     <br />
+                    Fax: (615) 616-7443
+                    <br />
                     Email:{" "}
                     <a
                       href="mailto:info@thecabellclinic.com"

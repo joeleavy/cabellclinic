@@ -65,6 +65,8 @@ const Footer = () => {
                 Call or text: (615) 237-8706
               </a>
               <br />
+              Fax: (615) 616-7443
+              <br />
               <a
                 href="mailto:info@thecabellclinic.com"
                 className="hover:text-soft-white transition-colors duration-300"
