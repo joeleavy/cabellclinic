@@ -13,6 +13,8 @@ import FAQ from "./pages/FAQ";
 import Apply from "./pages/Apply";
 import Contact from "./pages/Contact";
 import Nuropod from "./pages/Nuropod";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import Partners from "./pages/Partners";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
@@ -39,6 +41,9 @@ const App = () => (
           <Route path="/partners" element={<Partners />} />
           {/* Unlisted — shared by direct link only; not in any nav */}
           <Route path="/nuropod" element={<Nuropod />} />
+          {/* Legal drafts under review — move to /privacy and /terms once approved */}
+          <Route path="/drafts/privacy" element={<Privacy />} />
+          <Route path="/drafts/terms" element={<Terms />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
