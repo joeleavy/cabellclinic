@@ -4,6 +4,19 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-09-25
+
+### Privacy Policy + Terms of Service drafts (unlisted), and a cookie audit
+Client asked whether the site needs a cookie policy. Audit: the site runs **no analytics, ad pixels, or tracking scripts**; the only third parties are Cloudflare (hosting, functional security cookies), Google Fonts, and YouTube embeds. A consent banner isn't warranted. The real gap: the footer has linked to /privacy and /terms since launch, but **neither page existed** (both fell through to the Not Found page).
+
+- **Drafted both pages** in plain English, tailored to what the site actually does (which forms collect what, delivery via Cloudflare Worker → Resend with FormSubmit backup, no tracking, YouTube/Fonts notes, deletion requests, emergency + not-a-patient-portal language). Cookies are a section inside the Privacy Policy rather than a separate policy.
+- **Unlisted for review** at `/drafts/privacy` and `/drafts/terms` (draft banner, robots noindex, page title marked "(Draft)"). The footer links stay as they were until Dr. Cabell and the clinic's attorney approve; then move the routes to /privacy and /terms, drop the `draft` flag, and set the effective date.
+- New shared `LegalPage` component for the two pages' layout.
+- **Resources page videos switched to YouTube's privacy-enhanced (nocookie) player**, matching the Nuropod page, so the "no tracking cookies" statement is true everywhere.
+- Not legal advice — attorney review required before publishing.
+
+---
+
 ## 2026-09-21
 
 ### Fax number added to footer and Contact page
