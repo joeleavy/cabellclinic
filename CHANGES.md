@@ -14,6 +14,7 @@ Client asked whether the site needs a cookie policy. Audit: the site runs **no a
 - New shared `LegalPage` component for the two pages' layout.
 - **Resources page videos switched to YouTube's privacy-enhanced (nocookie) player**, matching the Nuropod page, so the "no tracking cookies" statement is true everywhere.
 - Not legal advice — attorney review required before publishing.
+- **Published (same day, client direction):** drafts promoted as-is to the real `/privacy` and `/terms` routes — draft banner and noindex removed, effective date set to September 25, 2026, `/drafts/*` routes retired. The footer's Privacy Policy and Terms of Service links now work for the first time since launch. Attorney review still recommended; edits can be applied in place.
 
 ---
 
