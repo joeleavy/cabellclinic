@@ -39,11 +39,11 @@ const App = () => (
           <Route path="/apply" element={<Apply />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/partners" element={<Partners />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           {/* Unlisted — shared by direct link only; not in any nav */}
           <Route path="/nuropod" element={<Nuropod />} />
-          {/* Legal drafts under review — move to /privacy and /terms once approved */}
-          <Route path="/drafts/privacy" element={<Privacy />} />
-          <Route path="/drafts/terms" element={<Terms />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

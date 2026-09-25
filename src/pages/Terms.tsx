@@ -1,12 +1,11 @@
 import LegalPage from "@/components/LegalPage";
 
-// DRAFT — pending review by Dr. Cabell and counsel.
+// Published 2026-09-25 at the client's direction; attorney review still recommended.
 
 const Terms = () => (
   <LegalPage
-    draft
     title="Terms of Service"
-    effectiveDate="[to be set on publication]"
+    effectiveDate="September 25, 2026"
     intro={
       <p>
         Welcome to thomascabellmd.com, the website of The Cabell Clinic. By

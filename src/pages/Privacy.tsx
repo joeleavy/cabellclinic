@@ -1,16 +1,15 @@
 import LegalPage from "@/components/LegalPage";
 
-// DRAFT — written to match what the site actually does as of Sept 2026:
+// Written to match what the site actually does as of Sept 2026:
 // contact/invitation/self-assessment forms emailed to the clinic (via a
 // Cloudflare Worker + Resend, with a FormSubmit backup relay), no analytics
 // or advertising trackers, YouTube privacy-enhanced embeds, Google Fonts.
-// Update this page if any of that changes. Pending attorney review.
+// Update this page if any of that changes. Published 2026-09-25 at the client's direction; attorney review still recommended.
 
 const Privacy = () => (
   <LegalPage
-    draft
     title="Privacy Policy"
-    effectiveDate="[to be set on publication]"
+    effectiveDate="September 25, 2026"
     intro={
       <p>
         The Cabell Clinic ("we," "us") respects your privacy. This policy
