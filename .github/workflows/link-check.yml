@@ -1,0 +1,51 @@
+# Weekly sweep of every external link and embedded YouTube video on the site.
+# If anything is broken, the job fails (GitHub emails the repo owner) and the
+# list is emailed to tech@thecabellclinic.com via Resend, using the same
+# RESEND_HEALTH_KEY secret as the backend health check.
+
+name: Weekly link check
+
+on:
+  schedule:
+    - cron: "0 13 * * 1" # Mondays, 8am Central
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        run: python3 scripts/check-links.py
+
+      - name: Email tech@thecabellclinic.com about broken links
+        if: failure()
+        env:
+          RESEND_KEY: ${{ secrets.RESEND_HEALTH_KEY }}
+        run: |
+          if [ -z "$RESEND_KEY" ]; then
+            echo "::warning::RESEND_HEALTH_KEY secret is not set — cannot email the alert."
+            exit 0
+          fi
+          list=$(cat broken-links.txt 2>/dev/null || echo "(see workflow log)")
+          python3 - "$list" <<'EOF'
+          import json, os, sys, urllib.request
+          body = {
+              "from": "Cabell Clinic Monitor <forms@thomascabellmd.com>",
+              "to": ["tech@thecabellclinic.com"],
+              "subject": "[Heads up] Broken links found on thomascabellmd.com",
+              "text": "The weekly link check found links on the site that no longer work:\n\n"
+                      + sys.argv[1]
+                      + "\n\nThese are external partner/expert sites or videos, so the fix is usually "
+                        "updating or removing the link on our side.\n\n"
+                        "Details: https://github.com/joeleavy/cabellclinic/actions",
+          }
+          req = urllib.request.Request(
+              "https://api.resend.com/emails",
+              data=json.dumps(body).encode(),
+              headers={"Authorization": f"Bearer {os.environ['RESEND_KEY']}",
+                       "Content-Type": "application/json"},
+          )
+          print(urllib.request.urlopen(req).read().decode())
+          EOF

@@ -30,3 +30,4 @@ yarn-error.log*
 .vite/
 .wrangler/
 .dev.vars
+broken-links.txt
