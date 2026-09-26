@@ -4,6 +4,16 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-09-26
+
+### Weekly link check added
+New GitHub Actions workflow (`link-check.yml`, Mondays 8am Central + on demand) runs `scripts/check-links.py`, which sweeps every external URL and embedded YouTube video referenced in the code. If anything is dead, the job fails and tech@thecabellclinic.com gets an email listing the broken links (via Resend, same secret as the backend health check). Also runnable locally with `npm run links:check`.
+
+- Hardened against false alarms found on the first run: identifies as a real browser (Caristo blocks bots), forces IPv4 with a long timeout (resourceyourhealth.com takes ~30s to respond), retries once, and treats "works only with relaxed certificate checks" as alive — Cool Springs Modern Dentistry serves an incomplete TLS chain that browsers tolerate.
+- Baseline today: 14 links + 6 videos, 0 broken.
+
+---
+
 ## 2026-09-25
 
 ### Privacy Policy + Terms of Service drafts (unlisted), and a cookie audit
