@@ -18,6 +18,7 @@ import Terms from "./pages/Terms";
 import Partners from "./pages/Partners";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import CookieNotice from "./components/CookieNotice";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <CookieNotice />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/approach" element={<Approach />} />

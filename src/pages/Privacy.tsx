@@ -120,8 +120,7 @@ const Privacy = () => (
             <p>
               This website does not use analytics services, advertising
               pixels, or any tracking technology to follow you across the web.
-              We do not show you a cookie banner because we have nothing to
-              ask your consent for.
+              The brief notice you see on your first visit is informational — there is nothing here you need to accept or opt out of.
             </p>
             <p>The following limited technologies are in use:</p>
             <ul>
