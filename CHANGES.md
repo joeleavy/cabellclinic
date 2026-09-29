@@ -4,6 +4,13 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-09-29
+
+### Cookie notice added
+Per client. Because the site sets no tracking cookies, this is an honest *notice* rather than an accept/reject banner: a slim navy bar at the bottom of the first visit reading "This site uses only essential cookies and does not track you. See our Privacy Policy for details." with a "Got it" button. Dismissal is remembered per browser in localStorage (wrapped in try/catch for private windows). New `CookieNotice` component mounted in `App.tsx`; the Privacy Policy's cookies section now describes the notice as informational.
+
+---
+
 ## 2026-09-26
 
 ### Weekly link check added
