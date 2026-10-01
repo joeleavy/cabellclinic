@@ -4,6 +4,20 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-10-01
+
+### Every page now ships as real HTML (prerendering) + per-page titles + sitemap
+Prompted by an outside note: the site was an empty JavaScript shell with one shared title ("The Cabell Clinic"), so AI assistants, link previews, and non-JS crawlers saw nothing. Now the build renders all 13 routes to complete static HTML, each with its own title, description, Open Graph tags, and canonical URL, plus a generated `sitemap.xml` (12 public URLs; /nuropod stays noindexed and unlisted). Cloudflare serves the static files exactly as before — no server, no new cost.
+
+- **How:** `npm run build` = client build → SSR build (`src/entry-server.tsx`, react-dom/server + StaticRouter) → `scripts/prerender.mjs` writes `dist/<route>.html` and `sitemap.xml`. The browser hydrates the prerendered markup (`hydrateRoot`; the dev server still client-renders). `robots.txt` now points at the sitemap.
+- **`src/seo.ts`** is the single source of truth for titles/descriptions/noindex — edit there to change what Google and link previews show. `<PageMeta />` keeps the head in sync on client-side navigation (replaced the ad-hoc `document.title` effects on Partners/Nuropod/legal pages).
+- **FAQ answers are now crawlable:** the accordion kept closed answers out of the DOM entirely; they're now rendered and hidden via CSS until opened (same for the credentials accordion on Home). FAQ static HTML went from ~330 to ~1,240 words.
+- **No-JS fallback:** a `<noscript>` style reveals framer-motion's opacity-0 entrance states, so the pages are readable with scripts off.
+- **Verified** locally and on a Cloudflare branch preview: all routes serve their own HTML; `/faq/` and `/faq.html` 308 → `/faq`; unknown URLs still fall back to the app (so case-variant links like /Nuropod keep working); zero hydration mismatches (hydrateRoot's `onRecoverableError` now logs any); forms, dialogs, cookie notice, and client navigation all work.
+- **Follow-up ideas (not done):** a real 404 status for junk URLs (would need a `404.html` and dropping the SPA fallback), and submitting the sitemap in Google Search Console.
+
+---
+
 ## 2026-09-29
 
 ### Cookie notice added
