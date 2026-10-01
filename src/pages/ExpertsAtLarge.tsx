@@ -7,9 +7,9 @@ import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
 
 import oliviaLesslarImg from "@/assets/experts/olivia-lesslar.jpg";
 import jenniferJudgeImg from "@/assets/experts/jennifer-judge.png";
-import katelynKalsteinImg from "@/assets/experts/katelyn-kalstein.png";
+import katelynKalsteinImg from "@/assets/experts/katelyn-kalstein.webp";
 import stephenHusseyImg from "@/assets/experts/stephen-hussey.jpg";
-import elizabethYorkImg from "@/assets/experts/elizabeth-york.png";
+import elizabethYorkImg from "@/assets/experts/elizabeth-york.webp";
 
 type ExpertLink = {
   label: string;

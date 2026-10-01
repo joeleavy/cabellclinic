@@ -21,7 +21,7 @@ type Category = {
   items: FAQ[];
 };
 
-const categories: Category[] = [
+export const categories: Category[] = [
   {
     eyebrow: "Section One",
     title: "About The Cabell Clinic",

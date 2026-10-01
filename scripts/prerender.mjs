@@ -8,7 +8,72 @@ import { pathToFileURL } from "node:url";
 const DIST = path.resolve(process.env.PRERENDER_DIST || "dist");
 const SSR_ENTRY = path.resolve(process.env.PRERENDER_SSR || "dist-ssr", "entry-server.js");
 
-const { render, PAGE_META, SITE_URL } = await import(pathToFileURL(SSR_ENTRY).href);
+const { render, faqEntries, PAGE_META, SITE_URL } = await import(pathToFileURL(SSR_ENTRY).href);
+
+// schema.org structured data — what Google's local results, knowledge panels,
+// and AI assistants read to understand who/where/what the practice is.
+const ORGANIZATION_LD = {
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "@id": `${SITE_URL}/#clinic`,
+  name: "The Cabell Clinic",
+  alternateName: "Thomas Cabell, MD",
+  url: `${SITE_URL}/`,
+  logo: `${SITE_URL}/favicon-512.png`,
+  image: `${SITE_URL}/og-image-v2.jpg`,
+  description:
+    "A membership-based preventive and integrative cardiology practice in Brentwood, Tennessee, led by Dr. Thomas Cabell.",
+  medicalSpecialty: "Cardiovascular",
+  telephone: "+1-615-237-8706",
+  faxNumber: "+1-615-616-7443",
+  email: "info@thecabellclinic.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "105 Continental Place, Suite 160",
+    addressLocality: "Brentwood",
+    addressRegion: "TN",
+    postalCode: "37027",
+    addressCountry: "US",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: 36.03740, longitude: -86.81066 },
+  areaServed: ["Brentwood TN", "Nashville TN", "Franklin TN", "Williamson County TN", "Middle Tennessee"],
+  founder: { "@id": `${SITE_URL}/dr-cabell#physician` },
+  employee: { "@id": `${SITE_URL}/dr-cabell#physician` },
+  isAcceptingNewPatients: true,
+};
+
+const PHYSICIAN_LD = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "@id": `${SITE_URL}/dr-cabell#physician`,
+  name: "Dr. Thomas Cabell",
+  honorificSuffix: "MD",
+  jobTitle: "Founder, Preventive & Integrative Cardiologist",
+  url: `${SITE_URL}/dr-cabell`,
+  image: `${SITE_URL}/og-image-v2.jpg`,
+  medicalSpecialty: "Cardiovascular",
+  worksFor: { "@id": `${SITE_URL}/#clinic` },
+};
+
+const ldTag = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/<\//g, "<\\/")}</script>`;
+
+const structuredDataFor = (route) => {
+  const tags = [ldTag(ORGANIZATION_LD), ldTag(PHYSICIAN_LD)];
+  if (route === "/faq") {
+    tags.push(
+      ldTag({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqEntries().map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      })
+    );
+  }
+  return tags.join("\n    ");
+};
 const template = fs.readFileSync(path.join(DIST, "index.html"), "utf8");
 
 const esc = (s) =>
@@ -40,6 +105,7 @@ const buildPage = (route, meta) => {
     `<link rel="canonical" href="${url}" />`,
     meta.noindex ? '<meta name="robots" content="noindex, nofollow" />' : "",
     NOSCRIPT_STYLE,
+    structuredDataFor(route),
   ].filter(Boolean).join("\n    ");
   html = html.replace("</head>", `    ${extraHead}\n  </head>`);
   html = setTag(html, /<div id="root"><\/div>/, `<div id="root">${body}</div>`);

@@ -5,7 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
-import thomasCabell from "@/assets/thomas-cabell.jpeg";
+import thomasCabell from "@/assets/thomas-cabell.webp";
 
 const About = () => {
   return (

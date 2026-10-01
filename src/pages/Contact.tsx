@@ -62,6 +62,7 @@ const Contact = () => {
       {/* Two Paths */}
       <section className="pt-32 pb-16 bg-soft-white">
         <div className="container-wide">
+          <h1 className="sr-only">Contact The Cabell Clinic</h1>
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {/* Path 1: Ready */}
             <motion.div

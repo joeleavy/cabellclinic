@@ -4,6 +4,18 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-10-01 (later)
+
+### Structured data, image diet, Contact heading
+Follow-ups from the discoverability audit:
+
+- **Structured data (schema.org JSON-LD)** on every page: a `MedicalClinic` entity (name, address, geo coordinates, phone/fax/email, specialty, areas served: Brentwood/Nashville/Franklin/Williamson County) and a `Physician` entity for Dr. Cabell, linked to each other. The FAQ page additionally carries `FAQPage` markup for all 19 questions (answers flattened to plain text at build time), which makes it eligible for expanded FAQ results in Google. Defined in `scripts/prerender.mjs`.
+- **Images:** the homepage vision photo was a 2.4 MB JPEG — now a 287 KB WebP at the same 1920px resolution. Three headshots (Dr. Cabell, Elizabeth York, Katelyn Kalstein) went from ~240 KB PNG/JPEG each to ~25 KB WebP. Originals removed from the repo. No visible change.
+- **Contact page** now has a page-level H1 ("Contact The Cabell Clinic", screen-reader only, since the design has no visible title there) — every page now has exactly one H1.
+- Not done: route-level code splitting (the ~600 KB JS bundle). React.lazy doesn't play well with the string-based prerender; revisit only if page speed becomes a priority.
+
+---
+
 ## 2026-10-01
 
 ### Every page now ships as real HTML (prerendering) + per-page titles + sitemap

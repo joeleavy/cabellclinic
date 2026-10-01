@@ -7,8 +7,8 @@ import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import PatientReviewsSection from "@/components/home/PatientReviewsSection";
-import visionImage from "@/assets/vision-outdoor.jpg";
-import thomasCabellImage from "@/assets/thomas-cabell.jpeg";
+import visionImage from "@/assets/vision-outdoor.webp";
+import thomasCabellImage from "@/assets/thomas-cabell.webp";
 const Home = () => {
   return <Layout>
       {/* Hero Section */}
