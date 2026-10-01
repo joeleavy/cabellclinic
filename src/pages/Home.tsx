@@ -202,7 +202,7 @@ const Home = () => {
                   <span className="uppercase tracking-widest">Credentials</span>
                   <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
                 </CollapsibleTrigger>
-                <CollapsibleContent className="mt-4 pl-4 border-l-2 border-gold/30">
+                <CollapsibleContent forceMount className="mt-4 pl-4 border-l-2 border-gold/30 data-[state=closed]:hidden">
                   <ul className="space-y-3 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />

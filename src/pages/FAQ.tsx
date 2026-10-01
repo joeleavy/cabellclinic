@@ -241,7 +241,7 @@ const FAQ = () => {
                           <Minus className="h-5 w-5 text-gold hidden group-data-[state=open]:block" />
                         </div>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className="px-5 md:px-6 pb-6">
+                      <CollapsibleContent forceMount className="px-5 md:px-6 pb-6 data-[state=closed]:hidden">
                         <div className="text-muted-foreground leading-relaxed">
                           {typeof item.answer === "string" ? (
                             <p>{item.answer}</p>

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import meoLogo from "@/assets/partners/meo-health.png";
@@ -92,14 +91,6 @@ const partners: Partner[] = [
 ];
 
 const Partners = () => {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = "Our Partners | The Cabell Clinic";
-    return () => {
-      document.title = previousTitle;
-    };
-  }, []);
-
   return (
     <Layout>
       {/* Hero */}

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
 
 type Section = {
@@ -11,27 +11,11 @@ type Props = {
   effectiveDate: string;
   intro: ReactNode;
   sections: Section[];
-  /** Draft pages are noindexed and carry a review banner. */
+  /** Draft pages carry a review banner (mark them noindex in src/seo.ts too). */
   draft?: boolean;
 };
 
 const LegalPage = ({ title, effectiveDate, intro, sections, draft }: Props) => {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = `${title}${draft ? " (Draft)" : ""} | The Cabell Clinic`;
-    let meta: HTMLMetaElement | null = null;
-    if (draft) {
-      meta = document.createElement("meta");
-      meta.name = "robots";
-      meta.content = "noindex, nofollow";
-      document.head.appendChild(meta);
-    }
-    return () => {
-      document.title = previousTitle;
-      if (meta) document.head.removeChild(meta);
-    };
-  }, [title, draft]);
-
   return (
     <Layout>
       <section className="pt-32 pb-20 md:pb-24 bg-soft-white">

@@ -1,10 +1,9 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 
-// Unlisted page — reachable only by direct link. Not in any nav menu, and
-// the meta tag below asks search engines not to index it.
+// Unlisted page — reachable only by direct link. Not in any nav menu;
+// marked noindex in src/seo.ts.
 
 const videos = [
   {
@@ -28,19 +27,6 @@ const videos = [
 ];
 
 const Nuropod = () => {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = "Nuropod | The Cabell Clinic";
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex, nofollow";
-    document.head.appendChild(meta);
-    return () => {
-      document.title = previousTitle;
-      document.head.removeChild(meta);
-    };
-  }, []);
-
   return (
     <Layout>
       {/* Hero */}
