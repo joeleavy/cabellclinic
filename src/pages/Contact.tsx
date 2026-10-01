@@ -243,6 +243,11 @@ const Contact = () => {
                     <br />
                     Brentwood, TN 37027
                   </p>
+                  <p className="text-sm text-muted-foreground/70 mt-2">
+                    In Maryland Farms, Brentwood — 15 minutes south of downtown
+                    Nashville, with easy access from Franklin and all of
+                    Williamson County.
+                  </p>
                 </div>
               </div>
 

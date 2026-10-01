@@ -22,7 +22,7 @@ const ORGANIZATION_LD = {
   logo: `${SITE_URL}/favicon-512.png`,
   image: `${SITE_URL}/og-image-v2.jpg`,
   description:
-    "A membership-based preventive and integrative cardiology practice in Brentwood, Tennessee, led by Dr. Thomas Cabell.",
+    "A membership-based preventive and integrative cardiology practice in Brentwood, Tennessee, serving Nashville, Franklin, Williamson County, and Middle Tennessee. Led by Dr. Thomas Cabell.",
   medicalSpecialty: "Cardiovascular",
   telephone: "+1-615-237-8706",
   faxNumber: "+1-615-616-7443",

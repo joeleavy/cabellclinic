@@ -14,9 +14,9 @@ export type PageMetaEntry = {
 
 export const PAGE_META: Record<string, PageMetaEntry> = {
   "/": {
-    title: "The Cabell Clinic | Preventive & Integrative Cardiology, Brentwood TN",
+    title: "The Cabell Clinic | Preventive & Integrative Cardiology | Brentwood & Nashville, TN",
     description:
-      "A membership-based preventive and integrative cardiology practice in Brentwood, Tennessee, led by Dr. Thomas Cabell: root-cause diagnostics, longevity science, and unhurried, personalized care.",
+      "A membership-based preventive and integrative cardiology practice in Brentwood, Tennessee, serving Nashville, Franklin, and Williamson County. Led by Dr. Thomas Cabell: root-cause diagnostics, longevity science, and unhurried, personalized care.",
   },
   "/approach": {
     title: "Our Approach & Method | The Cabell Clinic",
@@ -24,7 +24,7 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
       "From heart health to whole-person healing: how Dr. Cabell combines advanced cardiac diagnostics, root-cause thinking, and longevity science in a membership practice near Nashville.",
   },
   "/dr-cabell": {
-    title: "Meet Dr. Thomas Cabell | Preventive Cardiologist in Brentwood, TN",
+    title: "Meet Dr. Thomas Cabell | Preventive & Integrative Cardiologist, Nashville / Brentwood TN",
     description:
       "Dr. Thomas Cabell practiced conventional cardiology for eighteen years before founding The Cabell Clinic to practice preventive, integrative, root-cause medicine in Brentwood, Tennessee.",
   },
@@ -41,7 +41,7 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
   "/team": {
     title: "Our Team | The Cabell Clinic",
     description:
-      "Meet the team behind The Cabell Clinic's preventive and integrative cardiology practice in Brentwood, Tennessee.",
+      "Meet the team behind The Cabell Clinic's preventive and integrative cardiology practice in Brentwood, Tennessee, serving Nashville, Franklin, and Williamson County.",
   },
   "/faq": {
     title: "Frequently Asked Questions | The Cabell Clinic",
@@ -56,7 +56,7 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
   "/contact": {
     title: "Contact The Cabell Clinic | Brentwood, Tennessee",
     description:
-      "Request an invitation, ask a question, or reach The Cabell Clinic directly by phone, text, or email. 105 Continental Place, Suite 160, Brentwood, TN 37027.",
+      "Request an invitation, ask a question, or reach The Cabell Clinic directly by phone, text, or email. 105 Continental Place, Suite 160, Brentwood, TN 37027 — serving Nashville, Franklin, and Williamson County.",
   },
   "/partners": {
     title: "Our Partners | The Cabell Clinic",

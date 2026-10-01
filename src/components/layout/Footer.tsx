@@ -26,7 +26,7 @@ const Footer = () => {
               The Cabell Clinic
             </h3>
             <p className="text-soft-white/70 font-body text-sm leading-relaxed max-w-sm">
-              A membership-based Preventive & Integrative Cardiology practice in Brentwood, Tennessee.
+              A membership-based Preventive & Integrative Cardiology practice in Brentwood, Tennessee, serving Nashville, Williamson County, and Middle Tennessee.
             </p>
           </div>
 

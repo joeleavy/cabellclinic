@@ -62,7 +62,7 @@ const About = () => {
               className="prose prose-lg text-muted-foreground space-y-6"
             >
               <p className="leading-relaxed">
-                For eighteen years I practiced cardiology in some of the largest hospital systems in the country. I was trained at Vanderbilt and the University of Florida and board-certified in Internal Medicine, Cardiovascular Disease, and Nuclear Cardiology.
+                For eighteen years I practiced cardiology in some of the largest hospital systems in the country, here in Middle Tennessee. I was trained at Vanderbilt and the University of Florida and board-certified in Internal Medicine, Cardiovascular Disease, and Nuclear Cardiology.
               </p>
               <p className="leading-relaxed">
                 On paper, I had everything a physician could want. But in my late 30s, my own health broke down. I faced anxiety, depression, and autoimmune disease that conventional medicine couldn't fix. The best the system could offer me was symptom management, more tests, more prescriptions. It wasn't enough.
@@ -111,7 +111,7 @@ const About = () => {
                 icon: Stethoscope,
                 phase: "Clinical Practice",
                 description:
-                  "Eighteen years treating complex cardiovascular cases in major hospital systems across the country.",
+                  "Eighteen years treating complex cardiovascular cases in major hospital systems in Middle Tennessee.",
               },
               {
                 icon: Heart,

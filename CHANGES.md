@@ -4,6 +4,17 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-10-01 (evening)
+
+### Local-area language: Nashville / Williamson County / Middle Tennessee
+Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten light-touch edits so the site clearly places the practice in the Nashville area, where most searches originate — previously "Brentwood, Tennessee" appeared 11 times and "Nashville" once; now every page mentions Nashville naturally.
+
+- **Visible copy:** homepage hero eyebrow ("Brentwood, Tennessee · Serving Nashville & Middle TN"); footer blurb; FAQ "What is The Cabell Clinic?" (adds "just south of Nashville in Williamson County"); FAQ "Where are you located?" (Maryland Farms, 15 min south of downtown Nashville, members from Nashville/Franklin/Williamson County/Middle TN); **new FAQ** "Do I need to live in Nashville to become a member?"; Contact page location note; Dr. Cabell's bio on Home and Meet Dr. Cabell ("…largest hospital systems in the country, here in Middle Tennessee") plus the matching credentials bullet ("…in Middle Tennessee", was "across the country").
+- **Search snippets only:** homepage and Dr. Cabell titles now include Nashville; Home/Team/Contact descriptions, the site-wide default description, and the structured-data description add "serving Nashville, Franklin, and Williamson County."
+- A PDF summary of all before/after wording was given to the client for Dr. Cabell's review; revert = `git revert` of this commit.
+
+---
+
 ## 2026-10-01 (later)
 
 ### Structured data, image diet, Contact heading

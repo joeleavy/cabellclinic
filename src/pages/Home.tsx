@@ -33,7 +33,7 @@ const Home = () => {
             delay: 0.2
           }}>
               <span className="inline-block text-lg md:text-xl uppercase tracking-[0.25em] text-gold font-semibold mb-6">
-                Brentwood, Tennessee
+                Brentwood, Tennessee · Serving Nashville &amp; Middle TN
               </span>
             </motion.div>
 
@@ -195,7 +195,7 @@ const Home = () => {
               <p className="text-sm uppercase tracking-widest text-gold font-semibold mb-6">
                 Founder · Preventive & Integrative Cardiologist
               </p>
-              <p className="text-muted-foreground leading-relaxed mb-8">For eighteen years, I practiced conventional cardiology in some of the largest healthcare systems in the country. I loved my work, but I kept seeing the same thing: people getting treated, not truly healed. The journey to find a better answer became personal, and ultimately, the foundation of The Cabell Clinic.</p>
+              <p className="text-muted-foreground leading-relaxed mb-8">For eighteen years, I practiced conventional cardiology in some of the largest healthcare systems in the country, here in Middle Tennessee. I loved my work, but I kept seeing the same thing: people getting treated, not truly healed. The journey to find a better answer became personal, and ultimately, the foundation of The Cabell Clinic.</p>
               
               <Collapsible className="mb-8">
                 <CollapsibleTrigger className="flex items-center gap-2 text-sm font-semibold text-navy hover:text-gold transition-colors group">

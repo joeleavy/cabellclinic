@@ -29,7 +29,7 @@ export const categories: Category[] = [
       {
         question: "What is The Cabell Clinic?",
         answer:
-          "The Cabell Clinic is a membership-based preventive and integrative cardiology practice in Brentwood, Tennessee. We keep our membership intentionally small so we have the time to detect imbalances early, address root causes across body, mind, and environment, and build the kind of long-term biological resilience conventional medicine rarely has the room for.",
+          "The Cabell Clinic is a membership-based preventive and integrative cardiology practice in Brentwood, Tennessee — just south of Nashville in Williamson County. We keep our membership intentionally small so we have the time to detect imbalances early, address root causes across body, mind, and environment, and build the kind of long-term biological resilience conventional medicine rarely has the room for.",
       },
       {
         question: "Who is Dr. Thomas Cabell?",
@@ -155,7 +155,12 @@ export const categories: Category[] = [
       {
         question: "Where are you located?",
         answer:
-          "105 Continental Place, Suite 160, Brentwood, TN 37027. Members travel to us from across the greater Nashville area and the Southeast.",
+          "105 Continental Place, Suite 160, Brentwood, TN 37027 — in the Maryland Farms area, about 15 minutes south of downtown Nashville. Members come to us from Nashville, Franklin, and across Williamson County and Middle Tennessee, and some travel from farther across the Southeast.",
+      },
+      {
+        question: "Do I need to live in Nashville to become a member?",
+        answer:
+          "No. Most of our members live in the Nashville area — Brentwood, Franklin, Belle Meade, Green Hills, and the surrounding counties — but membership is open to anyone willing to travel to Brentwood for in-person visits. Much of our ongoing communication happens through secure channels between visits.",
       },
       {
         question: "How are appointments scheduled and conducted?",
