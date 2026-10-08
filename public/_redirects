@@ -1,1 +1,10 @@
-/*    /index.html   200
+# One canonical host: www -> apex (Cloudflare Pages honors this once www is a custom domain)
+https://www.thomascabellmd.com/*  https://thomascabellmd.com/:splat  301
+
+# Links Doc has sent out with a capital N; the real page is lowercase
+/Nuropod  /nuropod  301
+/NUROPOD  /nuropod  301
+
+# Retired draft addresses -> the published pages
+/drafts/privacy  /privacy  301
+/drafts/terms    /terms    301

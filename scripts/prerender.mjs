@@ -8,7 +8,7 @@ import { pathToFileURL } from "node:url";
 const DIST = path.resolve(process.env.PRERENDER_DIST || "dist");
 const SSR_ENTRY = path.resolve(process.env.PRERENDER_SSR || "dist-ssr", "entry-server.js");
 
-const { render, faqEntries, PAGE_META, SITE_URL } = await import(pathToFileURL(SSR_ENTRY).href);
+const { render, faqEntries, PAGE_META, NOT_FOUND_META, SITE_URL } = await import(pathToFileURL(SSR_ENTRY).href);
 
 // schema.org structured data — what Google's local results, knowledge panels,
 // and AI assistants read to understand who/where/what the practice is.
@@ -90,9 +90,9 @@ const setTag = (html, regex, replacement) => {
 const NOSCRIPT_STYLE =
   '<noscript><style>[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}</style></noscript>';
 
-const buildPage = (route, meta) => {
+const buildPage = (route, meta, renderRoute = route) => {
   const url = route === "/" ? `${SITE_URL}/` : `${SITE_URL}${route}`;
-  const body = render(route);
+  const body = render(renderRoute);
   let html = template;
   html = setTag(html, /<title>[^<]*<\/title>/, `<title>${esc(meta.title)}</title>`);
   html = setTag(html, /<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${esc(meta.description)}" />`);
@@ -102,7 +102,8 @@ const buildPage = (route, meta) => {
   html = setTag(html, /<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${esc(meta.title)}" />`);
   html = setTag(html, /<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${esc(meta.description)}" />`);
   const extraHead = [
-    `<link rel="canonical" href="${url}" />`,
+    // The 404 page is served at arbitrary URLs, so it gets no canonical.
+    meta === NOT_FOUND_META ? "" : `<link rel="canonical" href="${url}" />`,
     meta.noindex ? '<meta name="robots" content="noindex, nofollow" />' : "",
     NOSCRIPT_STYLE,
     structuredDataFor(route),
@@ -119,6 +120,15 @@ for (const route of routes) {
   fs.writeFileSync(path.join(DIST, file), html);
   const words = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
   console.log(`prerendered ${route.padEnd(12)} -> ${file.padEnd(16)} (${words} words)`);
+}
+
+// A real 404 page: with no SPA catch-all in _redirects, Cloudflare Pages
+// serves dist/404.html with a 404 status for any unknown URL, so junk links
+// no longer look like duplicate homepages ("soft 404s") to Google.
+{
+  const html = buildPage("/__not_found__", NOT_FOUND_META, "*");
+  fs.writeFileSync(path.join(DIST, "404.html"), html);
+  console.log("prerendered 404          -> 404.html");
 }
 
 const today = new Date().toISOString().slice(0, 10);
