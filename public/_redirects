@@ -1,5 +1,6 @@
-# One canonical host: www -> apex (Cloudflare Pages honors this once www is a custom domain)
-https://www.thomascabellmd.com/*  https://thomascabellmd.com/:splat  301
+# NOTE: www -> apex cannot be done here (Pages ignores host-based sources).
+# It is a Cloudflare dashboard Redirect Rule on the thomascabellmd.com zone.
+# Every page also carries a canonical tag pointing at the apex.
 
 # Links Doc has sent out with a capital N; the real page is lowercase
 /Nuropod  /nuropod  301
