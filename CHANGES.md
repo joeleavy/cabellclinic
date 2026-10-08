@@ -4,6 +4,18 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-10-08
+
+### Search Console follow-ups: www fixed, real 404 page, redirects
+Search Console's first indexing report flagged four things; two were real.
+
+- **Server error (5xx) on www — real.** `www.thomascabellmd.com` had a DNS record but was never attached to the Pages project, so it returned Cloudflare error 522 (likely since launch). Fixed by the client adding `www.thomascabellmd.com` as a custom domain in the Pages dashboard; `_redirects` now sends www → apex (301) so there's one canonical host.
+- **Soft 404 — real.** The `/* → /index.html 200` SPA catch-all meant every unknown URL returned the homepage shell with a 200. Removed it; the build now prerenders `dist/404.html` (restyled NotFound page with header/footer, noindex, no canonical), which Cloudflare Pages serves with a true 404. Because the catch-all is gone, case-variant links Doc has shared (`/Nuropod`) and the retired `/drafts/privacy` and `/drafts/terms` addresses now 301 to the real pages via `_redirects`.
+- **Page with redirect / Discovered–not indexed — expected.** Trailing-slash and http→https redirects, and the normal crawl queue. No action.
+- Gotcha noted in `scripts/prerender.mjs`: rendering the 404 at the literal `*` path matched no route and produced an empty page; it must be rendered at a real unknown path.
+
+---
+
 ## 2026-10-01 (evening)
 
 ### Local-area language: Nashville / Williamson County / Middle Tennessee
