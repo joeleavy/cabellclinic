@@ -126,7 +126,7 @@ for (const route of routes) {
 // serves dist/404.html with a 404 status for any unknown URL, so junk links
 // no longer look like duplicate homepages ("soft 404s") to Google.
 {
-  const html = buildPage("/__not_found__", NOT_FOUND_META, "*");
+  const html = buildPage("/__not_found__", NOT_FOUND_META, "/__not_found__");
   fs.writeFileSync(path.join(DIST, "404.html"), html);
   console.log("prerendered 404          -> 404.html");
 }
