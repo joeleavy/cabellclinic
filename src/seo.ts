@@ -82,7 +82,7 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
   "/preventive-cardiology": {
     title: "Preventive Cardiology in Brentwood, TN | The Cabell Clinic",
     description:
-      "Membership-based heart care with Dr. Thomas Cabell in Brentwood, Tennessee. Unhurried visits, root-cause testing, and a personalized plan. Book a 20-minute discovery call.",
+      "Membership-based heart care with Dr. Thomas Cabell in Brentwood, Tennessee. Unhurried visits, root-cause testing, and a personalized plan. Book a 20 minute discovery call.",
     noindex: true, // ads landing page — paid traffic only; the homepage is for search
   },
   "/preventive-cardiology/thank-you": {

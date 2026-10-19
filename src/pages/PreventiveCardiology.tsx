@@ -51,7 +51,7 @@ const faqs = [
   },
   {
     q: "How much does membership cost?",
-    a: "We cover pricing and what's included on your 20-minute discovery call, so you can decide with all the details in front of you.",
+    a: "We cover pricing and what's included on your 20 minute discovery call, so you can decide with all the details in front of you.",
   },
   {
     q: "Where are you located?",
@@ -100,7 +100,7 @@ const PreventiveCardiology = () => {
             </p>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-10">
               <a href="#intro-call" className="inline-flex items-center justify-center bg-navy text-soft-white px-8 h-14 text-sm font-semibold uppercase tracking-wider hover:bg-navy/90 transition-colors">
-                Book a 20-Minute Discovery Call
+                Book a 20 Minute Discovery Call
               </a>
               <CallLink className="text-sm font-medium" />
             </div>
@@ -111,7 +111,7 @@ const PreventiveCardiology = () => {
           </div>
 
           <div id="intro-call" className="bg-white shadow-sm p-6 md:p-8 scroll-mt-6">
-            <h2 className="font-heading text-2xl text-navy mb-1">Book your 20-minute discovery call</h2>
+            <h2 className="font-heading text-2xl text-navy mb-1">Book a 20 Minute Discovery Call</h2>
             <p className="text-muted-foreground text-sm mb-4">Pick a time that works for you — no pressure, no commitment.</p>
             <CalendlyEmbed url={CALENDLY_URL} onScheduled={() => navigate(THANK_YOU)} />
             <div className="mt-6 pt-6 border-t border-warm-gray/60">
@@ -209,12 +209,12 @@ const PreventiveCardiology = () => {
       {/* Closing CTA */}
       <section className="py-16 md:py-24 bg-warm-gray/20">
         <div className="container-narrow text-center">
-          <h2 className="font-heading text-display-sm text-navy mb-4">Start With a 20-Minute Conversation</h2>
+          <h2 className="font-heading text-display-sm text-navy mb-4">Start With a 20 Minute Conversation</h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl mx-auto">
             No pressure and no commitment. Just a chance to see if The Cabell Clinic is right for you.
           </p>
           <a href="#intro-call" className="inline-flex items-center justify-center bg-navy text-soft-white px-8 h-14 text-sm font-semibold uppercase tracking-wider hover:bg-navy/90 transition-colors mb-6">
-            Book Your Discovery Call
+            Book a 20 Minute Discovery Call
           </a>
           <p className="text-sm text-muted-foreground">
             <a href={PHONE_HREF} className="hover:text-navy">{PHONE_DISPLAY}</a> · <a href="mailto:info@thecabellclinic.com" className="hover:text-navy">info@thecabellclinic.com</a>
