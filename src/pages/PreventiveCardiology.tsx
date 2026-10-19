@@ -95,11 +95,16 @@ const PreventiveCardiology = () => {
             <h1 className="font-heading text-display-lg text-navy mb-6">
               Preventive Cardiology, Built Around You
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-8">
+            <p className="text-xl text-muted-foreground leading-relaxed mb-4">
               Membership-based heart care in Brentwood with Dr. Thomas Cabell. More time, deeper answers, and a plan made for your health — not a 10-minute visit.
             </p>
+            <p className="text-lg text-navy leading-relaxed mb-8">
+              Most heart care starts after something goes wrong. We start earlier — looking for root causes, not just symptoms, so you leave with a clear picture of your heart health and a plan you understand.
+            </p>
+            {/* On phones the calendar is below the fold, so offer a jump to it.
+                On desktop it sits right beside this text — a button would do nothing. */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-10">
-              <a href="#intro-call" className="inline-flex items-center justify-center bg-navy text-soft-white px-8 h-14 text-sm font-semibold uppercase tracking-wider hover:bg-navy/90 transition-colors">
+              <a href="#intro-call" className="lg:hidden inline-flex items-center justify-center bg-navy text-soft-white px-8 h-14 text-sm font-semibold uppercase tracking-wider hover:bg-navy/90 transition-colors">
                 Book a 20 Minute Discovery Call
               </a>
               <CallLink className="text-sm font-medium" />
@@ -130,17 +135,6 @@ const PreventiveCardiology = () => {
               )}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* A different kind of cardiology */}
-      <section className="py-16 md:py-20 bg-warm-gray/20">
-        <div className="container-narrow">
-          <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">A Different Kind of Cardiology</span>
-          <h2 className="font-heading text-display-sm text-navy mb-6">Most heart care starts after something goes wrong. We start earlier.</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Dr. Cabell looks for root causes, not just symptoms, and takes the time to understand your history, your risks, and your goals. You leave with a clear picture of your heart health and a plan you understand.
-          </p>
         </div>
       </section>
 
@@ -187,14 +181,13 @@ const PreventiveCardiology = () => {
         </div>
       </section>
 
-      {/* Who it's for + FAQ */}
+      {/* FAQ */}
       <section className="py-16 md:py-20">
         <div className="container-narrow">
-          <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">Who It's For</span>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-14">
-            The Cabell Clinic is for adults who want to understand their heart health and take an active role in it. That includes people with a family history of heart disease, people who want answers their current care hasn't given them, and people who simply want to stay ahead of problems.
+          <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">Common Questions</span>
+          <p className="text-muted-foreground leading-relaxed mb-10">
+            For adults who want to understand their heart health and take an active role in it — whether that's a family history, answers your current care hasn't given you, or simply staying ahead of problems.
           </p>
-          <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-6 block">Common Questions</span>
           <div className="space-y-8">
             {faqs.map((f) => (
               <div key={f.q}>
@@ -206,26 +199,11 @@ const PreventiveCardiology = () => {
         </div>
       </section>
 
-      {/* Closing CTA */}
-      <section className="py-16 md:py-24 bg-warm-gray/20">
-        <div className="container-narrow text-center">
-          <h2 className="font-heading text-display-sm text-navy mb-4">Start With a 20 Minute Conversation</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl mx-auto">
-            No pressure and no commitment. Just a chance to see if The Cabell Clinic is right for you.
-          </p>
-          <a href="#intro-call" className="inline-flex items-center justify-center bg-navy text-soft-white px-8 h-14 text-sm font-semibold uppercase tracking-wider hover:bg-navy/90 transition-colors mb-6">
-            Book a 20 Minute Discovery Call
-          </a>
-          <p className="text-sm text-muted-foreground">
-            <a href={PHONE_HREF} className="hover:text-navy">{PHONE_DISPLAY}</a> · <a href="mailto:info@thecabellclinic.com" className="hover:text-navy">info@thecabellclinic.com</a>
-          </p>
-        </div>
-      </section>
     </main>
 
     <footer className="py-6 border-t border-warm-gray/60">
       <div className="container-wide flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-muted-foreground/70">
-        <span>© {new Date().getFullYear()} The Cabell Clinic · 105 Continental Place, Suite 160, Brentwood, TN 37027</span>
+        <span>© {new Date().getFullYear()} The Cabell Clinic · 105 Continental Place, Suite 160, Brentwood, TN 37027 · <a href={PHONE_HREF} className="hover:text-navy">{PHONE_DISPLAY}</a> · <a href="mailto:info@thecabellclinic.com" className="hover:text-navy">info@thecabellclinic.com</a></span>
         <span><Link to="/privacy" className="hover:text-navy">Privacy Policy</Link> · <Link to="/terms" className="hover:text-navy">Terms</Link></span>
       </div>
     </footer>
