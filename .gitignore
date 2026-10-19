@@ -34,3 +34,5 @@ yarn-error.log*
 broken-links.txt
 dist-dev/
 dist-ssr-dev/
+dist-tag/
+dist-ssr-tag/

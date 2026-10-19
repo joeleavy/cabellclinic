@@ -13,6 +13,12 @@
 export const GOOGLE_TAG_ID: string | undefined = import.meta.env.VITE_GOOGLE_TAG_ID;
 export const CONSENT_STORAGE_KEY = "cabell-cookie-consent"; // "granted" | "denied"
 
+/** Fired (on window) by "Cookie settings" links to reopen the cookie bar. */
+export const REOPEN_EVENT = "cabell:cookie-settings";
+export const openCookieSettings = (): void => {
+  window.dispatchEvent(new Event(REOPEN_EVENT));
+};
+
 type Gtag = (...args: unknown[]) => void;
 
 declare global {

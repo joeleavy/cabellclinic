@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { openCookieSettings } from "@/lib/googleTag";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -100,6 +101,13 @@ const Footer = () => {
               >
                 Terms of Service
               </Link>
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="text-xs text-soft-white/50 hover:text-soft-white/70 transition-colors"
+              >
+                Cookie settings
+              </button>
             </div>
           </div>
         </div>

@@ -118,10 +118,12 @@ const Privacy = () => (
         body: (
           <>
             <p>
-              We keep tracking to a minimum. The cookie bar on your first visit
-              lets you choose whether to allow optional cookies, and we honor
-              that choice. You can change your mind at any time by clearing this
-              site's cookies in your browser, which will show the bar again.
+              We keep tracking to a minimum. On your first visit, a bar at the
+              bottom of the page tells you what cookies are in use; when
+              optional cookies are available, it asks whether to allow them,
+              and we honor your choice. You can review or change that choice
+              at any time with the <strong>Cookie settings</strong> link in the
+              footer of every page.
             </p>
             <p><strong>Essential, always on:</strong></p>
             <ul>

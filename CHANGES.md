@@ -28,6 +28,18 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-19 (cookies follow-up)
+
+### "Cookie settings" link + consent polish
+Closing the gaps left after the consent-mode build:
+
+- **Cookie settings** link in the main footer (next to Privacy/Terms) and in the landing page's footer line. It reopens the cookie bar so a visitor can change their choice without clearing browser data (`openCookieSettings()` dispatches a window event the bar listens for).
+- **Accept and Decline now carry equal visual weight** — deliberate for a medical practice; consent mode still counts conversions in aggregate when people decline.
+- **Privacy Policy** cookies paragraph reworded to be accurate in both states (informational bar today; Accept/Decline once the Google tag is on) and to point at the footer link.
+- Verified in both builds: dormant (link reopens "Got it" bar) and tag-enabled (Decline → reopen → Accept flips consent denied → granted in the data layer).
+
+---
+
 ## 2026-10-19 (later still)
 
 ### Landing page books through Calendly

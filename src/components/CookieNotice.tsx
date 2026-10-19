@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { applyConsent, loadGoogleTag, storedConsent, trackingEnabled } from "@/lib/googleTag";
+import { applyConsent, loadGoogleTag, storedConsent, trackingEnabled, REOPEN_EVENT } from "@/lib/googleTag";
 
 // Cookie bar. Two modes, decided by whether a Google tag ID is configured:
 //
@@ -27,6 +27,13 @@ const CookieNotice = () => {
       setVisible(true);
     }
   }, [tracking]);
+
+  // "Cookie settings" links (both footers) reopen the bar so a choice can be changed.
+  useEffect(() => {
+    const reopen = () => setVisible(true);
+    window.addEventListener(REOPEN_EVENT, reopen);
+    return () => window.removeEventListener(REOPEN_EVENT, reopen);
+  }, []);
 
   const decide = (choice: "granted" | "denied") => {
     applyConsent(choice);
@@ -69,7 +76,7 @@ const CookieNotice = () => {
             <Button type="button" onClick={() => decide("denied")} variant="clinic-outline" size="sm" className={buttonBase}>
               Decline
             </Button>
-            <Button type="button" onClick={() => decide("granted")} variant="clinic-outline" size="sm" className={`${buttonBase} bg-soft-white text-navy`}>
+            <Button type="button" onClick={() => decide("granted")} variant="clinic-outline" size="sm" className={buttonBase}>
               Accept
             </Button>
           </div>

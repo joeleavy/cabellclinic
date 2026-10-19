@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Phone, Check } from "lucide-react";
 import IntroCallForm from "@/components/IntroCallForm";
 import CalendlyEmbed from "@/components/CalendlyEmbed";
+import { openCookieSettings } from "@/lib/googleTag";
 import thomasCabell from "@/assets/thomas-cabell.webp";
 
 // Google Ads landing page. Deliberately NOT wrapped in <Layout>: no site
@@ -204,7 +205,7 @@ const PreventiveCardiology = () => {
     <footer className="py-6 border-t border-warm-gray/60">
       <div className="container-wide flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-muted-foreground/70">
         <span>© {new Date().getFullYear()} The Cabell Clinic · 105 Continental Place, Suite 160, Brentwood, TN 37027 · <a href={PHONE_HREF} className="hover:text-navy">{PHONE_DISPLAY}</a> · <a href="mailto:info@thecabellclinic.com" className="hover:text-navy">info@thecabellclinic.com</a></span>
-        <span><Link to="/privacy" className="hover:text-navy">Privacy Policy</Link> · <Link to="/terms" className="hover:text-navy">Terms</Link></span>
+        <span><Link to="/privacy" className="hover:text-navy">Privacy Policy</Link> · <Link to="/terms" className="hover:text-navy">Terms</Link> · <button type="button" onClick={openCookieSettings} className="hover:text-navy">Cookie settings</button></span>
       </div>
     </footer>
   </div>
