@@ -43,7 +43,7 @@ const IntroCallForm = ({ source, thankYouPath, idPrefix = "ic" }: Props) => {
     const result = await submitInquiry({
       name: form.name,
       email: form.email,
-      message: `Phone: ${form.phone}\n\n${form.message || "(no message — requested a 15-minute intro call)"}`,
+      message: `Phone: ${form.phone}\n\n${form.message || "(no message — requested a 20-minute discovery call)"}`,
       source,
     });
     setSubmitting(false);
@@ -82,7 +82,7 @@ const IntroCallForm = ({ source, thankYouPath, idPrefix = "ic" }: Props) => {
         <Input id={`${idPrefix}-message`} name="message" value={form.message} onChange={handleChange} className={field} placeholder="What's bringing you to us?" />
       </div>
       <Button type="submit" variant="clinic-primary" size="xl" className="w-full" disabled={submitting}>
-        {submitting ? "Sending..." : "Book Your 15-Minute Intro Call"}
+        {submitting ? "Sending..." : "Request a Call Back"}
       </Button>
       <p className="text-xs text-muted-foreground/70 text-center">
         Confidential. No pressure, no commitment. We'll reach out within one business day.

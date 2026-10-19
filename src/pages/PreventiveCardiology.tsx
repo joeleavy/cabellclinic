@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Phone, Check } from "lucide-react";
 import IntroCallForm from "@/components/IntroCallForm";
+import CalendlyEmbed from "@/components/CalendlyEmbed";
 import thomasCabell from "@/assets/thomas-cabell.webp";
 
 // Google Ads landing page. Deliberately NOT wrapped in <Layout>: no site
@@ -11,11 +13,15 @@ import thomasCabell from "@/assets/thomas-cabell.webp";
 
 const PHONE_DISPLAY = "(615) 237-8706";
 const PHONE_HREF = "tel:+16152378706";
+// Kristy's "20 Minute Discovery Call" event. (The slug says 30min — a leftover
+// from when the event was created in Calendly; the event itself is 20 minutes.)
+const CALENDLY_URL = "https://calendly.com/kristy-thecabellclinic/30min";
+const THANK_YOU = "/preventive-cardiology/thank-you";
 
 const steps = [
   {
     n: "1",
-    title: "Intro call",
+    title: "Discovery call",
     body: "A short, no-pressure conversation with our team to see if the clinic is a good fit.",
   },
   {
@@ -45,7 +51,7 @@ const faqs = [
   },
   {
     q: "How much does membership cost?",
-    a: "We cover pricing and what's included on your 15-minute intro call, so you can decide with all the details in front of you.",
+    a: "We cover pricing and what's included on your 20-minute discovery call, so you can decide with all the details in front of you.",
   },
   {
     q: "Where are you located?",
@@ -60,7 +66,11 @@ const CallLink = ({ className = "" }: { className?: string }) => (
   </a>
 );
 
-const PreventiveCardiology = () => (
+const PreventiveCardiology = () => {
+  const navigate = useNavigate();
+  const [showForm, setShowForm] = useState(false);
+
+  return (
   <div className="min-h-screen flex flex-col bg-soft-white">
     {/* Minimal header: wordmark + phone. No navigation on purpose. */}
     <header className="border-b border-warm-gray/60 bg-soft-white">
@@ -90,7 +100,7 @@ const PreventiveCardiology = () => (
             </p>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-10">
               <a href="#intro-call" className="inline-flex items-center justify-center bg-navy text-soft-white px-8 h-14 text-sm font-semibold uppercase tracking-wider hover:bg-navy/90 transition-colors">
-                Book a 15-Minute Intro Call
+                Book a 20-Minute Discovery Call
               </a>
               <CallLink className="text-sm font-medium" />
             </div>
@@ -100,10 +110,25 @@ const PreventiveCardiology = () => (
             </div>
           </div>
 
-          <div id="intro-call" className="bg-white shadow-sm p-8 md:p-10 scroll-mt-6">
-            <h2 className="font-heading text-2xl text-navy mb-2">Book your 15-minute intro call</h2>
-            <p className="text-muted-foreground text-sm mb-6">Share a few details and we'll reach out to schedule.</p>
-            <IntroCallForm source="Google Ads — Preventive Cardiology" thankYouPath="/preventive-cardiology/thank-you" />
+          <div id="intro-call" className="bg-white shadow-sm p-6 md:p-8 scroll-mt-6">
+            <h2 className="font-heading text-2xl text-navy mb-1">Book your 20-minute discovery call</h2>
+            <p className="text-muted-foreground text-sm mb-4">Pick a time that works for you — no pressure, no commitment.</p>
+            <CalendlyEmbed url={CALENDLY_URL} onScheduled={() => navigate(THANK_YOU)} />
+            <div className="mt-6 pt-6 border-t border-warm-gray/60">
+              {showForm ? (
+                <>
+                  <p className="text-sm font-medium text-navy mb-4">Leave your details and we'll reach out to schedule.</p>
+                  <IntroCallForm source="Google Ads — Preventive Cardiology" thankYouPath={THANK_YOU} />
+                </>
+              ) : (
+                <p className="text-sm text-muted-foreground text-center">
+                  Prefer we reach out to you?{" "}
+                  <button type="button" onClick={() => setShowForm(true)} className="underline text-navy hover:text-gold">
+                    Leave your details instead
+                  </button>
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -184,12 +209,12 @@ const PreventiveCardiology = () => (
       {/* Closing CTA */}
       <section className="py-16 md:py-24 bg-warm-gray/20">
         <div className="container-narrow text-center">
-          <h2 className="font-heading text-display-sm text-navy mb-4">Start With a 15-Minute Conversation</h2>
+          <h2 className="font-heading text-display-sm text-navy mb-4">Start With a 20-Minute Conversation</h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl mx-auto">
             No pressure and no commitment. Just a chance to see if The Cabell Clinic is right for you.
           </p>
           <a href="#intro-call" className="inline-flex items-center justify-center bg-navy text-soft-white px-8 h-14 text-sm font-semibold uppercase tracking-wider hover:bg-navy/90 transition-colors mb-6">
-            Book Your Intro Call
+            Book Your Discovery Call
           </a>
           <p className="text-sm text-muted-foreground">
             <a href={PHONE_HREF} className="hover:text-navy">{PHONE_DISPLAY}</a> · <a href="mailto:info@thecabellclinic.com" className="hover:text-navy">info@thecabellclinic.com</a>
@@ -205,6 +230,7 @@ const PreventiveCardiology = () => (
       </div>
     </footer>
   </div>
-);
+  );
+};
 
 export default PreventiveCardiology;
