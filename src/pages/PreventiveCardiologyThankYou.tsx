@@ -1,10 +1,19 @@
+import { useEffect } from "react";
 import { Phone } from "lucide-react";
+import { trackConversion } from "@/lib/googleTag";
 
 // Conversion page for the Google Ads landing page: reached only after a
 // successful form submission. Google Ads counts a visit here as a conversion.
 // noindex (src/seo.ts).
 
-const PreventiveCardiologyThankYou = () => (
+const PreventiveCardiologyThankYou = () => {
+  // Fires once per visit to this page. The label comes from the Google Ads
+  // conversion action; until it is set the event still goes to the tag ID.
+  useEffect(() => {
+    trackConversion(import.meta.env.VITE_GOOGLE_ADS_CONVERSION_LABEL);
+  }, []);
+
+  return (
   <div className="min-h-screen flex flex-col bg-soft-white">
     <header className="border-b border-warm-gray/60">
       <div className="container-wide py-5">
@@ -27,6 +36,7 @@ const PreventiveCardiologyThankYou = () => (
       </div>
     </main>
   </div>
-);
+  );
+};
 
 export default PreventiveCardiologyThankYou;

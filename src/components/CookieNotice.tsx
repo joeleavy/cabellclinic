@@ -1,26 +1,37 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { applyConsent, loadGoogleTag, storedConsent, trackingEnabled } from "@/lib/googleTag";
 
-// Informational only: the site sets no tracking cookies, so there is nothing
-// to accept or reject. Shown once per browser; dismissal is remembered in
-// localStorage (wrapped in try/catch — private windows may block it).
-const STORAGE_KEY = "cabell-cookie-notice-dismissed";
+// Cookie bar. Two modes, decided by whether a Google tag ID is configured:
+//
+//  - tracking enabled: a real Accept / Decline choice. The Google tag is loaded
+//    either way with consent defaulted to denied; Accept upgrades it.
+//  - tracking disabled: the informational notice the site has always shown
+//    ("essential cookies only"), with a single Got it.
+//
+// Either way the choice is remembered per browser in localStorage (wrapped in
+// try/catch — private windows may block it) and the bar is not shown again.
+const DISMISSED_KEY = "cabell-cookie-notice-dismissed";
 
 const CookieNotice = () => {
   const [visible, setVisible] = useState(false);
+  const tracking = trackingEnabled();
 
   useEffect(() => {
+    loadGoogleTag();
     try {
-      if (!localStorage.getItem(STORAGE_KEY)) setVisible(true);
+      const decided = tracking ? storedConsent() !== null : Boolean(localStorage.getItem(DISMISSED_KEY));
+      if (!decided) setVisible(true);
     } catch {
       setVisible(true);
     }
-  }, []);
+  }, [tracking]);
 
-  const dismiss = () => {
+  const decide = (choice: "granted" | "denied") => {
+    applyConsent(choice);
     try {
-      localStorage.setItem(STORAGE_KEY, "1");
+      localStorage.setItem(DISMISSED_KEY, "1");
     } catch {
       // Nothing to do — the notice will simply show again next visit.
     }
@@ -28,6 +39,8 @@ const CookieNotice = () => {
   };
 
   if (!visible) return null;
+
+  const buttonBase = "self-start sm:self-auto border-soft-white/40 text-soft-white hover:bg-soft-white hover:text-navy";
 
   return (
     <div
@@ -37,21 +50,34 @@ const CookieNotice = () => {
     >
       <div className="container-wide py-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
         <p className="text-sm text-soft-white/80 leading-relaxed flex-grow">
-          This site uses only essential cookies and does not track you. See our{" "}
-          <Link to="/privacy" className="underline hover:text-soft-white">
-            Privacy Policy
-          </Link>{" "}
-          for details.
+          {tracking ? (
+            <>
+              We use essential cookies, plus optional Google cookies that help us
+              understand how people find the site. See our{" "}
+              <Link to="/privacy" className="underline hover:text-soft-white">Privacy Policy</Link>.
+            </>
+          ) : (
+            <>
+              This site uses only essential cookies and does not track you. See our{" "}
+              <Link to="/privacy" className="underline hover:text-soft-white">Privacy Policy</Link>{" "}
+              for details.
+            </>
+          )}
         </p>
-        <Button
-          type="button"
-          onClick={dismiss}
-          variant="clinic-outline"
-          size="sm"
-          className="self-start sm:self-auto border-soft-white/40 text-soft-white hover:bg-soft-white hover:text-navy"
-        >
-          Got it
-        </Button>
+        {tracking ? (
+          <div className="flex gap-3">
+            <Button type="button" onClick={() => decide("denied")} variant="clinic-outline" size="sm" className={buttonBase}>
+              Decline
+            </Button>
+            <Button type="button" onClick={() => decide("granted")} variant="clinic-outline" size="sm" className={`${buttonBase} bg-soft-white text-navy`}>
+              Accept
+            </Button>
+          </div>
+        ) : (
+          <Button type="button" onClick={() => decide("denied")} variant="clinic-outline" size="sm" className={buttonBase}>
+            Got it
+          </Button>
+        )}
       </div>
     </div>
   );

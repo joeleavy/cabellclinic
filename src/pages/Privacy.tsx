@@ -9,7 +9,7 @@ import LegalPage from "@/components/LegalPage";
 const Privacy = () => (
   <LegalPage
     title="Privacy Policy"
-    effectiveDate="September 25, 2026"
+    effectiveDate="October 19, 2026"
     intro={
       <p>
         The Cabell Clinic ("we," "us") respects your privacy. This policy
@@ -118,17 +118,42 @@ const Privacy = () => (
         body: (
           <>
             <p>
-              This website does not use analytics services, advertising
-              pixels, or any tracking technology to follow you across the web.
-              The brief notice you see on your first visit is informational — there is nothing here you need to accept or opt out of.
+              We keep tracking to a minimum. The cookie bar on your first visit
+              lets you choose whether to allow optional cookies, and we honor
+              that choice. You can change your mind at any time by clearing this
+              site's cookies in your browser, which will show the bar again.
             </p>
-            <p>The following limited technologies are in use:</p>
+            <p><strong>Essential, always on:</strong></p>
             <ul>
               <li>
-                <strong>Cloudflare</strong> may set strictly functional
-                security cookies that help protect the site from automated
-                abuse. They do not identify you or track your browsing.
+                <strong>Cloudflare</strong>, our hosting provider, may set
+                strictly functional security cookies that help protect the site
+                from automated abuse. They do not identify you or track your
+                browsing.
               </li>
+              <li>
+                A small setting stored in your browser remembers your cookie
+                choice so we don't ask again.
+              </li>
+            </ul>
+            <p><strong>Optional, only if you accept:</strong></p>
+            <ul>
+              <li>
+                <strong>Google Ads conversion tracking.</strong> We sometimes
+                advertise on Google. To learn whether those ads lead people to
+                contact us, we use Google's tag. If you accept cookies, it may
+                set advertising cookies that let Google connect a visit to the
+                ad you clicked, subject to{" "}
+                <a href="https://policies.google.com/privacy" className="underline hover:text-navy" target="_blank" rel="noopener noreferrer">
+                  Google's privacy policy
+                </a>
+                . If you decline, no advertising cookies are set and Google
+                receives only aggregated, non-identifying signals. The tag does
+                not receive anything you type into our forms.
+              </li>
+            </ul>
+            <p><strong>Also in use, no cookies from us:</strong></p>
+            <ul>
               <li>
                 <strong>YouTube videos</strong> on some pages are embedded
                 using YouTube's privacy-enhanced mode, which does not set
@@ -143,8 +168,9 @@ const Privacy = () => (
               </li>
             </ul>
             <p>
-              If we ever add analytics or similar tools, we will update this
-              policy first.
+              We do not use analytics that follow you across other websites,
+              and we do not sell or share your information with advertisers
+              beyond the aggregated conversion signals described above.
             </p>
           </>
         ),

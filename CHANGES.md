@@ -28,6 +28,20 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-19 (later)
+
+### Google tag (Ads conversion tracking) with consent mode; cookie bar becomes Accept/Decline; privacy policy updated
+Per client, for the ads campaign. Built so nothing changes until the tag ID is set:
+
+- **`src/lib/googleTag.ts`:** loads Google's tag from `VITE_GOOGLE_TAG_ID` (e.g. `AW-123456789`) with **consent mode defaulting every storage type to denied** before the tag's config call — so until a visitor clicks Accept, no advertising cookies are set and Google only receives aggregated/modelled conversion signals. Accept upgrades consent; Decline keeps it denied; both remembered per browser. `anonymize_ip` on. **If the env var is unset (today), the bundle contains no Google code at all** — verified by grep.
+- **Cookie bar** (`CookieNotice`): with a tag ID it reads "essential cookies, plus optional Google cookies…" with **Decline / Accept**; without one it stays the informational "essential only / Got it" version. Choice stored in `cabell-cookie-consent`.
+- **Conversion event** fires on `/preventive-cardiology/thank-you` (`VITE_GOOGLE_ADS_CONVERSION_LABEL` = the action's `AW-…/label`; falls back to the tag ID alone).
+- **Privacy Policy** cookies section rewritten honestly (essential always-on; optional Google Ads tracking only if accepted, what it does on decline, forms never sent to the tag); effective date → October 19, 2026.
+- **Verified** with a test ID on the built site: consent default queued before config, bar shows Accept/Decline, Accept → consent update to granted + stored, form submit → thank-you page → `conversion` event with the label; no console errors.
+- **To switch on:** set `VITE_GOOGLE_TAG_ID` (and optionally `VITE_GOOGLE_ADS_CONVERSION_LABEL`) in the Cloudflare Pages Production env and `.env.local`, redeploy.
+
+---
+
 ## 2026-10-19
 
 ### Google Ads landing page: /preventive-cardiology (+ /thank-you conversion page)
