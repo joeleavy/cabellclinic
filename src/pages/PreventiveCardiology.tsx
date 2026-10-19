@@ -48,7 +48,7 @@ const benefits = [
 const faqs = [
   {
     q: "Do you take insurance?",
-    a: "The Cabell Clinic is a membership practice. The practice is Medicare-participatory and in-network with major plans, so plan resources can be used where appropriate — but most of what we do falls outside what insurance covers, and membership is paid directly. We'll walk through exactly how it works on your intro call.",
+    a: "The Cabell Clinic is a membership practice. The practice is Medicare-participatory and in-network with major plans, so plan resources can be used where appropriate — but most of what we do falls outside what insurance covers, and membership is paid directly. We'll walk through exactly how it works on your discovery call.",
   },
   {
     q: "How much does membership cost?",
