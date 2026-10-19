@@ -28,7 +28,7 @@ const steps = [
   {
     n: "2",
     title: "Your first visit",
-    body: "An extended appointment with Dr. Cabell, along with advanced testing — including AI plaque analysis of coronary CT, vascular and metabolic assessment — to understand where your heart health stands today.",
+    body: "An extended appointment with Dr. Cabell to go through your history, your risks, and your goals, and to decide together which testing makes sense for you.",
   },
   {
     n: "3",
