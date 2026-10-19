@@ -23,22 +23,31 @@ const CalendlyEmbed = ({ url, onScheduled, className = "" }: Props) => {
     const el = box.current;
     if (!el) return;
     const load = () => {
-      // The script may already be in <head> from an earlier page in this
-      // single-page session; the widget global is the real readiness signal.
-      if ((window as unknown as { Calendly?: unknown }).Calendly) {
+      const hasGlobal = () => Boolean((window as unknown as { Calendly?: unknown }).Calendly);
+      if (hasGlobal()) {
         setReady(true);
         return;
       }
-      const existing = document.querySelector<HTMLScriptElement>(`script[src="${SCRIPT_SRC}"]`);
-      if (existing) {
-        existing.addEventListener("load", () => setReady(true), { once: true });
-        return;
+      if (!document.querySelector(`script[src="${SCRIPT_SRC}"]`)) {
+        const s = document.createElement("script");
+        s.src = SCRIPT_SRC;
+        s.async = true;
+        document.head.appendChild(s);
       }
-      const s = document.createElement("script");
-      s.src = SCRIPT_SRC;
-      s.async = true;
-      s.onload = () => setReady(true);
-      document.head.appendChild(s);
+      // Poll for the global rather than trusting a load event: if the script
+      // was already in <head> from an earlier page in this session, its load
+      // event fired long ago and would never fire again (blank box on Back).
+      let tries = 0;
+      const timer = setInterval(() => {
+        tries += 1;
+        if (hasGlobal()) {
+          clearInterval(timer);
+          setReady(true);
+        } else if (tries > 100) {
+          clearInterval(timer); // ~10 s: give up; the slow-load link will show
+          setSlow(true);
+        }
+      }, 100);
     };
     if (!("IntersectionObserver" in window)) {
       load();
