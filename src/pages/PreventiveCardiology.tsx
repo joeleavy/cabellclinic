@@ -14,9 +14,8 @@ import thomasCabell from "@/assets/thomas-cabell.webp";
 
 const PHONE_DISPLAY = "(615) 237-8706";
 const PHONE_HREF = "tel:+16152378706";
-// Kristy's "20 Minute Discovery Call" event. (The slug says 30min — a leftover
-// from when the event was created in Calendly; the event itself is 20 minutes.)
-const CALENDLY_URL = "https://calendly.com/kristy-thecabellclinic/30min";
+// Kristy's "20 Minute Discovery Call" event (slug renamed from /30min on 2026-10-19).
+const CALENDLY_URL = "https://calendly.com/kristy-thecabellclinic/discovery-call";
 const THANK_YOU = "/preventive-cardiology/thank-you";
 
 const steps = [
