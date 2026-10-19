@@ -28,6 +28,20 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-19
+
+### Google Ads landing page: /preventive-cardiology (+ /thank-you conversion page)
+Built from the client's ads brief (copy pasted in, bracketed placeholders filled from existing approved site content: the FAQ insurance answer, the About-page training/board-certification bio, the Approach-page testing list, the street address).
+
+- **No site navigation or footer links** — a paid click has one job. Minimal header (wordmark + phone), hero with the "Book a 15-Minute Intro Call" button and "Or call", 241+ reviews line, and the form **on the page** (above the fold on phone and desktop). Sections: A Different Kind of Cardiology → How Membership Works (3 steps) → What Members Get + Meet Dr. Cabell (navy band) → Who It's For → Common Questions (insurance, cost, location) → closing CTA. Pricing intentionally omitted per the brief.
+- **Form:** new reusable `IntroCallForm` component (name, phone, email, optional note) — same backend (`submitInquiry` → Worker → Resend, FormSubmit fallback) and 10-digit phone validation as the invitation dialog. Submissions arrive tagged **source: "Google Ads — Preventive Cardiology"** so they're distinguishable in the inbox. On success it navigates to **/preventive-cardiology/thank-you**, which is the URL to use as the Google Ads conversion action.
+- **Both pages are `noindex`** and excluded from the sitemap (paid traffic only — the homepage stays the search landing page), but are live and prerendered like everything else. `scripts/prerender.mjs` now creates nested output folders.
+- **Verified** on the built site: form submission reaches the Worker with the right source tag and redirects to the thank-you page; no console errors; mobile layout clean (CTA + form start within the first screen).
+- **Google Ads setup (client side):** final URL `https://thomascabellmd.com/preventive-cardiology`; display path `thomascabellmd.com/Preventive/Cardiology`; conversion action = page view of `/preventive-cardiology/thank-you` (via Google tag or GA4 — neither is installed yet; see note); leave auto-tagging on.
+- **Note:** the site currently has no Google tag / GA4, which Google Ads needs to *record* the conversion. Adding it is a privacy-policy change (the policy currently says "no analytics") and should be a deliberate step before the campaign launches.
+
+---
+
 ## 2026-10-01 (later)
 
 ### Structured data, image diet, Contact heading

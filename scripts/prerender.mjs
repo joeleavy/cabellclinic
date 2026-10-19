@@ -117,6 +117,7 @@ const routes = Object.keys(PAGE_META);
 for (const route of routes) {
   const html = buildPage(route, PAGE_META[route]);
   const file = route === "/" ? "index.html" : `${route.slice(1)}.html`;
+  fs.mkdirSync(path.dirname(path.join(DIST, file)), { recursive: true });
   fs.writeFileSync(path.join(DIST, file), html);
   const words = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
   console.log(`prerendered ${route.padEnd(12)} -> ${file.padEnd(16)} (${words} words)`);

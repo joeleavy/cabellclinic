@@ -16,6 +16,8 @@ import Nuropod from "./pages/Nuropod";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Partners from "./pages/Partners";
+import PreventiveCardiology from "./pages/PreventiveCardiology";
+import PreventiveCardiologyThankYou from "./pages/PreventiveCardiologyThankYou";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieNotice from "./components/CookieNotice";
@@ -51,6 +53,9 @@ export const AppShell = () => (
         <Route path="/terms" element={<Terms />} />
         {/* Unlisted — shared by direct link only; not in any nav */}
         <Route path="/nuropod" element={<Nuropod />} />
+        {/* Google Ads landing page + its conversion page (no site nav; noindex) */}
+        <Route path="/preventive-cardiology" element={<PreventiveCardiology />} />
+        <Route path="/preventive-cardiology/thank-you" element={<PreventiveCardiologyThankYou />} />
 
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

@@ -79,6 +79,17 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
       "Short videos from The Cabell Clinic introducing the Nuropod earpiece: what it is, how to wear it, and how to use it.",
     noindex: true,
   },
+  "/preventive-cardiology": {
+    title: "Preventive Cardiology in Brentwood, TN | The Cabell Clinic",
+    description:
+      "Membership-based heart care with Dr. Thomas Cabell in Brentwood, Tennessee. Unhurried visits, root-cause testing, and a personalized plan. Book a 15-minute intro call.",
+    noindex: true, // ads landing page — paid traffic only; the homepage is for search
+  },
+  "/preventive-cardiology/thank-you": {
+    title: "Thank You | The Cabell Clinic",
+    description: "We've received your request and will reach out within one business day.",
+    noindex: true,
+  },
 };
 
 export const NOT_FOUND_META: PageMetaEntry = {
