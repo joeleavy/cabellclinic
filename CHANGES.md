@@ -28,6 +28,16 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-19 (later still)
+
+### Landing page books through Calendly
+Per client, the landing page's booking card now embeds Kristy's Calendly event **"20 Minute Discovery Call"** (`calendly.com/kristy-thecabellclinic/30min` — the slug is a leftover from creation; the event is 20 minutes). New `CalendlyEmbed` component: lazy-loads Calendly's script when the card scrolls near, re-initializes correctly when the script is already present from an earlier page in the session (a bug found in testing), shows an "open the scheduling page" link if Calendly hasn't drawn after 8 s, and listens for Calendly's `event_scheduled` message (origin-checked) to send the visitor to `/preventive-cardiology/thank-you` so the Ads conversion still fires. The request-a-call form stays available behind "Prefer we reach out to you? Leave your details instead." All CTA wording unified to **"Book a 20 Minute Discovery Call"** (matching the Calendly event name); every "15-minute" reference updated.
+
+- **Verified** on the live site in real Chrome: Calendly renders Kristy's calendar with current availability; fallback form works; simulated scheduled event (from calendly.com origin only) routes to the thank-you page. The built-in test browser's phone emulation cannot load cross-origin frames at all, so mobile was verified structurally (frame present, no horizontal scroll) — a real-phone check by the client is the final confirmation.
+- **Lead attribution:** Calendly bookings made from this page carry `utm_source=google / utm_medium=cpc / utm_campaign=preventive-cardiology` via the embed URL, so Kristy's Calendly notifications and exports show the source; the fallback form tags `source: "Google Ads — Preventive Cardiology"`. (See the next entry for the Calendly-side setting that surfaces this.)
+
+---
+
 ## 2026-10-19 (later)
 
 ### Google tag (Ads conversion tracking) with consent mode; cookie bar becomes Accept/Decline; privacy policy updated

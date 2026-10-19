@@ -60,9 +60,20 @@ const CalendlyEmbed = ({ url, onScheduled, className = "" }: Props) => {
     if (!calendly) return;
     const el = box.current;
     el.innerHTML = "";
+    // UTM values ride along into Calendly: they appear on each booking in
+    // Kristy's Calendly notifications/exports as the source. Google's own
+    // click id (gclid) is forwarded too when present, so a booking can be
+    // matched back to the exact ad click.
+    const gclid = new URLSearchParams(window.location.search).get("gclid");
     calendly.initInlineWidget({
       url: `${url}?hide_gdpr_banner=1&hide_landing_page_details=1&primary_color=0b2342`,
       parentElement: el,
+      utm: {
+        utmSource: "google",
+        utmMedium: "cpc",
+        utmCampaign: "preventive-cardiology",
+        ...(gclid ? { utmContent: `gclid:${gclid}` } : {}),
+      },
     });
     // If Calendly's page hasn't drawn after a while (blocked, offline, slow),
     // offer the direct link rather than an endless spinner.
