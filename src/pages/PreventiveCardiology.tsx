@@ -16,7 +16,22 @@ const PHONE_DISPLAY = "(615) 237-8706";
 const PHONE_HREF = "tel:+16152378706";
 // Kristy's "20 Minute Discovery Call" event (slug renamed from /30min on 2026-10-19).
 const CALENDLY_URL = "https://calendly.com/kristy-thecabellclinic/discovery-call";
-const THANK_YOU = "/preventive-cardiology/thank-you";
+// The same page serves two traffic sources with different attribution:
+//   /preventive-cardiology -> Google Ads (conversion tracked on its thank-you page)
+//   /book                  -> social bios (Instagram etc.)
+export type Channel = "ads" | "social";
+const CHANNELS = {
+  ads: {
+    thankYou: "/preventive-cardiology/thank-you",
+    formSource: "Google Ads — Preventive Cardiology",
+    attribution: { source: "google", medium: "cpc", campaign: "preventive-cardiology" },
+  },
+  social: {
+    thankYou: "/book/thank-you",
+    formSource: "Social — Book a Call",
+    attribution: { source: "instagram", medium: "social", campaign: "book-a-call" },
+  },
+} as const;
 
 const steps = [
   {
@@ -66,8 +81,9 @@ const CallLink = ({ className = "" }: { className?: string }) => (
   </a>
 );
 
-const PreventiveCardiology = () => {
+const PreventiveCardiology = ({ channel = "ads" }: { channel?: Channel }) => {
   const navigate = useNavigate();
+  const { thankYou: THANK_YOU, formSource, attribution } = CHANNELS[channel];
   const [showForm, setShowForm] = useState(false);
 
   return (
@@ -118,12 +134,12 @@ const PreventiveCardiology = () => {
           <div id="intro-call" className="bg-white shadow-sm p-6 md:p-8 scroll-mt-6">
             <h2 className="font-heading text-2xl text-navy mb-1">Book a 20 Minute Discovery Call</h2>
             <p className="text-muted-foreground text-sm mb-4">Pick a time that works for you — no pressure, no commitment.</p>
-            <CalendlyEmbed url={CALENDLY_URL} onScheduled={() => navigate(THANK_YOU)} />
+            <CalendlyEmbed url={CALENDLY_URL} attribution={attribution} onScheduled={() => navigate(THANK_YOU)} />
             <div className="mt-6 pt-6 border-t border-warm-gray/60">
               {showForm ? (
                 <>
                   <p className="text-sm font-medium text-navy mb-4">Leave your details and we'll reach out to schedule.</p>
-                  <IntroCallForm source="Google Ads — Preventive Cardiology" thankYouPath={THANK_YOU} />
+                  <IntroCallForm source={formSource} thankYouPath={THANK_YOU} />
                 </>
               ) : (
                 <p className="text-sm text-muted-foreground text-center">

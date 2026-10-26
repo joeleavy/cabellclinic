@@ -6,6 +6,8 @@ type Props = {
   /** Called once the visitor has scheduled; used to reach the thank-you page. */
   onScheduled?: () => void;
   className?: string;
+  /** Stamped on every booking (visible in Calendly notifications/exports). */
+  attribution: { source: string; medium: string; campaign: string };
 };
 
 // Calendly's inline widget, loaded lazily (when scrolled near) so the landing
@@ -14,7 +16,7 @@ type Props = {
 // postMessage is how we know a booking happened without any Calendly API key.
 const SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
 
-const CalendlyEmbed = ({ url, onScheduled, className = "" }: Props) => {
+const CalendlyEmbed = ({ url, onScheduled, className = "", attribution }: Props) => {
   const box = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [slow, setSlow] = useState(false);
@@ -78,9 +80,9 @@ const CalendlyEmbed = ({ url, onScheduled, className = "" }: Props) => {
       url: `${url}?hide_gdpr_banner=1&hide_landing_page_details=1&primary_color=0b2342`,
       parentElement: el,
       utm: {
-        utmSource: "google",
-        utmMedium: "cpc",
-        utmCampaign: "preventive-cardiology",
+        utmSource: attribution.source,
+        utmMedium: attribution.medium,
+        utmCampaign: attribution.campaign,
         ...(gclid ? { utmContent: `gclid:${gclid}` } : {}),
       },
     });
@@ -92,7 +94,7 @@ const CalendlyEmbed = ({ url, onScheduled, className = "" }: Props) => {
       }
     }, 8000);
     return () => clearTimeout(timer);
-  }, [ready, url]);
+  }, [ready, url, attribution.source, attribution.medium, attribution.campaign]);
 
   useEffect(() => {
     if (!onScheduled) return;

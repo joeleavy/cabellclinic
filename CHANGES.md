@@ -28,6 +28,22 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-26 (later)
+
+### /book — the landing page as a social-bio link, with its own attribution
+Per client: the Instagram bio should point at the self-booking page, with social bookings distinguishable from ad bookings. `/book` serves the **same page as /preventive-cardiology** (one copy to maintain) but with its own channel stamp:
+
+| | /preventive-cardiology | /book |
+|---|---|---|
+| Calendly booking tags | google / cpc / preventive-cardiology | instagram / social / book-a-call |
+| Fallback form source | "Google Ads — Preventive Cardiology" | "Social — Book a Call" |
+| Thank-you page | /preventive-cardiology/thank-you (fires the Google Ads conversion) | /book/thank-you (no Google conversion) |
+
+- Implemented as a `channel` prop on the page and thank-you components; `CalendlyEmbed` takes attribution as a prop instead of hard-coding Google. `/book` is noindex and off the sitemap, with its own share-preview title ("Book a 20 Minute Discovery Call").
+- Verified on the built site: both channels stamp correctly; social submissions land on /book/thank-you with no conversion event.
+
+---
+
 ## 2026-10-26
 
 ### Shareable link to the invitation form: thomascabellmd.com/requestinvite

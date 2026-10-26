@@ -58,6 +58,9 @@ export const AppShell = () => (
         {/* Google Ads landing page + its conversion page (no site nav; noindex) */}
         <Route path="/preventive-cardiology" element={<PreventiveCardiology />} />
         <Route path="/preventive-cardiology/thank-you" element={<PreventiveCardiologyThankYou />} />
+        {/* Same page for social bios, attributed separately (no Google conversion) */}
+        <Route path="/book" element={<PreventiveCardiology channel="social" />} />
+        <Route path="/book/thank-you" element={<PreventiveCardiologyThankYou channel="social" />} />
 
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

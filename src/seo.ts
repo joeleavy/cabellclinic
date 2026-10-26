@@ -85,6 +85,17 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
       "Request an invitation to The Cabell Clinic, a membership-based preventive and integrative cardiology practice in Brentwood, Tennessee.",
     noindex: true, // alias of the homepage with the dialog open
   },
+  "/book": {
+    title: "Book a 20 Minute Discovery Call | The Cabell Clinic",
+    description:
+      "Book a free 20 minute discovery call with The Cabell Clinic, a membership-based preventive cardiology practice in Brentwood, Tennessee.",
+    noindex: true, // social-bio link; same page as /preventive-cardiology
+  },
+  "/book/thank-you": {
+    title: "Thank You | The Cabell Clinic",
+    description: "Your discovery call is on the calendar.",
+    noindex: true,
+  },
   "/preventive-cardiology": {
     title: "Preventive Cardiology in Brentwood, TN | The Cabell Clinic",
     description:

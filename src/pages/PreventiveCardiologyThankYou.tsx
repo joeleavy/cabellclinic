@@ -6,12 +6,13 @@ import { trackConversion } from "@/lib/googleTag";
 // successful form submission. Google Ads counts a visit here as a conversion.
 // noindex (src/seo.ts).
 
-const PreventiveCardiologyThankYou = () => {
+const PreventiveCardiologyThankYou = ({ channel = "ads" }: { channel?: "ads" | "social" }) => {
   // Fires once per visit to this page. The label comes from the Google Ads
   // conversion action; until it is set the event still goes to the tag ID.
   useEffect(() => {
-    trackConversion(import.meta.env.VITE_GOOGLE_ADS_CONVERSION_LABEL);
-  }, []);
+    // Social bookings are attributed inside Calendly; only ad traffic reports to Google.
+    if (channel === "ads") trackConversion(import.meta.env.VITE_GOOGLE_ADS_CONVERSION_LABEL);
+  }, [channel]);
 
   return (
   <div className="min-h-screen flex flex-col bg-soft-white">
