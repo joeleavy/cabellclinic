@@ -46,7 +46,7 @@ const Nuropod = () => {
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Dr. Cabell has gathered these short videos to introduce the
-              Nuropod earpiece — what it is, how to wear it, and how to use it.
+              Nuropod earpiece: what it is, how to wear it, and how to use it.
               If you have any questions, we're always happy to talk them
               through.
             </p>

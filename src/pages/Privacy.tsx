@@ -15,7 +15,7 @@ const Privacy = () => (
         The Cabell Clinic ("we," "us") respects your privacy. This policy
         explains, in plain language, what information this website collects,
         how we use it, and the choices you have. It applies to
-        thomascabellmd.com only — not to the care we provide as your
+        thomascabellmd.com only, not to the care we provide as your
         physician, which is governed by our separate patient privacy
         practices.
       </p>
@@ -27,7 +27,7 @@ const Privacy = () => (
           <>
             <p>
               The only personal information this website collects is what you
-              choose to send us through our forms — Request an Invitation, the
+              choose to send us through our forms: Request an Invitation, the
               Contact form, and the Self-Assessment. Depending on the form,
               that may include your name, email address, phone number, your
               answers to the self-assessment questions, and anything you write
@@ -49,7 +49,7 @@ const Privacy = () => (
               conversation. They are not a secure patient portal and do not
               create a physician–patient relationship. Please do not include
               detailed medical history, test results, or other sensitive health
-              information in a website form — we will gather that through
+              information in a website form. We will gather that through
               appropriate channels once we are working together.
             </p>
             <p>
@@ -182,8 +182,8 @@ const Privacy = () => (
         body: (
           <p>
             Like virtually every website, our hosting provider automatically
-            records basic technical details when you visit — such as your IP
-            address, browser type, and the pages requested — in server logs
+            records basic technical details when you visit, such as your IP
+            address, browser type, and the pages requested, in server logs
             used for security and to keep the site running. We do not use
             these logs to identify or profile individual visitors.
           </p>

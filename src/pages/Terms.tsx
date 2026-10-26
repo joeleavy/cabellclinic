@@ -19,8 +19,8 @@ const Terms = () => (
         body: (
           <>
             <p>
-              The content on this site — including articles, videos, talks,
-              and descriptions of our approach — is provided for general
+              The content on this site, including articles, videos, talks,
+              and descriptions of our approach, is provided for general
               educational purposes. It is not medical advice, and it is not a
               substitute for evaluation and care by a physician who knows your
               individual situation.
@@ -49,8 +49,8 @@ const Terms = () => (
         body: (
           <p>
             Descriptions of membership on this site are general and may change.
-            The specific terms of membership — including services, fees, and
-            responsibilities — are set out in the written membership agreement
+            The specific terms of membership, including services, fees, and
+            responsibilities, are set out in the written membership agreement
             you sign with the practice, which controls over anything on this
             website.
           </p>
@@ -86,8 +86,8 @@ const Terms = () => (
         heading: "Third-party sites",
         body: (
           <p>
-            Links to other organizations — such as our partners and embedded
-            videos — are provided for convenience. We do not control those
+            Links to other organizations, such as our partners and embedded
+            videos, are provided for convenience. We do not control those
             sites and are not responsible for their content, products, or
             practices. A link is not an endorsement of everything a third
             party offers.

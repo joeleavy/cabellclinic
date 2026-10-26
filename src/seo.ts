@@ -56,7 +56,7 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
   "/contact": {
     title: "Contact The Cabell Clinic | Brentwood, Tennessee",
     description:
-      "Request an invitation, ask a question, or reach The Cabell Clinic directly by phone, text, or email. 105 Continental Place, Suite 160, Brentwood, TN 37027 — serving Nashville, Franklin, and Williamson County.",
+      "Request an invitation, ask a question, or reach The Cabell Clinic directly by phone, text, or email. 105 Continental Place, Suite 160, Brentwood, TN 37027, serving Nashville, Franklin, and Williamson County.",
   },
   "/partners": {
     title: "Our Partners | The Cabell Clinic",

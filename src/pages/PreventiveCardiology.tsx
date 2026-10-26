@@ -62,7 +62,7 @@ const benefits = [
 const faqs = [
   {
     q: "Do you take insurance?",
-    a: "The Cabell Clinic is a membership practice. The practice is Medicare-participatory and in-network with major plans, so plan resources can be used where appropriate — but most of what we do falls outside what insurance covers, and membership is paid directly. We'll walk through exactly how it works on your discovery call.",
+    a: "The Cabell Clinic is a membership practice. The practice is Medicare-participatory and in-network with major plans, so plan resources can be used where appropriate, but most of what we do falls outside what insurance covers, and membership is paid directly. We'll walk through exactly how it works on your discovery call.",
   },
   {
     q: "How much does membership cost?",
@@ -116,12 +116,12 @@ const PreventiveCardiology = ({ channel = "ads" }: { channel?: Channel }) => {
                 Preventive Cardiology, Built Around You
               </h1>
               <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-4">
-                Membership-based heart care in Brentwood with Dr. Thomas Cabell. More time, deeper answers, and a plan made for your health — not a 10-minute visit.
+                Membership-based heart care in Brentwood with Dr. Thomas Cabell. More time, deeper answers, and a plan made for your health, not a 10-minute visit.
               </p>
             </div>
             <div className="order-3 lg:order-none">
               <p className="text-lg text-navy leading-relaxed mb-6 lg:mb-8">
-                Most heart care starts after something goes wrong. We start earlier — looking for root causes, not just symptoms, so you leave with a clear picture of your heart health and a plan you understand.
+                Most heart care starts after something goes wrong. We start earlier, looking for root causes rather than just symptoms, so you leave with a clear picture of your heart health and a plan you understand.
               </p>
               <div className="flex items-center gap-4 mb-6 lg:mb-10">
                 <CallLink className="text-sm font-medium" />
@@ -135,7 +135,7 @@ const PreventiveCardiology = ({ channel = "ads" }: { channel?: Channel }) => {
 
           <div id="intro-call" className="order-2 lg:order-none bg-white shadow-sm p-4 sm:p-6 md:p-8 scroll-mt-6">
             <h2 className="font-heading text-2xl text-navy mb-1">Book a 20 Minute Discovery Call</h2>
-            <p className="text-muted-foreground text-sm mb-4">Pick a time that works for you — no pressure, no commitment.</p>
+            <p className="text-muted-foreground text-sm mb-4">Pick a time that works for you. No pressure, no commitment.</p>
             <CalendlyEmbed url={CALENDLY_URL} attribution={attribution} onScheduled={() => navigate(THANK_YOU)} />
             <div className="mt-6 pt-6 border-t border-warm-gray/60">
               {showForm ? (
@@ -204,7 +204,7 @@ const PreventiveCardiology = ({ channel = "ads" }: { channel?: Channel }) => {
         <div className="container-narrow">
           <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">Common Questions</span>
           <p className="text-muted-foreground leading-relaxed mb-10">
-            For adults who want to understand their heart health and take an active role in it — whether that's a family history, answers your current care hasn't given you, or simply staying ahead of problems.
+            For adults who want to understand their heart health and take an active role in it, whether that's a family history, answers your current care hasn't given you, or simply staying ahead of problems.
           </p>
           <div className="space-y-8">
             {faqs.map((f) => (

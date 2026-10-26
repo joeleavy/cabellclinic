@@ -28,6 +28,13 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-26 (copy)
+
+### Em dashes removed from all visitor-facing copy
+Per client. 31 occurrences rewritten with commas, periods, colons, or parentheses as each sentence called for (FAQ, Contact, Experts at Large bios, Nuropod, Privacy, Terms, the landing page and its thank-you page, the application form's sign-off, the Contact page's search description, and the social-share image alt text in the page template). Code comments and the internal inbox source labels ("Google Ads — Preventive Cardiology", "Social — Book a Call") were left alone; they're not visitor-facing. Verified: zero em dashes remain in any built page.
+
+---
+
 ## 2026-10-26 (mobile pass)
 
 ### Landing page: phone-first hero (affects /book and /preventive-cardiology)

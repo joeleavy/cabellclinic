@@ -43,7 +43,7 @@ const IntroCallForm = ({ source, thankYouPath, idPrefix = "ic" }: Props) => {
     const result = await submitInquiry({
       name: form.name,
       email: form.email,
-      message: `Phone: ${form.phone}\n\n${form.message || "(no message — requested a 20 minute discovery call)"}`,
+      message: `Phone: ${form.phone}\n\n${form.message || "(no message; requested a 20 minute discovery call)"}`,
       source,
     });
     setSubmitting(false);

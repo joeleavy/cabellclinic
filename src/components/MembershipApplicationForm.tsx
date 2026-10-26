@@ -165,7 +165,7 @@ const MembershipApplicationForm = ({ onSuccess, compact = false }: Props) => {
           Thank you for taking the time to share. We'll review your application and reach out within a few business days to schedule your discovery call.
         </p>
         <p className="text-sm text-muted-foreground/70 italic">
-          — The Cabell Clinic team
+          The Cabell Clinic team
         </p>
       </motion.div>
     );

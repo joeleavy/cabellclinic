@@ -24,9 +24,9 @@ const PreventiveCardiologyThankYou = ({ channel = "ads" }: { channel?: "ads" | "
     <main className="flex-1 flex items-center">
       <div className="container-narrow text-center py-20">
         <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">Request Received</span>
-        <h1 className="font-heading text-display-lg text-navy mb-6">Thank you — we'll be in touch.</h1>
+        <h1 className="font-heading text-display-lg text-navy mb-6">Thank you. We'll be in touch.</h1>
         <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-10">
-          If you picked a time, it's on the calendar — you'll get a confirmation email from Calendly with the details. If you asked us to reach out instead, a member of our team will contact you within one business day (check your spam folder for info@thecabellclinic.com).
+          If you picked a time, it's on the calendar, and you'll get a confirmation email from Calendly with the details. If you asked us to reach out instead, a member of our team will contact you within one business day (check your spam folder for info@thecabellclinic.com).
         </p>
         <p className="text-muted-foreground mb-2">Prefer to talk now?</p>
         <a href="tel:+16152378706" className="inline-flex items-center gap-2 font-heading text-2xl text-navy hover:text-gold transition-colors">
