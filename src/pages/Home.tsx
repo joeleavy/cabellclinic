@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
@@ -5,11 +6,33 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import DiscoveryCallDialog from "@/components/DiscoveryCallDialog";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { metaForPath, SITE_URL } from "@/seo";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import PatientReviewsSection from "@/components/home/PatientReviewsSection";
 import visionImage from "@/assets/vision-outdoor.webp";
 import thomasCabellImage from "@/assets/thomas-cabell.webp";
-const Home = () => {
+type HomeProps = {
+  /** True when reached via /requestinvite: the invitation dialog opens on load. */
+  requestInvite?: boolean;
+};
+
+const Home = ({ requestInvite = false }: HomeProps) => {
+  // /requestinvite is just the homepage with the dialog open. Replace the
+  // address with "/" once mounted so closing the dialog leaves a normal URL
+  // and a refresh doesn't re-open it.
+  useEffect(() => {
+    if (!requestInvite) return;
+    window.history.replaceState(null, "", "/");
+    // PageMeta keys off the router location, which replaceState doesn't
+    // update — so restore the homepage title/description directly.
+    document.title = metaForPath("/").title;
+    document.head
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", metaForPath("/").description);
+    document.head.querySelector('link[rel="canonical"]')?.setAttribute("href", `${SITE_URL}/`);
+    document.head.querySelector('meta[name="robots"]')?.remove();
+  }, [requestInvite]);
+
   return <Layout>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -71,7 +94,7 @@ const Home = () => {
             duration: 0.8,
             delay: 0.5
           }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <DiscoveryCallDialog>
+              <DiscoveryCallDialog initialOpen={requestInvite}>
                 <Button variant="clinic-primary" size="xl" className="w-full sm:w-64">
                   Request an Invitation
                   <ArrowRight className="ml-2 h-4 w-4" />

@@ -79,6 +79,12 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
       "Short videos from The Cabell Clinic introducing the Nuropod earpiece: what it is, how to wear it, and how to use it.",
     noindex: true,
   },
+  "/requestinvite": {
+    title: "Request an Invitation | The Cabell Clinic",
+    description:
+      "Request an invitation to The Cabell Clinic, a membership-based preventive and integrative cardiology practice in Brentwood, Tennessee.",
+    noindex: true, // alias of the homepage with the dialog open
+  },
   "/preventive-cardiology": {
     title: "Preventive Cardiology in Brentwood, TN | The Cabell Clinic",
     description:

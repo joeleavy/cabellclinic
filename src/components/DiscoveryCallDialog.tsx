@@ -16,6 +16,8 @@ import { submitInquiry } from "@/lib/submitInquiry";
 
 type Props = {
   children: ReactNode;
+  /** Open the dialog as soon as it mounts (used by the /requestinvite link). */
+  initialOpen?: boolean;
 };
 
 const initialState = {
@@ -25,9 +27,9 @@ const initialState = {
   message: "",
 };
 
-const DiscoveryCallDialog = ({ children }: Props) => {
+const DiscoveryCallDialog = ({ children, initialOpen = false }: Props) => {
   const { toast } = useToast();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(initialOpen);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState(initialState);
 

@@ -28,6 +28,17 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-26
+
+### Shareable link to the invitation form: thomascabellmd.com/requestinvite
+Per client (for the Instagram bio): a clean address that opens the homepage with the **Request an Invitation** dialog already up, instead of a separate form page. Once loaded, the address is rewritten to `/` and the homepage title/canonical restored, so closing the dialog leaves a normal homepage and a refresh doesn't re-open it. The hero button reopens the dialog as usual.
+
+- `DiscoveryCallDialog` gained an `initialOpen` prop; `Home` takes `requestInvite`; `/requestinvite` route renders `<Home requestInvite />`.
+- Prerendered with its own share-preview title ("Request an Invitation | The Cabell Clinic") so the link previews nicely in Instagram/texts; `noindex` and excluded from the sitemap (it's an alias of the homepage).
+- Verified on the built site: dialog open on arrival, URL cleaned, X closes it, hero button reopens it, plain homepage unaffected.
+
+---
+
 ## 2026-10-19 (cookies follow-up)
 
 ### "Cookie settings" link + consent polish

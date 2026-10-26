@@ -40,6 +40,8 @@ export const AppShell = () => (
       <CookieNotice />
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* Shareable link (Instagram bio etc.): homepage with the invitation dialog open */}
+        <Route path="/requestinvite" element={<Home requestInvite />} />
         <Route path="/approach" element={<Approach />} />
         <Route path="/dr-cabell" element={<About />} />
         <Route path="/resources" element={<Resources />} />
