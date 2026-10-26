@@ -28,6 +28,13 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-26 (tag on)
+
+### Google Ads tag switched on
+Client created the Google Ads conversion ("Discovery call booked", Submit lead form, page-load) and the account's Google tag. Set in Cloudflare Pages Production env (and `.env.local`): `VITE_GOOGLE_TAG_ID=AW-18453714857`, `VITE_GOOGLE_ADS_CONVERSION_LABEL=AW-18453714857/1--ZCIvk2qodEKmvtd9E`. This rebuild activates the consent-mode tag sitewide and flips the cookie bar to Accept/Decline; `/preventive-cardiology/thank-you` now reports the conversion. Both values are public by design (they ship in the page).
+
+---
+
 ## 2026-10-26 (copy)
 
 ### Em dashes removed from all visitor-facing copy
