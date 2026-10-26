@@ -102,36 +102,38 @@ const PreventiveCardiology = ({ channel = "ads" }: { channel?: Channel }) => {
 
     <main className="flex-1">
       {/* Hero + form */}
-      <section className="pt-14 pb-16 md:pt-20 md:pb-24">
-        <div className="container-wide grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-start">
-          <div className="max-w-xl">
-            <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-4 block">
-              Brentwood · Nashville · Franklin
-            </span>
-            <h1 className="font-heading text-display-lg text-navy mb-6">
-              Preventive Cardiology, Built Around You
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-4">
-              Membership-based heart care in Brentwood with Dr. Thomas Cabell. More time, deeper answers, and a plan made for your health — not a 10-minute visit.
-            </p>
-            <p className="text-lg text-navy leading-relaxed mb-8">
-              Most heart care starts after something goes wrong. We start earlier — looking for root causes, not just symptoms, so you leave with a clear picture of your heart health and a plan you understand.
-            </p>
-            {/* On phones the calendar is below the fold, so offer a jump to it.
-                On desktop it sits right beside this text — a button would do nothing. */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-10">
-              <a href="#intro-call" className="lg:hidden inline-flex items-center justify-center bg-navy text-soft-white px-8 h-14 text-sm font-semibold uppercase tracking-wider hover:bg-navy/90 transition-colors">
-                Book a 20 Minute Discovery Call
-              </a>
-              <CallLink className="text-sm font-medium" />
+      {/* Phones (Instagram traffic): headline, one line of context, then the
+          calendar immediately — the pitch continues below it. Desktop: text
+          and calendar side by side, unchanged. */}
+      <section className="pt-8 pb-12 md:pt-20 md:pb-24">
+        <div className="container-wide grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-16 items-start">
+          <div className="max-w-xl contents lg:block">
+            <div className="order-1 lg:order-none">
+              <span className="text-xs uppercase tracking-widest text-gold font-semibold mb-3 lg:mb-4 block">
+                Brentwood · Nashville · Franklin
+              </span>
+              <h1 className="font-heading text-4xl sm:text-5xl lg:text-display-lg text-navy mb-4 lg:mb-6">
+                Preventive Cardiology, Built Around You
+              </h1>
+              <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-4">
+                Membership-based heart care in Brentwood with Dr. Thomas Cabell. More time, deeper answers, and a plan made for your health — not a 10-minute visit.
+              </p>
             </div>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <span className="font-heading text-3xl text-navy">241+</span>
-              <span>five-star Google reviews<br className="sm:hidden" /> from patients across Middle Tennessee</span>
+            <div className="order-3 lg:order-none">
+              <p className="text-lg text-navy leading-relaxed mb-6 lg:mb-8">
+                Most heart care starts after something goes wrong. We start earlier — looking for root causes, not just symptoms, so you leave with a clear picture of your heart health and a plan you understand.
+              </p>
+              <div className="flex items-center gap-4 mb-6 lg:mb-10">
+                <CallLink className="text-sm font-medium" />
+              </div>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <span className="font-heading text-3xl text-navy">241+</span>
+                <span>five-star Google reviews<br className="sm:hidden" /> from patients across Middle Tennessee</span>
+              </div>
             </div>
           </div>
 
-          <div id="intro-call" className="bg-white shadow-sm p-6 md:p-8 scroll-mt-6">
+          <div id="intro-call" className="order-2 lg:order-none bg-white shadow-sm p-4 sm:p-6 md:p-8 scroll-mt-6">
             <h2 className="font-heading text-2xl text-navy mb-1">Book a 20 Minute Discovery Call</h2>
             <p className="text-muted-foreground text-sm mb-4">Pick a time that works for you — no pressure, no commitment.</p>
             <CalendlyEmbed url={CALENDLY_URL} attribution={attribution} onScheduled={() => navigate(THANK_YOU)} />

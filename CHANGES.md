@@ -28,6 +28,13 @@ Per client (Dr. Cabell approved the "Middle Tennessee" framing for his bio). Ten
 
 ---
 
+## 2026-10-26 (mobile pass)
+
+### Landing page: phone-first hero (affects /book and /preventive-cardiology)
+Per client — Instagram traffic is almost entirely phones, and on a phone the calendar started ~940px down (a full screen of text first) with the hero button wrapping to two lines. On screens below the desktop breakpoint the hero now runs: eyebrow → headline (smaller) → one sentence → **the Calendly card** → the "we start earlier" paragraph, phone link, and reviews line. The scroll-to-calendar button is gone (the calendar is right there). Desktop layout unchanged (text beside calendar). Calendar card now starts ~460px down on an iPhone-sized screen — visible on the first screen.
+
+---
+
 ## 2026-10-26 (later)
 
 ### /book — the landing page as a social-bio link, with its own attribution
