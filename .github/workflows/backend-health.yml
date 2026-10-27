@@ -15,6 +15,11 @@ on:
   schedule:
     - cron: "17 */6 * * *"
   workflow_dispatch:
+    inputs:
+      test_alert:
+        description: "Send a test alert email (proves the Resend key works)"
+        type: boolean
+        default: false
 
 jobs:
   health:
@@ -38,15 +43,26 @@ jobs:
       # blocks requests from GitHub's runners.) Requires the
       # RESEND_HEALTH_KEY repository secret — a Resend API key.
       - name: Email tech@thecabellclinic.com on failure
-        if: failure()
+        if: failure() || inputs.test_alert
         env:
           RESEND_KEY: ${{ secrets.RESEND_HEALTH_KEY }}
+          TEST_ALERT: ${{ inputs.test_alert }}
         run: |
           if [ -z "$RESEND_KEY" ]; then
-            echo "::warning::RESEND_HEALTH_KEY secret is not set — cannot email the failure alert."
-            exit 0
+            echo "::error::RESEND_HEALTH_KEY secret is not set — cannot email the failure alert."
+            exit 1
           fi
-          curl -sS --max-time 30 -X POST "https://api.resend.com/emails" \
+          if [ "$TEST_ALERT" = "true" ]; then
+            subject="[TEST] Cabell Clinic monitoring alert (ignore)"
+            text="This is a manual test of the monitoring alert email. The form backend is fine. Nothing to do."
+          else
+            subject="[ALERT] Cabell Clinic form backend is DOWN"
+            text="The scheduled health check failed: the contact form backend (Cloudflare Worker) is unreachable.\n\nSite visitors submitting forms are being routed to the backup channel, so leads are still captured, but the primary backend needs attention.\n\nDetails: https://github.com/joeleavy/cabellclinic/actions"
+          fi
+          # Print Resend's reply and fail loudly if it refuses, so a dead key shows up in the run log.
+          code=$(curl -sS --max-time 30 -o resend-reply.json -w '%{http_code}' -X POST "https://api.resend.com/emails" \
             -H "Authorization: Bearer $RESEND_KEY" \
             -H "Content-Type: application/json" \
-            -d '{"from":"Cabell Clinic Monitor <forms@thomascabellmd.com>","to":["tech@thecabellclinic.com"],"subject":"[ALERT] Cabell Clinic form backend is DOWN","text":"The scheduled health check failed: the contact form backend (Cloudflare Worker) is unreachable.\n\nSite visitors submitting forms are being routed to the backup channel, so leads are still captured — but the primary backend needs attention.\n\nDetails: https://github.com/joeleavy/cabellclinic/actions"}'
+            -d "{\"from\":\"Cabell Clinic Monitor <forms@thomascabellmd.com>\",\"to\":[\"tech@thecabellclinic.com\"],\"subject\":\"$subject\",\"text\":\"$text\"}")
+          echo "Resend HTTP $code: $(cat resend-reply.json)"
+          [ "$code" = "200" ] || { echo "::error::Resend refused the alert email (HTTP $code). Check the RESEND_HEALTH_KEY secret."; exit 1; }

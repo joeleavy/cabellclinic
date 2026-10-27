@@ -46,6 +46,10 @@ def status(url: str) -> tuple[str, bool, str]:
     relaxed = _fetch(url, insecure=True)
     if relaxed[:1] in "23":
         return relaxed, True, "incomplete TLS chain on their end"
+    # 429 means the site is up but throttling automated checks (Instagram does
+    # this to GitHub's runners). The link is not broken; just not verified.
+    if code == "429":
+        return code, True, "rate-limited, not verified"
     return code, False, ""
 
 
