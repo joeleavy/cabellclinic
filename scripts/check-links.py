@@ -51,6 +51,8 @@ def status(url: str) -> tuple[str, bool, str]:
 
 def main() -> int:
     sources = glob.glob("src/**/*.tsx", recursive=True) + glob.glob("src/**/*.ts", recursive=True)
+    # Test files use made-up addresses (e.g. https://worker.test); they are not links on the site.
+    sources = [f for f in sources if ".test." not in f]
     urls: dict[str, set[str]] = {}
     video_ids: dict[str, set[str]] = {}
     for f in sources:
