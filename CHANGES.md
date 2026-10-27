@@ -4,6 +4,16 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-10-27
+
+### Social bio links with attribution, Turnstile bot check (code), privacy policy update
+- **Per-platform booking links.** `/instagram`, `/facebook`, `/youtube` (and short forms `/ig`, `/fb`, `/yt`) 302 to `/book?from=<platform>` via `_redirects`. The booking page reads `from`, keeps it in `sessionStorage` for the session, and removes it from the address bar, so the visitor only ever sees `/book`. Referrer is the fallback when someone reaches `/book` directly (in-app browsers often strip it, hence the links). The platform becomes `utm_source` on the Calendly booking (visible to Kristy under Calendar > booking details) and the fallback form's inbox tag becomes "Social — Instagram" etc. Unknown platform stays "Social — Book a Call" with `utm_source=social`. New: `src/lib/socialSource.ts`.
+- **Cloudflare Turnstile, wired but not yet switched on.** The four forms (Request an Invitation, intro-call form on the landing pages, membership application, Contact) now render a `TurnstileWidget` above the submit button and send its token with the submission. The contact Worker verifies the token with Cloudflare's siteverify (never from the browser) and returns 403 `turnstile_failed` when it is missing or invalid; `submitInquiry` shows a "couldn't confirm you're not a robot" message in that case and does NOT re-send through the FormSubmit relay (which would let bots around the check). Both halves are dormant until configured: the widget renders only when `src/lib/turnstile.ts` has a site key, and the Worker enforces only when the `TURNSTILE_SECRET_KEY` secret is set. Rollout order: create widget -> set site key in code and deploy site -> set Worker secret and deploy Worker. Verified locally against `wrangler dev` with Cloudflare's always-fail test secret (403 + message, no fallback request) and the always-pass site key.
+- **Privacy policy** (effective date now Oct 27, 2026): adds Calendly to the service-provider list and the booking calendar to "Information you give us"; new short section "How we note where you came from" covering the Instagram/Google Ads label; Turnstile added under essential cookies. Still carries the attorney-review note. No change to the cookie bar wording.
+- Not a HIPAA change: the source label is a marketing word attached to records Calendly and the inbox already hold. The open questions (Google Ads tag on a covered entity's site; Calendly without a BAA) predate this work and are flagged for the attorney.
+
+---
+
 ## 2026-10-08
 
 ### Search Console follow-ups: www fixed, real 404 page, redirects
