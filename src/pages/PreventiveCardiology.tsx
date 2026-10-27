@@ -102,11 +102,20 @@ const PreventiveCardiology = ({ channel = "ads" }: { channel?: Channel }) => {
     <header className="border-b border-warm-gray/60 bg-soft-white">
       <div className="container-wide flex items-center justify-between py-5">
         <span className="font-heading text-2xl text-navy">The Cabell Clinic</span>
-        <a href={PHONE_HREF} className="text-sm font-medium text-navy hover:text-gold transition-colors flex items-center gap-2">
-          <Phone className="w-4 h-4 text-gold" strokeWidth={1.5} />
-          <span className="hidden sm:inline">{PHONE_DISPLAY}</span>
-          <span className="sm:hidden">Call</span>
-        </a>
+        <div className="flex items-center gap-4 sm:gap-6">
+          {/* Social visitors may want to look around first; ad visitors keep the single-purpose page. */}
+          {channel === "social" && (
+            <Link to="/" className="text-sm text-muted-foreground hover:text-navy transition-colors">
+              <span className="hidden sm:inline">Explore the full site</span>
+              <span className="sm:hidden">Full site</span>
+            </Link>
+          )}
+          <a href={PHONE_HREF} className="text-sm font-medium text-navy hover:text-gold transition-colors flex items-center gap-2">
+            <Phone className="w-4 h-4 text-gold" strokeWidth={1.5} />
+            <span className="hidden sm:inline">{PHONE_DISPLAY}</span>
+            <span className="sm:hidden">Call</span>
+          </a>
+        </div>
       </div>
     </header>
 
@@ -232,7 +241,7 @@ const PreventiveCardiology = ({ channel = "ads" }: { channel?: Channel }) => {
     <footer className="py-6 border-t border-warm-gray/60">
       <div className="container-wide flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-muted-foreground/70">
         <span>© {new Date().getFullYear()} The Cabell Clinic · 105 Continental Place, Suite 160, Brentwood, TN 37027 · <a href={PHONE_HREF} className="hover:text-navy">{PHONE_DISPLAY}</a> · <a href="mailto:info@thecabellclinic.com" className="hover:text-navy">info@thecabellclinic.com</a></span>
-        <span><Link to="/privacy" className="hover:text-navy">Privacy Policy</Link> · <Link to="/terms" className="hover:text-navy">Terms</Link> · <button type="button" onClick={openCookieSettings} className="hover:text-navy">Cookie settings</button></span>
+        <span>{channel === "social" && <><Link to="/" className="hover:text-navy">Explore the full site</Link> · </>}<Link to="/privacy" className="hover:text-navy">Privacy Policy</Link> · <Link to="/terms" className="hover:text-navy">Terms</Link> · <button type="button" onClick={openCookieSettings} className="hover:text-navy">Cookie settings</button></span>
       </div>
     </footer>
   </div>
