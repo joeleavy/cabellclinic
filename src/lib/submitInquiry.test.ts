@@ -91,7 +91,7 @@ describe("submitInquiry", () => {
 
     const result = await submitInquiry(payload);
 
-    expect(result).toEqual({ ok: false });
+    expect(result).toEqual({ ok: false, reason: "unavailable" });
   });
 
   it("treats an unactivated/failed fallback response as failure", async () => {
@@ -103,6 +103,31 @@ describe("submitInquiry", () => {
 
     const result = await submitInquiry(payload);
 
-    expect(result).toEqual({ ok: false });
+    expect(result).toEqual({ ok: false, reason: "unavailable" });
+  });
+
+  it("does not fall back when the bot check fails (403 turnstile_failed)", async () => {
+    fetchMock.mockResolvedValueOnce(
+      jsonResponse(403, { success: false, code: "turnstile_failed", error: "Bot check failed" })
+    );
+
+    const result = await submitInquiry({ ...payload, turnstileToken: "tok" });
+
+    expect(result).toEqual({ ok: false, reason: "turnstile" });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("sends the Turnstile token to the primary but never to the fallback relay", async () => {
+    fetchMock
+      .mockResolvedValueOnce(jsonResponse(500, {}))
+      .mockResolvedValueOnce(jsonResponse(200, { success: "true" }));
+
+    await submitInquiry({ ...payload, turnstileToken: "tok" });
+
+    const primaryBody = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(primaryBody.turnstileToken).toBe("tok");
+    const fallbackBody = JSON.parse(fetchMock.mock.calls[1][1].body);
+    expect(fallbackBody).not.toHaveProperty("turnstileToken");
+    expect(fallbackBody.name).toBe(payload.name);
   });
 });

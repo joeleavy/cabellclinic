@@ -10,20 +10,10 @@ export type InquiryPayload = {
   email: string;
   message: string;
   source: string;
-export type InquiryPayload = {
-  name: string;
-  email: string;
-  message: string;
-  source: string;
   /** The phone on its own, so the clinic's CRM (Atrium, fed by the Worker) can file and match by it. */
   phone?: string;
   /** Cloudflare Turnstile token from the form's widget (when Turnstile is on). */
   turnstileToken?: string | null;
-};
-
-export type SubmitResult =
-  | { ok: true; via: "primary" | "fallback" }
-  | { ok: false; reason: "turnstile" | "unavailable" };
 };
 
 export type SubmitResult =
