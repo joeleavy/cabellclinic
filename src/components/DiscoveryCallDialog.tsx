@@ -56,6 +56,7 @@ const DiscoveryCallDialog = ({ children, initialOpen = false }: Props) => {
       name: form.name,
       email: form.email,
       message: `Phone: ${form.phone}\n\n${form.message}`,
+      phone: form.phone,
       source: "Invitation request",
     });
     setSubmitting(false);

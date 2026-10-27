@@ -10,6 +10,8 @@ export type InquiryPayload = {
   email: string;
   message: string;
   source: string;
+  /** The phone on its own, so the clinic's CRM (Atrium, fed by the Worker) can file and match by it. */
+  phone?: string;
 };
 
 export type SubmitResult =

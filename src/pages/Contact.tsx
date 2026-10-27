@@ -28,7 +28,8 @@ const Contact = () => {
     const result = await submitInquiry({
       name: formData.name,
       email: formData.email,
-      message: formData.message,
+      message: formData.phone.trim() ? `Phone: ${formData.phone.trim()}\n\n${formData.message}` : formData.message,
+      phone: formData.phone.trim(),
       source: "Cabell Clinic website",
     });
     setIsSubmitting(false);

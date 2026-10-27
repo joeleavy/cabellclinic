@@ -125,6 +125,7 @@ const MembershipApplicationForm = ({ onSuccess, compact = false }: Props) => {
       name: form.name,
       email: form.email,
       message: formatMessage(),
+      phone: form.phone,
       source: "Membership application",
     });
     setSubmitting(false);

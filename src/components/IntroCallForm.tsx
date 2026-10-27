@@ -44,6 +44,7 @@ const IntroCallForm = ({ source, thankYouPath, idPrefix = "ic" }: Props) => {
       name: form.name,
       email: form.email,
       message: `Phone: ${form.phone}\n\n${form.message || "(no message; requested a 20 minute discovery call)"}`,
+      phone: form.phone,
       source,
     });
     setSubmitting(false);
