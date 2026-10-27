@@ -9,6 +9,11 @@ on:
   schedule:
     - cron: "0 13 * * 1" # Mondays, 8am Central
   workflow_dispatch:
+    inputs:
+      test_alert:
+        description: "Send a test alert email (proves the Resend key works)"
+        type: boolean
+        default: false
 
 jobs:
   links:
@@ -20,36 +25,38 @@ jobs:
         run: python3 scripts/check-links.py
 
       - name: Email tech@thecabellclinic.com about broken links
-        if: failure()
+        if: failure() || inputs.test_alert
         env:
           RESEND_KEY: ${{ secrets.RESEND_HEALTH_KEY }}
+          TEST_ALERT: ${{ inputs.test_alert }}
+        # Sent with curl on purpose: Resend's API refuses Python's urllib client
+        # (HTTP 403), which silently killed this alert until 2026-10-27.
         run: |
           if [ -z "$RESEND_KEY" ]; then
-            echo "::warning::RESEND_HEALTH_KEY secret is not set — cannot email the alert."
-            exit 0
+            echo "::error::RESEND_HEALTH_KEY secret is not set — cannot email the alert."
+            exit 1
           fi
-          list=$(cat broken-links.txt 2>/dev/null || echo "(see workflow log)")
-          python3 - "$list" <<'EOF'
-          import json, os, sys, urllib.request
-          body = {
+          if [ "$TEST_ALERT" = "true" ]; then
+            subject="[TEST] Cabell Clinic link-check alert (ignore)"
+            list="(this is a manual test; no links are broken)"
+          else
+            subject="[Heads up] Broken links found on thomascabellmd.com"
+            list=$(cat broken-links.txt 2>/dev/null || echo "(see workflow log)")
+          fi
+          python3 - "$subject" "$list" > resend-body.json <<'EOF'
+          import json, sys
+          print(json.dumps({
               "from": "Cabell Clinic Monitor <forms@thomascabellmd.com>",
               "to": ["tech@thecabellclinic.com"],
-              "subject": "[Heads up] Broken links found on thomascabellmd.com",
+              "subject": sys.argv[1],
               "text": "The weekly link check found links on the site that no longer work:\n\n"
-                      + sys.argv[1]
+                      + sys.argv[2]
                       + "\n\nThese are external partner/expert sites or videos, so the fix is usually "
                         "updating or removing the link on our side.\n\n"
                         "Details: https://github.com/joeleavy/cabellclinic/actions",
-          }
-          req = urllib.request.Request(
-              "https://api.resend.com/emails",
-              data=json.dumps(body).encode(),
-              headers={"Authorization": f"Bearer {os.environ['RESEND_KEY']}",
-                       "Content-Type": "application/json"},
-          )
-          try:
-              print(urllib.request.urlopen(req).read().decode())
-          except urllib.error.HTTPError as e:
-              print(f"::error::Resend refused the alert email (HTTP {e.code}): {e.read().decode()}")
-              raise SystemExit(1)
+          }))
           EOF
+          code=$(curl -sS --max-time 30 -o resend-reply.json -w '%{http_code}' -X POST "https://api.resend.com/emails" \
+            -H "Authorization: Bearer $RESEND_KEY" -H "Content-Type: application/json" --data-binary @resend-body.json)
+          echo "Resend HTTP $code: $(cat resend-reply.json)"
+          [ "$code" = "200" ] || { echo "::error::Resend refused the alert email (HTTP $code). Check the RESEND_HEALTH_KEY secret."; exit 1; }
