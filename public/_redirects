@@ -9,3 +9,13 @@
 # Retired draft addresses -> the published pages
 /drafts/privacy  /privacy  301
 /drafts/terms    /terms    301
+
+# Social bio links -> the booking page, tagged with where the visitor came
+# from. /book reads ?from=, keeps it for the session, and removes it from the
+# address bar (src/lib/socialSource.ts). 302 so these can change later.
+/instagram  /book?from=instagram  302
+/facebook   /book?from=facebook   302
+/youtube    /book?from=youtube    302
+/ig         /book?from=instagram  302
+/fb         /book?from=facebook   302
+/yt         /book?from=youtube    302

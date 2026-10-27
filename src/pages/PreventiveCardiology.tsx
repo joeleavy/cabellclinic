@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Phone, Check } from "lucide-react";
 import IntroCallForm from "@/components/IntroCallForm";
 import CalendlyEmbed from "@/components/CalendlyEmbed";
 import { openCookieSettings } from "@/lib/googleTag";
+import { PLATFORM_LABEL, resolveSocialPlatform, stripSourceFromUrl } from "@/lib/socialSource";
 import thomasCabell from "@/assets/thomas-cabell.webp";
 
 // Google Ads landing page. Deliberately NOT wrapped in <Layout>: no site
@@ -18,7 +19,8 @@ const PHONE_HREF = "tel:+16152378706";
 const CALENDLY_URL = "https://calendly.com/kristy-thecabellclinic/discovery-call";
 // The same page serves two traffic sources with different attribution:
 //   /preventive-cardiology -> Google Ads (conversion tracked on its thank-you page)
-//   /book                  -> social bios (Instagram etc.)
+//   /book                  -> social bios; the platform (Instagram, Facebook,
+//                             YouTube) comes from the bio link, see src/lib/socialSource.ts
 export type Channel = "ads" | "social";
 const CHANNELS = {
   ads: {
@@ -28,8 +30,8 @@ const CHANNELS = {
   },
   social: {
     thankYou: "/book/thank-you",
-    formSource: "Social — Book a Call",
-    attribution: { source: "instagram", medium: "social", campaign: "book-a-call" },
+    formSource: "Social — Book a Call", // used when the platform is unknown
+    attribution: { source: "social", medium: "social", campaign: "book-a-call" },
   },
 } as const;
 
@@ -83,7 +85,15 @@ const CallLink = ({ className = "" }: { className?: string }) => (
 
 const PreventiveCardiology = ({ channel = "ads" }: { channel?: Channel }) => {
   const navigate = useNavigate();
-  const { thankYou: THANK_YOU, formSource, attribution } = CHANNELS[channel];
+  const config = CHANNELS[channel];
+  const THANK_YOU = config.thankYou;
+  // Social traffic: which platform's bio link brought them here, if known.
+  const [platform] = useState(() => (channel === "social" ? resolveSocialPlatform() : null));
+  useEffect(() => {
+    if (channel === "social") stripSourceFromUrl();
+  }, [channel]);
+  const formSource = platform ? `Social — ${PLATFORM_LABEL[platform]}` : config.formSource;
+  const attribution = platform ? { ...config.attribution, source: platform } : config.attribution;
   const [showForm, setShowForm] = useState(false);
 
   return (
