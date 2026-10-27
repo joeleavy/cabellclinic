@@ -2,9 +2,46 @@
 
 interface Env {
   RESEND_API_KEY: string; // secret — set with: npx wrangler secret put RESEND_API_KEY -c workers/contact-email/wrangler.jsonc
+  // Cloudflare Turnstile secret (bot check). Optional: when unset, no check
+  // runs. When set, every submission must carry a valid turnstileToken.
+  // Set with: npx wrangler secret put TURNSTILE_SECRET_KEY -c workers/contact-email/wrangler.jsonc
+  TURNSTILE_SECRET_KEY?: string;
   FROM_EMAIL: string;
   TO_EMAIL: string;
 }
+
+const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+// Must match the data-action / action the site's widget uses (src/lib/turnstile.ts).
+const TURNSTILE_ACTION = "turnstile-spin-v1";
+const TURNSTILE_TOKEN_MAX = 2048;
+
+type TurnstileResult = { ok: true } | { ok: false; detail: string };
+
+/** Server-side check of a Turnstile token. Never called from the browser. */
+const verifyTurnstile = async (
+  secret: string,
+  token: string,
+  remoteIp: string | null
+): Promise<TurnstileResult> => {
+  const form = new FormData();
+  form.append("secret", secret);
+  form.append("response", token);
+  if (remoteIp) form.append("remoteip", remoteIp);
+  let data: { success?: boolean; action?: string; "error-codes"?: string[] };
+  try {
+    const res = await fetch(TURNSTILE_VERIFY_URL, { method: "POST", body: form });
+    data = (await res.json()) as typeof data;
+  } catch (err) {
+    return { ok: false, detail: err instanceof Error ? err.message : String(err) };
+  }
+  if (data.success !== true) {
+    return { ok: false, detail: (data["error-codes"] ?? ["unknown"]).join(",") };
+  }
+  if (data.action && data.action !== TURNSTILE_ACTION) {
+    return { ok: false, detail: `unexpected action ${data.action}` };
+  }
+  return { ok: true };
+};
 
 // Origins allowed to call this endpoint. localhost is the Vite dev server;
 // *.pages.dev covers Cloudflare Pages preview deployments.
@@ -44,9 +81,10 @@ type Payload = {
   email: string;
   message: string;
   source: string;
+  turnstileToken?: string;
 };
 
-const MAX_LENGTHS: Record<keyof Payload, number> = {
+const MAX_LENGTHS: Record<Exclude<keyof Payload, "turnstileToken">, number> = {
   name: 200,
   email: 320,
   message: 10_000,
@@ -56,7 +94,7 @@ const MAX_LENGTHS: Record<keyof Payload, number> = {
 const validate = (data: unknown): Payload | string => {
   if (typeof data !== "object" || data === null) return "Body must be JSON.";
   const record = data as Record<string, unknown>;
-  for (const key of Object.keys(MAX_LENGTHS) as (keyof Payload)[]) {
+  for (const key of Object.keys(MAX_LENGTHS) as (keyof typeof MAX_LENGTHS)[]) {
     const value = record[key];
     if (typeof value !== "string" || value.trim() === "") {
       return `Missing required field: ${key}`;
@@ -69,11 +107,18 @@ const validate = (data: unknown): Payload | string => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return "Invalid email address.";
   }
+  const token = record.turnstileToken;
+  if (token !== undefined && token !== null) {
+    if (typeof token !== "string" || token.length > TURNSTILE_TOKEN_MAX) {
+      return "Invalid Turnstile token.";
+    }
+  }
   return {
     name: record.name as string,
     email,
     message: record.message as string,
     source: record.source as string,
+    ...(typeof token === "string" && token !== "" ? { turnstileToken: token } : {}),
   };
 };
 
@@ -105,6 +150,30 @@ export default {
     const payload = validate(body);
     if (typeof payload === "string") {
       return json(400, { success: false, error: payload }, origin);
+    }
+
+    // Bot check. Only enforced once the secret is configured on the Worker,
+    // so the site can ship the widget first and switch the check on after.
+    if (env.TURNSTILE_SECRET_KEY) {
+      if (!payload.turnstileToken) {
+        return json(
+          403,
+          { success: false, code: "turnstile_failed", error: "Bot check missing" },
+          origin
+        );
+      }
+      const check = await verifyTurnstile(
+        env.TURNSTILE_SECRET_KEY,
+        payload.turnstileToken,
+        request.headers.get("CF-Connecting-IP")
+      );
+      if (!check.ok) {
+        return json(
+          403,
+          { success: false, code: "turnstile_failed", error: `Bot check failed: ${check.detail}` },
+          origin
+        );
+      }
     }
 
     if (!env.RESEND_API_KEY) {

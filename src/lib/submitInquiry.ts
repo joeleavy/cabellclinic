@@ -10,13 +10,25 @@ export type InquiryPayload = {
   email: string;
   message: string;
   source: string;
+export type InquiryPayload = {
+  name: string;
+  email: string;
+  message: string;
+  source: string;
   /** The phone on its own, so the clinic's CRM (Atrium, fed by the Worker) can file and match by it. */
   phone?: string;
+  /** Cloudflare Turnstile token from the form's widget (when Turnstile is on). */
+  turnstileToken?: string | null;
 };
 
 export type SubmitResult =
   | { ok: true; via: "primary" | "fallback" }
-  | { ok: false };
+  | { ok: false; reason: "turnstile" | "unavailable" };
+};
+
+export type SubmitResult =
+  | { ok: true; via: "primary" | "fallback" }
+  | { ok: false; reason: "turnstile" | "unavailable" };
 
 // Independent of the primary backend on purpose: if the Worker is down, this
 // FormSubmit relay still delivers the visitor's inquiry as an email, flagged
@@ -58,6 +70,11 @@ export async function submitInquiry(
       if (res.ok && data?.success === true) {
         return { ok: true, via: "primary" };
       }
+      // The bot check failed: the backend is healthy and said no. Do not
+      // re-send through the fallback relay (that would let bots around it).
+      if (res.status === 403 && data?.code === "turnstile_failed") {
+        return { ok: false, reason: "turnstile" };
+      }
       failureDetail = `HTTP ${res.status}${
         data?.error ? ` — ${String(data.error)}` : ""
       }`;
@@ -66,6 +83,9 @@ export async function submitInquiry(
     }
   }
 
+  // The relay only sees the lead itself, never the Turnstile token.
+  const { turnstileToken: _omit, ...lead } = payload;
+  void _omit;
   try {
     const res = await fetch(FALLBACK_RELAY_URL, {
       method: "POST",
@@ -77,7 +97,7 @@ export async function submitInquiry(
         _subject: `[ALERT] Cabell Clinic form backend failed — lead captured (${payload.source})`,
         backend_error: failureDetail,
         page: typeof window !== "undefined" ? window.location.href : "",
-        ...payload,
+        ...lead,
       }),
       signal: timeoutSignal(REQUEST_TIMEOUT_MS),
     });
@@ -89,5 +109,5 @@ export async function submitInquiry(
     // Both channels down — fall through.
   }
 
-  return { ok: false };
+  return { ok: false, reason: "unavailable" };
 }

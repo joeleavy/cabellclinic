@@ -11,6 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { submitInquiry } from "@/lib/submitInquiry";
+import { TURNSTILE_ENABLED, resetTurnstile } from "@/lib/turnstile";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -21,6 +23,7 @@ const Contact = () => {
     phone: "",
     message: "",
   });
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,14 +34,25 @@ const Contact = () => {
       message: formData.phone.trim() ? `Phone: ${formData.phone.trim()}\n\n${formData.message}` : formData.message,
       phone: formData.phone.trim(),
       source: "Cabell Clinic website",
+      turnstileToken,
     });
     setIsSubmitting(false);
+    // Tokens are single-use: issue a fresh one whether or not this went through.
+    resetTurnstile();
+    setTurnstileToken(null);
 
     if (result.ok) {
       toast({
         title: "Thanks, we received your message.",
       });
       setFormData({ name: "", email: "", phone: "", message: "" });
+    } else if (result.ok === false && result.reason === "turnstile") {
+      toast({
+        title: "We couldn't confirm you're not a robot.",
+        description:
+          "Please try again, or call or text us at (615) 237-8706 and we'll get right back to you.",
+        variant: "destructive",
+      });
     } else {
       toast({
         title: "Something went wrong sending your message.",
@@ -209,12 +223,13 @@ const Contact = () => {
                     />
                   </div>
 
+                  <TurnstileWidget onToken={setTurnstileToken} />
                   <Button
                     type="submit"
                     variant="clinic-primary"
                     size="xl"
                     className="w-full"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || (TURNSTILE_ENABLED && !turnstileToken)}
                   >
                     {isSubmitting ? "Sending..." : "Submit Inquiry"}
                   </Button>

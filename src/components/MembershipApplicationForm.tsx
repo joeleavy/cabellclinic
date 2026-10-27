@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
 import { submitInquiry } from "@/lib/submitInquiry";
+import { TURNSTILE_ENABLED, resetTurnstile } from "@/lib/turnstile";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 type RadioQuestion = {
   id: string;
@@ -89,6 +91,7 @@ const MembershipApplicationForm = ({ onSuccess, compact = false }: Props) => {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState<FormState>(initialState);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const updateField = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -127,11 +130,13 @@ const MembershipApplicationForm = ({ onSuccess, compact = false }: Props) => {
       message: formatMessage(),
       phone: form.phone,
       source: "Membership application",
+      turnstileToken,
     });
     setSubmitting(false);
 
     if (result.ok) {
       setForm(initialState);
+      setTurnstileToken(null);
       if (onSuccess) {
         toast({
           title: "Application received.",
@@ -141,6 +146,18 @@ const MembershipApplicationForm = ({ onSuccess, compact = false }: Props) => {
       } else {
         setSubmitted(true);
       }
+      return;
+    }
+    // Tokens are single-use: issue a fresh one before the visitor retries.
+    resetTurnstile();
+    setTurnstileToken(null);
+    if (result.ok === false && result.reason === "turnstile") {
+      toast({
+        title: "We couldn't confirm you're not a robot.",
+        description:
+          "Please try again, or call or text us at (615) 237-8706 and we'll get right back to you.",
+        variant: "destructive",
+      });
     } else {
       toast({
         title: "Something went wrong sending your application.",
@@ -298,12 +315,13 @@ const MembershipApplicationForm = ({ onSuccess, compact = false }: Props) => {
         </div>
       </div>
 
+      <TurnstileWidget onToken={setTurnstileToken} />
       <Button
         type="submit"
         variant="clinic-primary"
         size="xl"
         className="w-full"
-        disabled={submitting}
+        disabled={submitting || (TURNSTILE_ENABLED && !turnstileToken)}
       >
         {submitting ? "Submitting..." : "Submit Application"}
         {!submitting && <ArrowRight className="ml-2 h-4 w-4" />}

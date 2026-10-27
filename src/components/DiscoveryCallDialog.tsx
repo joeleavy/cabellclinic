@@ -13,6 +13,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { submitInquiry } from "@/lib/submitInquiry";
+import { TURNSTILE_ENABLED, resetTurnstile } from "@/lib/turnstile";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 type Props = {
   children: ReactNode;
@@ -32,6 +34,7 @@ const DiscoveryCallDialog = ({ children, initialOpen = false }: Props) => {
   const [open, setOpen] = useState(initialOpen);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState(initialState);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -58,6 +61,7 @@ const DiscoveryCallDialog = ({ children, initialOpen = false }: Props) => {
       message: `Phone: ${form.phone}\n\n${form.message}`,
       phone: form.phone,
       source: "Invitation request",
+      turnstileToken,
     });
     setSubmitting(false);
 
@@ -68,7 +72,20 @@ const DiscoveryCallDialog = ({ children, initialOpen = false }: Props) => {
           "You'll hear from us by email (info@thecabellclinic.com) within one business day. If you don't see it, please check your spam folder.",
       });
       setForm(initialState);
+      setTurnstileToken(null);
       setOpen(false);
+      return;
+    }
+    // Tokens are single-use: issue a fresh one before the visitor retries.
+    resetTurnstile();
+    setTurnstileToken(null);
+    if (result.ok === false && result.reason === "turnstile") {
+      toast({
+        title: "We couldn't confirm you're not a robot.",
+        description:
+          "Please try again, or call or text us at (615) 237-8706 and we'll get right back to you.",
+        variant: "destructive",
+      });
     } else {
       toast({
         title: "Something went wrong sending your inquiry.",
@@ -157,12 +174,13 @@ const DiscoveryCallDialog = ({ children, initialOpen = false }: Props) => {
             />
           </div>
 
+          <TurnstileWidget onToken={setTurnstileToken} />
           <Button
             type="submit"
             variant="clinic-primary"
             size="xl"
             className="w-full"
-            disabled={submitting}
+            disabled={submitting || (TURNSTILE_ENABLED && !turnstileToken)}
           >
             {submitting ? "Sending..." : "Submit Inquiry"}
           </Button>
