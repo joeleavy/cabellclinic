@@ -1,15 +1,19 @@
 import LegalPage from "@/components/LegalPage";
 
-// Written to match what the site actually does as of Sept 2026:
+// Written to match what the site actually does as of Oct 2026:
 // contact/invitation/self-assessment forms emailed to the clinic (via a
-// Cloudflare Worker + Resend, with a FormSubmit backup relay), no analytics
-// or advertising trackers, YouTube privacy-enhanced embeds, Google Fonts.
-// Update this page if any of that changes. Published 2026-09-25 at the client's direction; attorney review still recommended.
+// Cloudflare Worker + Resend, with a FormSubmit backup relay), Calendly
+// booking calendar on /preventive-cardiology and /book, Cloudflare Turnstile
+// bot check on the forms, consent-gated Google Ads conversion tag, a
+// where-you-came-from label on bookings (src/lib/socialSource.ts), YouTube
+// privacy-enhanced embeds, Google Fonts.
+// Update this page (and the effective date) if any of that changes.
+// Published 2026-09-25 at the client's direction; attorney review still recommended.
 
 const Privacy = () => (
   <LegalPage
     title="Privacy Policy"
-    effectiveDate="October 19, 2026"
+    effectiveDate="October 27, 2026"
     intro={
       <p>
         The Cabell Clinic ("we," "us") respects your privacy. This policy
@@ -27,11 +31,12 @@ const Privacy = () => (
           <>
             <p>
               The only personal information this website collects is what you
-              choose to send us through our forms: Request an Invitation, the
-              Contact form, and the Self-Assessment. Depending on the form,
+              choose to send us through our forms (Request an Invitation, the
+              Contact form, and the Self-Assessment) or enter into the booking
+              calendar on our discovery-call pages. Depending on the form,
               that may include your name, email address, phone number, your
-              answers to the self-assessment questions, and anything you write
-              in a message field.
+              answers to the self-assessment questions, the time you pick for
+              a call, and anything you write in a message field.
             </p>
             <p>
               You do not need an account to use this site, and we do not ask
@@ -105,12 +110,37 @@ const Privacy = () => (
                 <strong>Google Workspace</strong> hosts the clinic email
                 accounts where your submission ultimately arrives.
               </li>
+              <li>
+                <strong>Calendly</strong> runs the booking calendar on our
+                discovery-call pages. When you pick a time, the name, email
+                address, and phone number you enter go to Calendly, which
+                places the call on our calendar and sends you a confirmation,
+                subject to{" "}
+                <a href="https://calendly.com/privacy" className="underline hover:text-navy" target="_blank" rel="noopener noreferrer">
+                  Calendly's privacy policy
+                </a>
+                .
+              </li>
             </ul>
             <p>
               These providers are not permitted to use your information for
               their own purposes.
             </p>
           </>
+        ),
+      },
+      {
+        heading: "How we note where you came from",
+        body: (
+          <p>
+            When you reach our booking page from one of our social media
+            profiles or from an ad, we attach a simple label to your booking
+            or form submission saying which one it was (for example,
+            "Instagram" or "Google Ads"). It tells us which of our outreach
+            is working. The label contains nothing about you or your health,
+            and it goes only to the places that already receive your booking
+            or submission: Calendly and our own inbox.
+          </p>
         ),
       },
       {
@@ -132,6 +162,13 @@ const Privacy = () => (
                 strictly functional security cookies that help protect the site
                 from automated abuse. They do not identify you or track your
                 browsing.
+              </li>
+              <li>
+                <strong>Cloudflare Turnstile</strong>, the small check shown
+                on our forms, confirms that a real person is submitting rather
+                than an automated program. It runs in your browser, may store
+                a short-lived functional token, and does not track you across
+                other sites.
               </li>
               <li>
                 A small setting stored in your browser remembers your cookie
