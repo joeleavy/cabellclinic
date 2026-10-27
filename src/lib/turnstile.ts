@@ -6,7 +6,7 @@
 // Cloudflare's test keys. The secret key lives only on the contact Worker
 // (TURNSTILE_SECRET_KEY), which rejects submissions whose token fails.
 
-const DEFAULT_SITE_KEY = "";
+const DEFAULT_SITE_KEY = "0x4AAAAAAFoS-hUzd4uUc7Bo";
 
 export const TURNSTILE_SITE_KEY: string =
   (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined) || DEFAULT_SITE_KEY;
