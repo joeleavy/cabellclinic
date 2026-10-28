@@ -6,10 +6,11 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ## 2026-10-28
 
-### Resources: first guide published (Metabolic Winter)
-- **Guides card on /resources now opens a guide list.** The Articles / Essays / Guides row at the bottom stays; Articles and Essays remain "Coming Soon", and the Guides card is now live (full-strength styling, "View guide" with a chevron). Clicking it expands the list in place under the row; each guide is a card with the first page as a cover image, a short description, and a "Read the guide" link that opens the PDF in a new tab. `/resources#guides` opens the list on arrival. The list lives at the top of `src/pages/Resources.tsx` (`guides`); add an entry there plus the two files under `public/guides/` for the next one. (First pass put a standalone Guides section above the row; client wanted the card-click version.)
+### Resources: first guide published (Metabolic Winter), new /resources/guides page
+- **New page /resources/guides** (`src/pages/Guides.tsx`, prerendered, in the sitemap). Each guide is a card with the first page as a cover image, a short description, and a "Read the guide" link that opens the PDF in a new tab. The list lives in `src/lib/guides.ts`; to add one, drop the PDF and a cover image into `public/guides/` and add an entry there.
+- **Guides card on /resources** (bottom row, with Articles and Essays) is now live and links to the new page ("View the guide", becomes "View N guides" automatically). Articles and Essays remain "Coming Soon". Row heading changed from "Coming Soon / More resources on the way" to "Library / Articles, essays & guides"; /resources meta description now mentions guides.
 - **Metabolic Winter** (Structure Series seasonal guide, 9 pages) at `/guides/metabolic-winter.pdf`, cover at `/guides/metabolic-winter-cover.jpg`. File supplied by the client (Downloads/"Metabolic Winter Guide built.pdf"), copied as-is.
-- Row heading changed from "Coming Soon / More resources on the way" to "Library / Articles, essays & guides"; /resources meta description now mentions guides.
+- Two earlier passes the same day (a standalone section above the row, then an expand-in-place card) were replaced at the client's request by the separate page.
 - Note: the guide is written for members (it references the Signal Ladder Floor, integration sessions, and Circadian Whole30), and it is now public. Anyone can download or share it.
 
 ---
