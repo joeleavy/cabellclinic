@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { FileText, BookOpen, Play, Download } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { FileText, BookOpen, Lightbulb, Play, Download, ChevronDown } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import SectionHeader from "@/components/ui/SectionHeader";
 
@@ -44,6 +45,12 @@ const Resources = () => {
       cover: "/guides/metabolic-winter-cover.jpg",
     },
   ];
+
+  // The Guides card at the bottom opens the guide list in place. /resources#guides
+  // opens it on arrival so the list can be linked to directly.
+  const [guidesOpen, setGuidesOpen] = useState(
+    () => typeof window !== "undefined" && window.location.hash === "#guides",
+  );
 
   return (
     <Layout>
@@ -143,87 +150,17 @@ const Resources = () => {
         </div>
       </section>
 
-      {/* Guides */}
-      <section className="section-padding bg-warm-gray/20">
+      {/* Resource Categories */}
+      <section id="guides" className="section-padding bg-warm-gray/20 scroll-mt-24">
         <div className="container-wide">
           <SectionHeader
-            eyebrow="Guides"
-            title="Practical guides from the clinic"
-            description="Frameworks for understanding and acting on health information, written for the people we care for and shared here for anyone who finds them useful."
+            eyebrow="Library"
+            title="Articles, essays & guides"
+            description="Guides are available now. We're still gathering the most helpful articles and essays to share with you."
             className="mb-12"
           />
 
-          <div className="grid gap-8">
-            {guides.map((guide, index) => (
-              <motion.article
-                key={guide.href}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white shadow-sm card-elevated overflow-hidden grid md:grid-cols-[260px_1fr]"
-              >
-                <a
-                  href={guide.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-warm-gray/30 border-b md:border-b-0 md:border-r border-gold/20"
-                  aria-label={`Open ${guide.title} (PDF)`}
-                >
-                  <img
-                    src={guide.cover}
-                    alt={`First page of the ${guide.title} guide`}
-                    width={695}
-                    height={900}
-                    loading="lazy"
-                    className="w-full h-full object-cover object-top max-h-80 md:max-h-none"
-                  />
-                </a>
-                <div className="p-8 md:p-10 flex flex-col">
-                  <div className="flex items-center gap-2 mb-3">
-                    <FileText className="w-4 h-4 text-gold" strokeWidth={1.5} />
-                    <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
-                      {guide.series}
-                    </span>
-                  </div>
-                  <h3 className="font-heading text-2xl text-navy mb-4">
-                    {guide.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed mb-8">
-                    {guide.description}
-                  </p>
-                  <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3">
-                    <a
-                      href={guide.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm uppercase tracking-widest font-semibold text-navy accent-underline"
-                    >
-                      <Download className="w-4 h-4 text-gold" strokeWidth={1.5} />
-                      Read the guide
-                    </a>
-                    <span className="text-xs uppercase tracking-widest text-muted-foreground">
-                      PDF · {guide.pages} pages
-                    </span>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Resource Categories - Coming Soon */}
-      <section className="section-padding bg-soft-white">
-        <div className="container-wide">
-          <SectionHeader
-            eyebrow="Coming Soon"
-            title="More resources on the way"
-            description="We're currently gathering the most helpful articles and essays to share with you. Check back soon."
-            className="mb-12"
-          />
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: FileText,
@@ -262,7 +199,105 @@ const Resources = () => {
                 </span>
               </motion.div>
             ))}
+
+            {/* Guides: live, click to open the list below */}
+            <motion.button
+              type="button"
+              onClick={() => setGuidesOpen((open) => !open)}
+              aria-expanded={guidesOpen}
+              aria-controls="guide-list"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className={`bg-white p-8 shadow-sm card-elevated text-center border transition-colors ${
+                guidesOpen ? "border-gold" : "border-transparent hover:border-gold/40"
+              }`}
+            >
+              <div className="w-14 h-14 border border-gold/60 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Lightbulb className="w-6 h-6 text-gold" strokeWidth={1.5} />
+              </div>
+              <h3 className="font-heading text-xl text-navy mb-3">Guides</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                Practical frameworks for understanding and acting on health information.
+              </p>
+              <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-gold font-semibold">
+                {guidesOpen ? "Hide guides" : `View ${guides.length === 1 ? "guide" : "guides"}`}
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${guidesOpen ? "rotate-180" : ""}`}
+                  strokeWidth={1.5}
+                />
+              </span>
+            </motion.button>
           </div>
+
+          <AnimatePresence initial={false}>
+            {guidesOpen && (
+              <motion.div
+                id="guide-list"
+                key="guide-list"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4 }}
+                className="overflow-hidden"
+              >
+                <div className="pt-12 grid gap-8">
+                  {guides.map((guide) => (
+                    <article
+                      key={guide.href}
+                      className="bg-white shadow-sm card-elevated overflow-hidden grid md:grid-cols-[260px_1fr]"
+                    >
+                      <a
+                        href={guide.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-warm-gray/30 border-b md:border-b-0 md:border-r border-gold/20"
+                        aria-label={`Open ${guide.title} (PDF)`}
+                      >
+                        <img
+                          src={guide.cover}
+                          alt={`First page of the ${guide.title} guide`}
+                          width={695}
+                          height={900}
+                          loading="lazy"
+                          className="w-full h-full object-cover object-top max-h-80 md:max-h-none"
+                        />
+                      </a>
+                      <div className="p-8 md:p-10 flex flex-col">
+                        <div className="flex items-center gap-2 mb-3">
+                          <FileText className="w-4 h-4 text-gold" strokeWidth={1.5} />
+                          <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
+                            {guide.series}
+                          </span>
+                        </div>
+                        <h3 className="font-heading text-2xl text-navy mb-4">
+                          {guide.title}
+                        </h3>
+                        <p className="text-muted-foreground leading-relaxed mb-8">
+                          {guide.description}
+                        </p>
+                        <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3">
+                          <a
+                            href={guide.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm uppercase tracking-widest font-semibold text-navy accent-underline"
+                          >
+                            <Download className="w-4 h-4 text-gold" strokeWidth={1.5} />
+                            Read the guide
+                          </a>
+                          <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                            PDF · {guide.pages} pages
+                          </span>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
