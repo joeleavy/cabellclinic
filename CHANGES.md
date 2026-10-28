@@ -4,6 +4,16 @@ A running log of edits made to the site, grouped by session date. Most recent at
 
 ---
 
+## 2026-10-28
+
+### Resources: first guide published (Metabolic Winter)
+- **New Guides section on /resources**, between the talks and the "Coming Soon" cards. Each guide is a card with the first page as a cover image, a short description, and a "Read the guide" link that opens the PDF in a new tab. The list lives at the top of `src/pages/Resources.tsx` (`guides`); add an entry there plus the two files under `public/guides/` for the next one.
+- **Metabolic Winter** (Structure Series seasonal guide, 9 pages) at `/guides/metabolic-winter.pdf`, cover at `/guides/metabolic-winter-cover.jpg`. File supplied by the client (Downloads/"Metabolic Winter Guide built.pdf"), copied as-is.
+- "Guides" removed from the Coming Soon trio (now Articles and Essays, two columns); /resources meta description now mentions guides.
+- Note: the guide is written for members (it references the Signal Ladder Floor, integration sessions, and Circadian Whole30), and it is now public. Anyone can download or share it.
+
+---
+
 ## 2026-10-27
 
 ### Social bio links with attribution, Turnstile bot check (code), privacy policy update
