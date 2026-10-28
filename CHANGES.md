@@ -7,9 +7,9 @@ A running log of edits made to the site, grouped by session date. Most recent at
 ## 2026-10-28
 
 ### Resources: first guide published (Metabolic Winter)
-- **New Guides section on /resources**, between the talks and the "Coming Soon" cards. Each guide is a card with the first page as a cover image, a short description, and a "Read the guide" link that opens the PDF in a new tab. The list lives at the top of `src/pages/Resources.tsx` (`guides`); add an entry there plus the two files under `public/guides/` for the next one.
+- **Guides card on /resources now opens a guide list.** The Articles / Essays / Guides row at the bottom stays; Articles and Essays remain "Coming Soon", and the Guides card is now live (full-strength styling, "View guide" with a chevron). Clicking it expands the list in place under the row; each guide is a card with the first page as a cover image, a short description, and a "Read the guide" link that opens the PDF in a new tab. `/resources#guides` opens the list on arrival. The list lives at the top of `src/pages/Resources.tsx` (`guides`); add an entry there plus the two files under `public/guides/` for the next one. (First pass put a standalone Guides section above the row; client wanted the card-click version.)
 - **Metabolic Winter** (Structure Series seasonal guide, 9 pages) at `/guides/metabolic-winter.pdf`, cover at `/guides/metabolic-winter-cover.jpg`. File supplied by the client (Downloads/"Metabolic Winter Guide built.pdf"), copied as-is.
-- "Guides" removed from the Coming Soon trio (now Articles and Essays, two columns); /resources meta description now mentions guides.
+- Row heading changed from "Coming Soon / More resources on the way" to "Library / Articles, essays & guides"; /resources meta description now mentions guides.
 - Note: the guide is written for members (it references the Signal Ladder Floor, integration sessions, and Circadian Whole30), and it is now public. Anyone can download or share it.
 
 ---
