@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Approach from "./pages/Approach";
 import About from "./pages/About";
 import Resources from "./pages/Resources";
+import Guides from "./pages/Guides";
 import ExpertsAtLarge from "./pages/ExpertsAtLarge";
 import OurTeam from "./pages/OurTeam";
 import FAQ from "./pages/FAQ";
@@ -45,6 +46,7 @@ export const AppShell = () => (
         <Route path="/approach" element={<Approach />} />
         <Route path="/dr-cabell" element={<About />} />
         <Route path="/resources" element={<Resources />} />
+        <Route path="/resources/guides" element={<Guides />} />
         <Route path="/experts" element={<ExpertsAtLarge />} />
         <Route path="/team" element={<OurTeam />} />
         <Route path="/faq" element={<FAQ />} />

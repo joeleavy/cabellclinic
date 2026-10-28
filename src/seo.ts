@@ -33,6 +33,11 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
     description:
       "Talks, guides, and insights from Dr. Thomas Cabell on circadian health, quantum biology, emotional wellbeing, and cardiovascular longevity.",
   },
+  "/resources/guides": {
+    title: "Guides | The Cabell Clinic",
+    description:
+      "Practical guides from The Cabell Clinic, including Metabolic Winter: why your body is built for a real winter and how light, sleep, eating window, and temperature shift as the days get shorter.",
+  },
   "/experts": {
     title: "Experts at Large | The Cabell Clinic",
     description:
