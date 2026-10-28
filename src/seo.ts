@@ -31,7 +31,7 @@ export const PAGE_META: Record<string, PageMetaEntry> = {
   "/resources": {
     title: "Resources & Talks | The Cabell Clinic",
     description:
-      "Talks and insights from Dr. Thomas Cabell on circadian health, quantum biology, emotional wellbeing, and cardiovascular longevity.",
+      "Talks, guides, and insights from Dr. Thomas Cabell on circadian health, quantum biology, emotional wellbeing, and cardiovascular longevity.",
   },
   "/experts": {
     title: "Experts at Large | The Cabell Clinic",

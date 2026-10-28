@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FileText, BookOpen, Lightbulb, Play } from "lucide-react";
+import { FileText, BookOpen, Play, Download } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import SectionHeader from "@/components/ui/SectionHeader";
 
@@ -29,6 +29,19 @@ const Resources = () => {
       title: "Epigenetics, Heart Health & Emotional Wellbeing",
       description:
         "A conference talk on overcoming trauma, toxic stress, and disease through understanding the deep connection between emotional and cardiovascular health.",
+    },
+  ];
+
+  // Downloadable guides. Files live in public/guides/ and are served as-is.
+  const guides = [
+    {
+      title: "Metabolic Winter",
+      series: "Structure Series · Seasonal Guide",
+      description:
+        "Why your body is built for a real winter, and how your plan shifts as the days get shorter. Covers the signals that tell your body the season, what changes in light, sleep, eating window, and temperature, how carbs follow the light, setting up a dark evening and bedroom, the November 1 clock change, and a sample December day.",
+      pages: 9,
+      href: "/guides/metabolic-winter.pdf",
+      cover: "/guides/metabolic-winter-cover.jpg",
     },
   ];
 
@@ -130,17 +143,87 @@ const Resources = () => {
         </div>
       </section>
 
-      {/* Resource Categories - Coming Soon */}
+      {/* Guides */}
       <section className="section-padding bg-warm-gray/20">
+        <div className="container-wide">
+          <SectionHeader
+            eyebrow="Guides"
+            title="Practical guides from the clinic"
+            description="Frameworks for understanding and acting on health information, written for the people we care for and shared here for anyone who finds them useful."
+            className="mb-12"
+          />
+
+          <div className="grid gap-8">
+            {guides.map((guide, index) => (
+              <motion.article
+                key={guide.href}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white shadow-sm card-elevated overflow-hidden grid md:grid-cols-[260px_1fr]"
+              >
+                <a
+                  href={guide.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-warm-gray/30 border-b md:border-b-0 md:border-r border-gold/20"
+                  aria-label={`Open ${guide.title} (PDF)`}
+                >
+                  <img
+                    src={guide.cover}
+                    alt={`First page of the ${guide.title} guide`}
+                    width={695}
+                    height={900}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top max-h-80 md:max-h-none"
+                  />
+                </a>
+                <div className="p-8 md:p-10 flex flex-col">
+                  <div className="flex items-center gap-2 mb-3">
+                    <FileText className="w-4 h-4 text-gold" strokeWidth={1.5} />
+                    <span className="text-xs uppercase tracking-widest text-muted-foreground font-medium">
+                      {guide.series}
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-2xl text-navy mb-4">
+                    {guide.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed mb-8">
+                    {guide.description}
+                  </p>
+                  <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3">
+                    <a
+                      href={guide.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm uppercase tracking-widest font-semibold text-navy accent-underline"
+                    >
+                      <Download className="w-4 h-4 text-gold" strokeWidth={1.5} />
+                      Read the guide
+                    </a>
+                    <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                      PDF · {guide.pages} pages
+                    </span>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Resource Categories - Coming Soon */}
+      <section className="section-padding bg-soft-white">
         <div className="container-wide">
           <SectionHeader
             eyebrow="Coming Soon"
             title="More resources on the way"
-            description="We're currently gathering the most helpful articles, essays, and guides to share with you. Check back soon."
+            description="We're currently gathering the most helpful articles and essays to share with you. Check back soon."
             className="mb-12"
           />
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
             {[
               {
                 icon: FileText,
@@ -154,13 +237,6 @@ const Resources = () => {
                 title: "Essays",
                 description:
                   "Reflections on medicine, patient care, and the philosophy behind our approach.",
-                status: "Coming Soon",
-              },
-              {
-                icon: Lightbulb,
-                title: "Guides",
-                description:
-                  "Practical frameworks for understanding and acting on health information.",
                 status: "Coming Soon",
               },
             ].map((category, index) => (
